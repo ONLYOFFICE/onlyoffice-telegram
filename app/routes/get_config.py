@@ -36,6 +36,7 @@ async def get_config(request: Request):
 
         pipeline = r.pipeline()
         pipeline.hgetall(f"{key}:config")
+        pipeline.get(f"{user['id']}:lang")
         pipeline.sadd(f"{key}:members", user["id"])
         pipeline.expire(f"{key}:members", TTL)
         results = pipeline.execute()
@@ -43,6 +44,13 @@ async def get_config(request: Request):
         config = {}
         for key, value in results[0].items():
             config[key.decode("utf-8")] = value.decode("utf-8")
+
+        lang = (
+            results[1].decode("utf-8")
+            if results[1]
+            else user.get("language_code", "en")
+        )
+        config["lang"] = lang
 
         return json_response({"ok": True, "config": config})
     except Exception as e:

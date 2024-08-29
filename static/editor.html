@@ -60,7 +60,7 @@
             documentType: "",
             editorConfig: {
                 callbackUrl: "",
-                lang: initDataUnsafe.user.language_code,
+                lang: "",
                 mode: "edit",
                 user: {
                     id: initDataUnsafe.user.id,
@@ -99,6 +99,7 @@
                     key: result.config.file_unique_id
                 });
                 config.documentType = result.config.document_type;
+                config.editorConfig.lang = result.config.lang
                 config.editorConfig.callbackUrl = `${baseUrl}sendFile?key=${key}`;
                 connectEditor();
                 fixSize();

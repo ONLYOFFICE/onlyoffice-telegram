@@ -4,6 +4,7 @@ from pathlib import Path
 BOT_NAME = "ONLYOFFICE_test_bot"
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
+CONVERT_MAX_ATTEMPTS = 5
 CONVERT_TIMEOUT = 5
 
 DOCSERVER_URL = os.getenv("DOCSERVER_URL")
@@ -12,7 +13,7 @@ DOCSERVER_CONVERTER_URL = "ConvertService.ashx"
 FLOOD_INTERVAL = 2
 FLOOD_MESSAGES_LIMIT = 5
 
-MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024
+MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # TODO: Create Middleware for file size limit
 
 PROJECT_ROOT = Path(__file__).resolve().parent
 

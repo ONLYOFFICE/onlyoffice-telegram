@@ -13,10 +13,10 @@ from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import get_file_type, get_supported_convert_formats
 from app.utils.lang_utils import _, __
 from config import (
+    CONVERT_MAX_ATTEMPTS,
     CONVERT_TIMEOUT,
     DOCSERVER_CONVERTER_URL,
     DOCSERVER_URL,
-    MAX_ATTEMPTS_CONVERT,
     MAX_FILE_SIZE_BYTES,
     WEB_APP_URL,
 )
@@ -99,7 +99,7 @@ async def handle_conversion_finish(
 
     async with aiohttp.ClientSession() as session:
         end_convert = False
-        for attempt in range(MAX_ATTEMPTS_CONVERT):
+        for attempt in range(CONVERT_MAX_ATTEMPTS):
             try:
                 async with session.post(
                     conversion_url, json=payload, headers=headers

@@ -66,7 +66,7 @@ def create_app(bot: Bot, redis_client: Redis) -> Application:
 async def on_startup(app: Application) -> None:
     bot = app["bot"]
     try:
-        await bot.delete_webhook()
+        await bot.delete_webhook(drop_pending_updates=True)
         await bot.set_webhook(f"{WEB_APP_URL}{WEBHOOK_PATH}")
         await set_commands(bot)
     except Exception as e:

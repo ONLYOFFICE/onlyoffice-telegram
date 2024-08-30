@@ -1,7 +1,7 @@
 from aiogram import Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
-from aiogram.types import CallbackQuery, Message
+from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
 from redis import Redis
 
 from app.keyboards import LangCallback, make_lang_buttons
@@ -12,9 +12,12 @@ router = Router()
 
 @router.message(Command("lang"))
 async def handle_lang(message: Message, state: FSMContext):
-    # TODO: Remove the keyboard if it is open
     await state.clear()
-    await message.answer(text=_("Select language"), reply_markup=make_lang_buttons())
+    # Keyboard removal is only available when sending a message with reply_markup, so we're sending two messages
+    await message.answer(text=_("Select language"), reply_markup=ReplyKeyboardRemove())
+    await message.answer(
+        text=_("Available languages:"), reply_markup=make_lang_buttons()
+    )
 
 
 @router.callback_query(LangCallback.filter())

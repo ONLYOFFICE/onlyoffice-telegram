@@ -1,6 +1,7 @@
 import json
 import logging
 import urllib.parse
+import uuid
 
 from aiogram import Bot
 from aiogram.utils.web_app import check_webapp_signature
@@ -32,18 +33,33 @@ async def get_config(request: Request):
             return json_response({"ok": False, "error": "Bad Request"}, status=400)
 
         user = json.loads(auth_params["user"][0])
-        key = auth_params["start_param"][0].replace("_", ":", 1)
+        key = auth_params["start_param"][0]
 
         pipeline = r.pipeline()
-        pipeline.hgetall(f"{key}:config")
+        pipeline.hgetall(key)
         pipeline.get(f"{user['id']}:lang")
-        pipeline.sadd(f"{key}:members", user["id"])
-        pipeline.expire(f"{key}:members", TTL)
         results = pipeline.execute()
 
         config = {}
-        for key, value in results[0].items():
-            config[key.decode("utf-8")] = value.decode("utf-8")
+        for field, value in results[0].items():
+            config[field.decode("utf-8")] = value.decode("utf-8")
+
+        pipeline = r.pipeline()
+
+        if "file_unique_id" not in config:
+            file_unique_id = uuid.uuid4().hex
+            pipeline.hset(key, "file_unique_id", file_unique_id)
+            config["file_unique_id"] = file_unique_id
+
+        user_id = str(user["id"])
+        members = set(config["members"].split())
+        if user_id not in members:
+            members.add(user_id)
+            config["members"] = " ".join(members)
+            pipeline.hset(key, "members", config["members"])
+
+        pipeline.expire(f"{key}", TTL)
+        pipeline.execute()
 
         lang = (
             results[1].decode("utf-8")

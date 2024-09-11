@@ -10,7 +10,7 @@ from aiogram.types import Message, ReplyKeyboardRemove, URLInputFile
 from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
-from app.utils.file_utils import get_file_type, get_supported_convert_formats
+from app.utils.file_utils import get_file_type_by_name, get_supported_convert_formats
 from app.utils.lang_utils import _, __
 from config import (
     CONVERT_MAX_ATTEMPTS,
@@ -51,7 +51,7 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         await state.update_data(
             file_id=file.file_id,
             file_name=file.file_name,
-            file_type=get_file_type(file.file_name),
+            file_type=get_file_type_by_name(file.file_name),
             supported_convert_formats=supported_convert_formats,
         )
         row_buttons = make_buttons(

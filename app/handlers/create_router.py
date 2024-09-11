@@ -46,29 +46,25 @@ async def handle_create_title(message: Message, state: FSMContext):
 
 @router.message(MenuState.on_create_title, DocumentNameFilter())
 async def handle_create_document(message: Message, state: FSMContext, r: Redis):
-    name = message.text
+    file_name = message.text
     data = await state.get_data()
     format = data["format"]
     if format.lower() in ["document", "spreadsheet", "presentation", "form"]:
         try:
-            file_unique_id = uuid.uuid4().hex
-            key = f"{message.chat.id}:{file_unique_id}"
+            key = uuid.uuid4().hex
 
             pipeline = r.pipeline()
             config_data = {
-                "is_new": "true",
-                "file_unique_id": file_unique_id,
-                "file_name": name,
+                "file_name": file_name,
                 "document_type": get_document_type_by_format(format),
                 "file_type": get_file_type_by_format(format),
-                "chat_id": message.chat.id,
-                "message_id": message.message_id,
+                "members": "",
             }
-            pipeline.hset(f"{key}:config", mapping=config_data)
-            pipeline.expire(f"{key}:config", TTL)
+            pipeline.hset(key, mapping=config_data)
+            pipeline.expire(key, TTL)
             pipeline.execute()
 
-            web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={message.chat.id}_{file_unique_id}"
+            web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
             link_preview_options = LinkPreviewOptions(url=web_app_url)
 
             await state.clear()

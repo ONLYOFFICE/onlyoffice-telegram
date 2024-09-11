@@ -54,7 +54,8 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         result = r.hgetall(key)
         data = {
-            key.decode("utf-8"): value.decode("utf-8") for key, value in result.items()
+            field.decode("utf-8"): value.decode("utf-8")
+            for field, value in result.items()
         }
 
         last_message = float(data.get("last_message", now))

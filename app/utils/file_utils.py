@@ -15,12 +15,12 @@ def get_all_mime():
     ]
 
 
-def get_file_type(name):
+def get_file_type_by_name(name):
     return name[name.rfind(".") + 1 :].lower()
 
 
-def get_document_type(name):
-    file_type = get_file_type(name)
+def get_document_type_by_name(name):
+    file_type = get_file_type_by_name(name)
     for format in get_supported_formats():
         if format.file_type == file_type:
             return format.document_type
@@ -104,7 +104,7 @@ def get_file_by_file_type(file_type, lang="en"):
 
 
 def get_supported_convert_formats(name):
-    file_type = get_file_type(name)
+    file_type = get_file_type_by_name(name)
     for format in get_supported_formats():
         if format.file_type == file_type:
             return format.convert_to

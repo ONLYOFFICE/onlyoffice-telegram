@@ -89,9 +89,7 @@
 
         const handleGetConfigSuccess = (result) => {
             if (result.ok) {
-                const url = result.config.is_new
-                    ? `${baseUrl}createFile?file_type=${result.config.file_type}`
-                    : `${baseUrl}getFile?file_id=${result.config.file_id}`
+                const url = `${baseUrl}getFile?key=${key}`
                 Object.assign(config.document, {
                     fileType: result.config.file_type,
                     title: result.config.file_name + "." + result.config.file_type,

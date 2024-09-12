@@ -45,7 +45,7 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
-        const baseUrl = "{{ WEB_APP_URL }}/editor/"//"https://f4cc-31-146-73-203.ngrok-free.app/editor/";
+        const baseUrl = "{{ WEB_APP_URL }}/editor/"
         const initData = Telegram.WebApp.initData || "";
         const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
         const key = initDataUnsafe.start_param;
@@ -63,7 +63,7 @@
                 lang: "",
                 mode: "edit",
                 user: {
-                    id: initDataUnsafe.user.id,
+                    id: initDataUnsafe.user.id.toString(),
                     name: initDataUnsafe.user.first_name
                 }
             },

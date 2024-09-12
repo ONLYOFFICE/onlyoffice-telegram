@@ -12,6 +12,7 @@ DOCSERVER_CONVERTER_URL = "ConvertService.ashx"
 
 FLOOD_INTERVAL = 2
 FLOOD_MESSAGES_LIMIT = 5
+FLOOD_TTL = 3600
 
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # TODO: Create Middleware for file size limit
 

@@ -60,6 +60,8 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
                 "file_type": get_file_type_by_format(format),
                 "members": "",
             }
+            if message.chat.type == "group":
+                config_data["group"] = message.chat.id
             pipeline.hset(key, mapping=config_data)
             pipeline.expire(key, TTL)
             pipeline.execute()

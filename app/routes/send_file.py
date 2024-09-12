@@ -36,9 +36,15 @@ async def send_file(request: Request):
             file_type = get_file_type_by_name(ds_file_url)
             document = URLInputFile(ds_file_url, filename=f"{filename}.{file_type}")
 
-            members = r.hget(key, "members").decode("utf-8").split()
+            members = r.hget(key, "members")
             if not members:
                 raise ValueError("No members found for the given key")
+            members = members.decode("utf-8").split()
+
+            group = r.hget(key, "group")
+            if group:
+                group = group.decode("utf-8")
+                members.append(group)
 
             for member in members:
                 try:

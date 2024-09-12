@@ -46,6 +46,8 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
             "file_type": get_file_type_by_name(file.file_name),
             "members": "",
         }
+        if message.chat.type == "group":
+            config_data["group"] = message.chat.id
         pipeline.hset(key, mapping=config_data)
         pipeline.expire(key, TTL)
         pipeline.execute()

@@ -10,7 +10,7 @@ from aiogram.types import Message
 from redis import Redis
 
 from app.utils.lang_utils import _
-from config import FLOOD_INTERVAL, FLOOD_MESSAGES_LIMIT
+from config import FLOOD_INTERVAL, FLOOD_MESSAGES_LIMIT, FLOOD_TTL
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -74,6 +74,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         data["exceeded_count"] = exceeded_count
 
         r.hset(key, mapping=data)
+        r.expire(key, FLOOD_TTL)
 
         if exceeded_count > FLOOD_MESSAGES_LIMIT:
             raise Throttled(user_id, exceeded_count, delta)

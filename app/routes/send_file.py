@@ -7,6 +7,7 @@ from aiohttp.web_response import json_response
 from redis import Redis
 
 from app.utils.file_utils import get_file_type_by_name
+from app.utils.jwt_utils import decode_token
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -19,12 +20,12 @@ async def send_file(request: Request):
 
     try:
         data = await request.json()
-        key = request.query.get("key")
+        token = request.query.get("token")
 
-        if not key:
-            raise ValueError("Key must be provided")
+        if not token:
+            raise ValueError("Token must be provided")
 
-        key = key.replace("_", ":", 1)
+        config = decode_token(token)
 
         status = data.get("status")
         if status in [2, 3]:
@@ -32,16 +33,16 @@ async def send_file(request: Request):
             if not ds_file_url:
                 raise ValueError("URL must be provided")
 
-            filename = r.hget(key, "file_name").decode("utf-8")
+            filename = config["file_name"]
             file_type = get_file_type_by_name(ds_file_url)
             document = URLInputFile(ds_file_url, filename=f"{filename}.{file_type}")
 
-            members = r.hget(key, "members")
+            members = r.hget(config["key"], "members")
             if not members:
                 raise ValueError("No members found for the given key")
             members = members.decode("utf-8").split()
 
-            group = r.hget(key, "group")
+            group = r.hget(config["key"], "group")
             if group:
                 group = group.decode("utf-8")
                 members.append(group)
@@ -58,8 +59,8 @@ async def send_file(request: Request):
                     logger.error(f"Failed to send document to user {member}: {e}")
 
             pipeline = r.pipeline()
-            pipeline.hdel(key, "file_unique_id")
-            pipeline.hset(key, "members", "")
+            pipeline.hdel(config["key"], "file_unique_id")
+            pipeline.hset(config["key"], "members", "")
             pipeline.execute()
 
     except Exception as e:

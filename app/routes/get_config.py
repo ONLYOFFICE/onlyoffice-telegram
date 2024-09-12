@@ -68,7 +68,19 @@ async def get_config(request: Request):
         )
         config["lang"] = lang
 
-        return json_response({"ok": True, "config": config})
+        return json_response(
+            {
+                "ok": True,
+                "config": {
+                    "document_type": config["document_type"],
+                    "file_name": config["file_name"],
+                    "file_type": config["file_type"],
+                    "file_unique_id": config["file_unique_id"],
+                    "lang": config["lang"],
+                    "token": config["token"],
+                },
+            }
+        )
     except Exception as e:
         logger.error(f"Failed to get config: {e}")
         return json_response({"ok": False, "error": str(e)}, status=500)

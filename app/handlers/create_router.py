@@ -13,6 +13,7 @@ from app.utils.file_utils import (
     get_document_type_by_format,
     get_file_type_by_format,
 )
+from app.utils.jwt_utils import encode_payload
 from app.utils.lang_utils import _, __
 from config import BOT_NAME, TTL, WEB_APP_NAME
 
@@ -54,15 +55,17 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             key = uuid.uuid4().hex
 
             pipeline = r.pipeline()
-            config_data = {
-                "file_name": file_name,
+            config = {
                 "document_type": get_document_type_by_format(format),
+                "file_name": file_name,
                 "file_type": get_file_type_by_format(format),
+                "key": key,
                 "members": "",
             }
             if message.chat.type == "group":
-                config_data["group"] = message.chat.id
-            pipeline.hset(key, mapping=config_data)
+                config["group"] = message.chat.id
+            config["token"] = encode_payload(config)
+            pipeline.hset(key, mapping=config)
             pipeline.expire(key, TTL)
             pipeline.execute()
 

@@ -14,6 +14,9 @@ FLOOD_INTERVAL = 2
 FLOOD_MESSAGES_LIMIT = 5
 FLOOD_TTL = 3600
 
+JWT_HEADER = os.getenv("JWT_HEADER")
+JWT_SECRET = os.getenv("JWT_SECRET")
+
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # TODO: Create Middleware for file size limit
 
 PROJECT_ROOT = Path(__file__).resolve().parent

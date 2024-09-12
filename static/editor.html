@@ -69,7 +69,7 @@
             },
             width: "100%",
             height: "100%",
-            type: "mobile" // Telegram.WebApp.platform === "web" ? "desktop" : "mobile"
+            type: "mobile"
         };
 
         const onLoad = () => {
@@ -89,7 +89,7 @@
 
         const handleGetConfigSuccess = (result) => {
             if (result.ok) {
-                const url = `${baseUrl}getFile?key=${key}`
+                const url = `${baseUrl}getFile?token=${result.config.token}`
                 Object.assign(config.document, {
                     fileType: result.config.file_type,
                     title: result.config.file_name + "." + result.config.file_type,
@@ -98,7 +98,7 @@
                 });
                 config.documentType = result.config.document_type;
                 config.editorConfig.lang = result.config.lang
-                config.editorConfig.callbackUrl = `${baseUrl}sendFile?key=${key}`;
+                config.editorConfig.callbackUrl = `${baseUrl}sendFile?token=${result.config.token}`;
                 connectEditor();
                 fixSize();
             } else if (result.error) {

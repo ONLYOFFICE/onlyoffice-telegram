@@ -15,6 +15,15 @@ def get_all_mime():
     ]
 
 
+def remove_extension(name):
+    last_dot_index = name.rfind(".")
+
+    if last_dot_index != -1:
+        return name[:last_dot_index]
+    else:
+        return name
+
+
 def get_file_type_by_name(name):
     return name[name.rfind(".") + 1 :].lower()
 

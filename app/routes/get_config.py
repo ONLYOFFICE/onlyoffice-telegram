@@ -9,7 +9,8 @@ from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
 
-from config import TTL
+from app.utils.jwt_utils import decode_token, encode_payload
+from config import TTL, WEB_APP_URL
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -40,23 +41,34 @@ async def get_config(request: Request):
         pipeline.get(f"{user['id']}:lang")
         results = pipeline.execute()
 
-        config = {}
+        session = {}
         for field, value in results[0].items():
-            config[field.decode("utf-8")] = value.decode("utf-8")
+            session[field.decode("utf-8")] = value.decode("utf-8")
 
         pipeline = r.pipeline()
 
-        if "file_unique_id" not in config:
-            file_unique_id = uuid.uuid4().hex
-            pipeline.hset(key, "file_unique_id", file_unique_id)
-            config["file_unique_id"] = file_unique_id
+        if "token" not in session:
+            config = {
+                "document": {
+                    "key": uuid.uuid4().hex,
+                    "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
+                },
+                "editorConfig": {
+                    "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
+                },
+            }
+            token = encode_payload(config)
+            session["token"] = token
+            pipeline.hset(key, "token", token)
+        else:
+            config = decode_token(session["token"])
 
         user_id = str(user["id"])
-        members = set(config["members"].split())
+        members = set(session["members"].split())
         if user_id not in members:
             members.add(user_id)
-            config["members"] = " ".join(members)
-            pipeline.hset(key, "members", config["members"])
+            session["members"] = " ".join(members)
+            pipeline.hset(key, "members", session["members"])
 
         pipeline.expire(f"{key}", TTL)
         pipeline.execute()
@@ -66,18 +78,24 @@ async def get_config(request: Request):
             if results[1]
             else user.get("language_code", "en")
         )
-        config["lang"] = lang
+        session["lang"] = lang
 
         return json_response(
             {
                 "ok": True,
                 "config": {
-                    "document_type": config["document_type"],
-                    "file_name": config["file_name"],
-                    "file_type": config["file_type"],
-                    "file_unique_id": config["file_unique_id"],
-                    "lang": config["lang"],
-                    "token": config["token"],
+                    "document": {
+                        "fileType": session["file_type"],
+                        "key": config["document"]["key"],
+                        "title": session["file_name"] + session["file_type"],
+                        "url": config["document"]["url"],
+                    },
+                    "documentType": session["document_type"],
+                    "editorConfig": {
+                        "callbackUrl": config["editorConfig"]["callbackUrl"],
+                        "lang": session["lang"],
+                    },
+                    "token": session["token"],
                 },
             }
         )

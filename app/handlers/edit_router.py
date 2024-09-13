@@ -14,7 +14,6 @@ from app.utils.file_utils import (
     get_file_type_by_name,
     remove_extension,
 )
-from app.utils.jwt_utils import encode_payload
 from app.utils.lang_utils import _, __
 from config import BOT_NAME, MAX_FILE_SIZE_BYTES, TTL, WEB_APP_NAME
 
@@ -44,18 +43,16 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
         key = uuid.uuid4().hex
 
         pipeline = r.pipeline()
-        config = {
+        session = {
             "document_type": get_document_type_by_name(file.file_name),
             "file_id": file.file_id,
             "file_name": remove_extension(file.file_name),
             "file_type": get_file_type_by_name(file.file_name),
-            "key": key,
             "members": "",
         }
         if message.chat.type == "group":
-            config["group"] = message.chat.id
-        config["token"] = encode_payload(config)
-        pipeline.hset(key, mapping=config)
+            session["group"] = message.chat.id
+        pipeline.hset(key, mapping=session)
         pipeline.expire(key, TTL)
         pipeline.execute()
 

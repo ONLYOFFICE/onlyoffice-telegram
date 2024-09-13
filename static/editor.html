@@ -45,22 +45,12 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
-        const baseUrl = "{{ WEB_APP_URL }}/editor/"
         const initData = Telegram.WebApp.initData || "";
         const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
         const key = initDataUnsafe.start_param;
 
         const config = {
-            document: {
-                fileType: "",
-                title: "",
-                url: "",
-                key: ""
-            },
-            documentType: "",
             editorConfig: {
-                callbackUrl: "",
-                lang: "",
                 mode: "edit",
                 user: {
                     id: initDataUnsafe.user.id.toString(),
@@ -89,16 +79,7 @@
 
         const handleGetConfigSuccess = (result) => {
             if (result.ok) {
-                const url = `${baseUrl}getFile?token=${result.config.token}`
-                Object.assign(config.document, {
-                    fileType: result.config.file_type,
-                    title: result.config.file_name + "." + result.config.file_type,
-                    url: url,
-                    key: result.config.file_unique_id
-                });
-                config.documentType = result.config.document_type;
-                config.editorConfig.lang = result.config.lang
-                config.editorConfig.callbackUrl = `${baseUrl}sendFile?token=${result.config.token}`;
+                Object.assign(config , result.config);
                 connectEditor();
                 fixSize();
             } else if (result.error) {

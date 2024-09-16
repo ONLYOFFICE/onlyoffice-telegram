@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-28 13:52+0300\n"
+"POT-Creation-Date: 2024-09-16 16:58+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: app/commands/commands.py:16
+#: app/commands/commands.py:17
 msgid "Change language"
 msgstr ""
 
@@ -49,57 +49,57 @@ msgstr ""
 msgid "convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:34 app/handlers/edit_router.py:25
+#: app/handlers/convert_router.py:34 app/handlers/edit_router.py:28
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:45
+#: app/handlers/convert_router.py:45 app/handlers/edit_router.py:40
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:61
+#: app/handlers/convert_router.py:59
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:64 app/handlers/edit_router.py:66
+#: app/handlers/convert_router.py:62 app/handlers/edit_router.py:77
 msgid "File not supported"
 msgstr ""
 
-#: app/handlers/convert_router.py:132
+#: app/handlers/convert_router.py:130
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:137
+#: app/handlers/convert_router.py:135
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:143
+#: app/handlers/convert_router.py:141
 msgid "Invalid format"
 msgstr ""
 
-#: app/handlers/create_router.py:25
+#: app/handlers/create_router.py:26
 msgid "create"
 msgstr ""
 
-#: app/handlers/create_router.py:30
+#: app/handlers/create_router.py:31
 msgid "Select document format"
 msgstr ""
 
-#: app/handlers/create_router.py:40
+#: app/handlers/create_router.py:41
 msgid "Enter document title"
 msgstr ""
 
-#: app/handlers/create_router.py:76 app/handlers/edit_router.py:53
+#: app/handlers/create_router.py:76 app/handlers/edit_router.py:64
 msgid ""
 "For co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:91
+#: app/handlers/create_router.py:89
 msgid "Invalid title"
 msgstr ""
 
-#: app/handlers/edit_router.py:21
+#: app/handlers/edit_router.py:24
 msgid "edit"
 msgstr ""
 
@@ -107,7 +107,11 @@ msgstr ""
 msgid "Select language"
 msgstr ""
 
-#: app/handlers/lang_router.py:26
+#: app/handlers/lang_router.py:19
+msgid "Available languages:"
+msgstr ""
+
+#: app/handlers/lang_router.py:28
 msgid "Language changed"
 msgstr ""
 
@@ -129,5 +133,25 @@ msgstr ""
 
 #: app/keyboards/make_buttons.py:19
 msgid "Back"
+msgstr ""
+
+#: app/middlewares/antiflood.py:47
+msgid "Too many requests, try again in {delta:.2f} seconds"
+msgstr ""
+
+#: app/utils/file_utils.py:18 app/utils/file_utils.py:48
+msgid "Document"
+msgstr ""
+
+#: app/utils/file_utils.py:19 app/utils/file_utils.py:50
+msgid "Spreadsheet"
+msgstr ""
+
+#: app/utils/file_utils.py:20 app/utils/file_utils.py:52
+msgid "Presentation"
+msgstr ""
+
+#: app/utils/file_utils.py:21 app/utils/file_utils.py:56
+msgid "Form"
 msgstr ""
 

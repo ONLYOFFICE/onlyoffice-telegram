@@ -1,17 +1,24 @@
+import json
 import os
 
+from app.utils.lang_utils import _
 from config import PROJECT_ROOT
 
-from .format_utils import get_supported_formats
+onlyoffice_docs_formats_path = os.path.join(
+    PROJECT_ROOT,
+    "static",
+    "assets",
+    "document-formats",
+    "onlyoffice-docs-formats.json",
+)
 
 
-def get_all_mime():
+def get_format_description():
     return [
-        "application/msword",
-        "application/vnd.openxmlformats-officedocument.wordprocessingml.document",
-        "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
-        "application/vnd.openxmlformats-officedocument.presentationml.presentation",
-        "application/pdf",
+        _("Document").capitalize(),
+        _("Spreadsheet").capitalize(),
+        _("Presentation").capitalize(),
+        _("Form").capitalize(),
     ]
 
 
@@ -24,41 +31,30 @@ def remove_extension(name):
         return name
 
 
-def get_file_type_by_name(name):
+def get_extension_by_name(name):
     return name[name.rfind(".") + 1 :].lower()
 
 
-def get_document_type_by_name(name):
-    file_type = get_file_type_by_name(name)
-    for format in get_supported_formats():
-        if format.file_type == file_type:
-            return format.document_type
-
-    return None
-
-
-def get_document_type_by_format(format):
-    if format == "document":
-        return "word"
-    if format == "spreadsheet":
-        return "cell"
-    if format == "presentation":
-        return "slide"
-    if format == "form":
-        return "pdf"
-
-    return None
+def get_format_by_mime(mime):
+    with open(onlyoffice_docs_formats_path, "r") as onlyoffice_docs_formats:
+        formats = json.load(onlyoffice_docs_formats)
+    for format in formats:
+        if mime in format["mime"]:
+            return format
 
 
-def get_file_type_by_format(format):
-    if format == "document":
-        return "docx"
-    if format == "spreadsheet":
-        return "xlsx"
-    if format == "presentation":
-        return "pptx"
-    if format == "form":
-        return "pdf"
+def get_mime_by_format_description(format):
+    format = format.capitalize()
+    if format == _("Document"):
+        return "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+    if format == _("Spreadsheet"):
+        return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
+    if format == _("Presentation"):
+        return (
+            "application/vnd.openxmlformats-officedocument.presentationml.presentation"
+        )
+    if format == _("Form"):
+        return "application/pdf"
 
     return None
 
@@ -98,6 +94,7 @@ def get_file_by_file_type(file_type, lang="en"):
         "static",
         "assets",
         "document_templates",
+        "new",
         locale,
         "new." + file_type,
     )
@@ -110,12 +107,3 @@ def get_file_by_file_type(file_type, lang="en"):
         return file_data
     finally:
         file.close()
-
-
-def get_supported_convert_formats(name):
-    file_type = get_file_type_by_name(name)
-    for format in get_supported_formats():
-        if format.file_type == file_type:
-            return format.convert_to
-
-    return None

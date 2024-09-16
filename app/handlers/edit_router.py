@@ -6,12 +6,10 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import LinkPreviewOptions, Message, ReplyKeyboardRemove
 from redis import Redis
 
-from app.filters import DocumentTypeFilter
+from app.filters import DocumentEditFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
-    get_document_type_by_name,
-    get_file_type_by_name,
     remove_extension,
 )
 from app.utils.lang_utils import _, __
@@ -31,8 +29,10 @@ async def handle_edit_start(message: Message, state: FSMContext):
     await state.set_state(MenuState.on_edit_start)
 
 
-@router.message(MenuState.on_edit_start, DocumentTypeFilter())
-async def handle_edit_document_upload(message: Message, state: FSMContext, r: Redis):
+@router.message(MenuState.on_edit_start, DocumentEditFilter())
+async def handle_edit_document_upload(
+    message: Message, state: FSMContext, r: Redis, format
+):
     try:
         file = message.document
         if file.file_size > MAX_FILE_SIZE_BYTES:
@@ -44,10 +44,10 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
 
         pipeline = r.pipeline()
         session = {
-            "document_type": get_document_type_by_name(file.file_name),
+            "document_type": format["type"],
             "file_id": file.file_id,
             "file_name": remove_extension(file.file_name),
-            "file_type": get_file_type_by_name(file.file_name),
+            "file_type": format["name"],
             "members": "",
         }
         if message.chat.type == "group":

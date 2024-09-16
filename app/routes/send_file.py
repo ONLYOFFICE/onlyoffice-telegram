@@ -6,7 +6,7 @@ from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
 
-from app.utils.file_utils import get_file_type_by_name
+from app.utils.file_utils import get_extension_by_name
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -31,7 +31,7 @@ async def send_file(request: Request):
                 raise ValueError("URL must be provided")
 
             filename = r.hget(key, "file_name").decode("utf-8")
-            file_type = get_file_type_by_name(ds_file_url)
+            file_type = get_extension_by_name(ds_file_url)
             document = URLInputFile(ds_file_url, filename=f"{filename}.{file_type}")
 
             members = r.hget(key, "members")

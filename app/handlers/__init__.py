@@ -14,9 +14,9 @@ def setup_handlers(dispatcher: Dispatcher) -> None:
     dispatcher.include_routers(
         back_router,
         cancel_router,
+        lang_router,
         convert_router,
         create_router,
         edit_router,
-        lang_router,
         start_router,
     )

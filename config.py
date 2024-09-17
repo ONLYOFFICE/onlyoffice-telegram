@@ -1,7 +1,7 @@
 import os
 from pathlib import Path
 
-BOT_NAME = "ONLYOFFICE_test_bot"
+BOT_NAME = os.getenv("BOT_NAME")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 
 CONVERT_MAX_ATTEMPTS = 5
@@ -14,7 +14,6 @@ FLOOD_INTERVAL = 2
 FLOOD_MESSAGES_LIMIT = 5
 FLOOD_TTL = 3600
 
-JWT_HEADER = os.getenv("JWT_HEADER")
 JWT_SECRET = os.getenv("JWT_SECRET")
 
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # TODO: Create Middleware for file size limit
@@ -30,7 +29,7 @@ REDIS_PORT = int(os.getenv("REDIS_PORT"))
 
 TTL = 3600 * 24
 
-WEB_APP_NAME = "ONLYOFFICE"
+WEB_APP_NAME = os.getenv("WEB_APP_NAME")
 WEB_APP_URL = os.getenv("WEB_APP_URL")
 
 WEBHOOK_HOST = os.getenv("WEBHOOK_HOST")

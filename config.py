@@ -15,6 +15,7 @@ FLOOD_MESSAGES_LIMIT = 5
 FLOOD_TTL = 3600
 
 JWT_SECRET = os.getenv("JWT_SECRET")
+JWT_HEADER = os.getenv("JWT_HEADER")
 
 MAX_FILE_SIZE_BYTES = 20 * 1024 * 1024  # TODO: Create Middleware for file size limit
 

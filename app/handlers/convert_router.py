@@ -6,18 +6,22 @@ import aiohttp
 from aiogram import Bot, F, Router
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove, URLInputFile
+from redis import Redis
 
 from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import get_extension_by_name, get_format_by_mime
+from app.utils.jwt_utils import encode_payload
 from app.utils.lang_utils import _, __
 from config import (
     CONVERT_MAX_ATTEMPTS,
     CONVERT_TIMEOUT,
     DOCSERVER_CONVERTER_URL,
     DOCSERVER_URL,
+    JWT_HEADER,
     MAX_FILE_SIZE_BYTES,
+    TTL,
     WEB_APP_URL,
 )
 
@@ -78,22 +82,36 @@ async def check_conversion_status(session: aiohttp.ClientSession, key: str) -> d
 async def handle_conversion_finish(
     message: Message,
     bot: Bot,
+    r: Redis,
     state: FSMContext,
     file_id: str,
     file_name: str,
     file_type: str,
     output_type: str,
 ):
+    key = uuid.uuid4().hex
     conversion_url = f"{DOCSERVER_URL}/{DOCSERVER_CONVERTER_URL}"
     payload = {
         "async": "true",
-        "url": f"{WEB_APP_URL}/editor/getFile?file_id={file_id}",
-        "key": f"{message.chat.id}_{uuid.uuid4().hex}",
+        "url": f"{WEB_APP_URL}/editor/getFile?key={key}",
+        "key": f"{uuid.uuid4().hex}",
         "title": file_name,
         "filetype": file_type,
         "outputtype": output_type,
     }
     headers = {"accept": "application/json"}
+    token = encode_payload(payload)
+    payload["token"] = token
+    headers[JWT_HEADER] = f"Bearer {token}"
+
+    r.hset(
+        key,
+        mapping={
+            "file_id": file_id,
+            "file_type": file_type,
+        },
+    )
+    r.expire(key, TTL)
 
     async with aiohttp.ClientSession() as session:
         end_convert = False

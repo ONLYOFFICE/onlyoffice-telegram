@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-08-28 13:52+0300\n"
+"POT-Creation-Date: 2024-10-07 12:27+0300\n"
 "PO-Revision-Date: 2024-08-28 13:52+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -27,7 +27,7 @@ msgstr "Старт"
 msgid "Cancel"
 msgstr "Отмена"
 
-#: app/commands/commands.py:17
+#: app/commands/commands.py:16
 msgid "Change language"
 msgstr "Изменить язык"
 
@@ -47,35 +47,35 @@ msgstr "Отменять нечего"
 msgid "Action canceled"
 msgstr "Действие отменено"
 
-#: app/handlers/convert_router.py:30
+#: app/handlers/convert_router.py:34
 msgid "convert"
 msgstr "конвертировать"
 
-#: app/handlers/convert_router.py:34 app/handlers/edit_router.py:28
+#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
 msgid "Send file"
 msgstr "Отправьте файл"
 
-#: app/handlers/convert_router.py:45 app/handlers/edit_router.py:40
+#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:40
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr "Размер файла слишком большой. Максимально допустимый размер файла - 20 MB"
 
-#: app/handlers/convert_router.py:59
+#: app/handlers/convert_router.py:67
 msgid "Select format to convert"
 msgstr "Выберите формат для конвертации"
 
-#: app/handlers/convert_router.py:62 app/handlers/edit_router.py:77
+#: app/handlers/convert_router.py:70 app/handlers/edit_router.py:77
 msgid "File not supported"
 msgstr "Файл не поддерживается"
 
-#: app/handlers/convert_router.py:130
+#: app/handlers/convert_router.py:152
 msgid "Done"
 msgstr "Готово"
 
-#: app/handlers/convert_router.py:135
+#: app/handlers/convert_router.py:157
 msgid "Failed to convert file"
 msgstr "Не удалось конвертировать файл"
 
-#: app/handlers/convert_router.py:141
+#: app/handlers/convert_router.py:163
 msgid "Invalid format"
 msgstr "Некорректный формат"
 
@@ -87,19 +87,20 @@ msgstr "создать"
 msgid "Select file format"
 msgstr "Выберите формат документа"
 
-#: app/handlers/create_router.py:41
+#: app/handlers/create_router.py:43
 msgid "Enter file title"
 msgstr "Введите название файла"
 
-#: app/handlers/create_router.py:76 app/handlers/edit_router.py:64
+#: app/handlers/create_router.py:78 app/handlers/edit_router.py:64
 msgid ""
-"For co-editing, send this message to other participants\n"
+"To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
-"Для совместного редактирования перешлите это сообщение другим участникам\n"
+"Чтобы начать совместное редактирование, отправьте это сообщение другим "
+"участникам\n"
 "{web_app_url}"
 
-#: app/handlers/create_router.py:89
+#: app/handlers/create_router.py:91
 msgid "Invalid title"
 msgstr "Некорректное название"
 

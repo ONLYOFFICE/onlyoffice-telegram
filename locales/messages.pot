@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-09-16 16:58+0300\n"
+"POT-Creation-Date: 2024-10-07 12:27+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -25,7 +25,7 @@ msgstr ""
 msgid "Cancel"
 msgstr ""
 
-#: app/commands/commands.py:17
+#: app/commands/commands.py:16
 msgid "Change language"
 msgstr ""
 
@@ -45,35 +45,35 @@ msgstr ""
 msgid "Action canceled"
 msgstr ""
 
-#: app/handlers/convert_router.py:30
+#: app/handlers/convert_router.py:34
 msgid "convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:34 app/handlers/edit_router.py:28
+#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:45 app/handlers/edit_router.py:40
+#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:40
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:59
+#: app/handlers/convert_router.py:67
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:62 app/handlers/edit_router.py:77
+#: app/handlers/convert_router.py:70 app/handlers/edit_router.py:77
 msgid "File not supported"
 msgstr ""
 
-#: app/handlers/convert_router.py:130
+#: app/handlers/convert_router.py:152
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:135
+#: app/handlers/convert_router.py:157
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:141
+#: app/handlers/convert_router.py:163
 msgid "Invalid format"
 msgstr ""
 
@@ -85,17 +85,17 @@ msgstr ""
 msgid "Select file format"
 msgstr ""
 
-#: app/handlers/create_router.py:41
+#: app/handlers/create_router.py:43
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:76 app/handlers/edit_router.py:64
+#: app/handlers/create_router.py:78 app/handlers/edit_router.py:64
 msgid ""
-"For co-editing, send this message to other participants\n"
+"To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:89
+#: app/handlers/create_router.py:91
 msgid "Invalid title"
 msgstr ""
 

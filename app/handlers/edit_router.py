@@ -62,7 +62,7 @@ async def handle_edit_document_upload(
         await state.clear()
         await message.answer(
             text=_(
-                "For co-editing, send this message to other participants\n{web_app_url}"
+                "To start co-editing, send this message to other participants\n{web_app_url}"
             ).format(web_app_url=web_app_url),
             link_preview_options=link_preview_options,
             reply_markup=ReplyKeyboardRemove(),

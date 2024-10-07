@@ -9,7 +9,7 @@ router = Router()
 
 
 @router.message(StateFilter(None), Command(commands=["cancel"]))
-@router.message(StateFilter(None), F.text.lower() == __("cancel"))
+@router.message(StateFilter(None), F.text.lower() == __("❌ cancel"))
 async def cmd_cancel_no_state(message: Message, state: FSMContext):
     await state.set_data({})
     await message.answer(
@@ -18,7 +18,7 @@ async def cmd_cancel_no_state(message: Message, state: FSMContext):
 
 
 @router.message(Command(commands=["cancel"]))
-@router.message(F.text.lower() == __("cancel"))
+@router.message(F.text.lower() == __("❌ cancel"))
 async def cmd_cancel(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(text=_("Action canceled"), reply_markup=ReplyKeyboardRemove())

@@ -24,20 +24,20 @@ msgid "Start"
 msgstr "Старт"
 
 #: app/commands/commands.py:15 app/keyboards/make_buttons.py:22
-msgid "Cancel"
-msgstr "Отмена"
+msgid "❌ Cancel"
+msgstr "❌ Отмена"
 
 #: app/commands/commands.py:16
 msgid "Change language"
 msgstr "Изменить язык"
 
 #: app/handlers/back_router.py:14
-msgid "back"
-msgstr "назад"
+msgid "⬅️ back"
+msgstr "⬅️ назад"
 
 #: app/handlers/cancel_router.py:12 app/handlers/cancel_router.py:21
-msgid "cancel"
-msgstr "отмена"
+msgid "❌ cancel"
+msgstr "❌ отмена"
 
 #: app/handlers/cancel_router.py:16
 msgid "There is nothing to cancel"
@@ -48,8 +48,8 @@ msgid "Action canceled"
 msgstr "Действие отменено"
 
 #: app/handlers/convert_router.py:34
-msgid "convert"
-msgstr "конвертировать"
+msgid "🔄 convert"
+msgstr "🔄 конвертировать"
 
 #: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
 msgid "Send file"
@@ -129,16 +129,16 @@ msgid "Open"
 msgstr "Открыть"
 
 #: app/handlers/start_router.py:15
-msgid "Convert"
-msgstr "Конвертировать"
+msgid "🔄 Convert"
+msgstr "🔄 Конвертировать"
 
 #: app/handlers/start_router.py:19
 msgid "Choose an action"
 msgstr "Выберите действие"
 
 #: app/keyboards/make_buttons.py:19
-msgid "Back"
-msgstr "Назад"
+msgid "⬅️ Back"
+msgstr "⬅️ Назад"
 
 #: app/middlewares/antiflood.py:47
 msgid "Too many requests, try again in {delta:.2f} seconds"

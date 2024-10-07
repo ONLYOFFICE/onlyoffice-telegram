@@ -31,7 +31,7 @@ logger = logging.getLogger(__name__)
 router = Router()
 
 
-@router.message(MenuState.on_start, F.text.lower() == __("convert"))
+@router.message(MenuState.on_start, F.text.lower() == __("🔄 convert"))
 async def handle_conversion_start(message: Message, state: FSMContext):
     row_buttons = make_buttons([], with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
@@ -60,6 +60,8 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         )
         row_buttons = make_buttons(
             [item.upper() for item in format["convert"]],
+            buttons_per_row=4,
+            separate=True,
             with_back=True,
             with_cancel=True,
         )

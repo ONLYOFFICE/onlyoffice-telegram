@@ -23,7 +23,7 @@ msgid "Start"
 msgstr ""
 
 #: app/commands/commands.py:15 app/keyboards/make_buttons.py:22
-msgid "Cancel"
+msgid "❌ Cancel"
 msgstr ""
 
 #: app/commands/commands.py:16
@@ -31,11 +31,11 @@ msgid "Change language"
 msgstr ""
 
 #: app/handlers/back_router.py:14
-msgid "back"
+msgid "⬅️ back"
 msgstr ""
 
 #: app/handlers/cancel_router.py:12 app/handlers/cancel_router.py:21
-msgid "cancel"
+msgid "❌ cancel"
 msgstr ""
 
 #: app/handlers/cancel_router.py:16
@@ -47,7 +47,7 @@ msgid "Action canceled"
 msgstr ""
 
 #: app/handlers/convert_router.py:34
-msgid "convert"
+msgid "🔄 convert"
 msgstr ""
 
 #: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
@@ -125,7 +125,7 @@ msgid "Open"
 msgstr ""
 
 #: app/handlers/start_router.py:15
-msgid "Convert"
+msgid "🔄 Convert"
 msgstr ""
 
 #: app/handlers/start_router.py:19
@@ -133,7 +133,7 @@ msgid "Choose an action"
 msgstr ""
 
 #: app/keyboards/make_buttons.py:19
-msgid "Back"
+msgid "⬅️ Back"
 msgstr ""
 
 #: app/middlewares/antiflood.py:47

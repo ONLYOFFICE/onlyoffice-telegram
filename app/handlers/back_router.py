@@ -11,7 +11,7 @@ from app.utils.lang_utils import __
 router = Router()
 
 
-@router.message(F.text.lower() == __("back"))
+@router.message(F.text.lower() == __("⬅️ back"))
 async def handle_back_button(message: Message, state: FSMContext):
     current_state = await state.get_state()
 

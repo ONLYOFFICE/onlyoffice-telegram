@@ -58,7 +58,11 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
             file_type=get_extension_by_name(file.file_name),
             supported_convert_formats=format["convert"],
         )
-        row_buttons = make_buttons(format["convert"], with_back=True, with_cancel=True)
+        row_buttons = make_buttons(
+            [item.upper() for item in format["convert"]],
+            with_back=True,
+            with_cancel=True,
+        )
         keyboard = make_keyboard(row_buttons)
         await message.answer(text=_("Select format to convert"), reply_markup=keyboard)
         await state.set_state(MenuState.on_convert_format_selection)

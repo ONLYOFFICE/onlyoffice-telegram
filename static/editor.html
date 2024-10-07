@@ -45,11 +45,29 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
+        const deepMerge = (target, source) => {
+            for (const key in source) {
+                if (source[key] instanceof Object && key in target) {
+                    target[key] = deepMerge(target[key], source[key]);
+                } else {
+                    target[key] = source[key];
+                }
+            }
+            return target;
+        }
+
         const initData = Telegram.WebApp.initData || "";
         const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
         const key = initDataUnsafe.start_param;
 
-        const config = {
+        let config;
+        const preset = {
+            document: {
+                permissions: {
+                    download: "false",
+                    print: "false"
+                }
+            },
             editorConfig: {
                 mode: "edit",
                 user: {
@@ -79,7 +97,7 @@
 
         const handleGetConfigSuccess = (result) => {
             if (result.ok) {
-                Object.assign(config , result.config);
+                config = deepMerge(preset, result.config);
                 connectEditor();
                 fixSize();
             } else if (result.error) {

@@ -84,11 +84,11 @@ msgid "create"
 msgstr "создать"
 
 #: app/handlers/create_router.py:31
-msgid "Select document format"
+msgid "Select file format"
 msgstr "Выберите формат документа"
 
 #: app/handlers/create_router.py:41
-msgid "Enter document title"
+msgid "Enter file title"
 msgstr "Введите название файла"
 
 #: app/handlers/create_router.py:76 app/handlers/edit_router.py:64
@@ -104,8 +104,8 @@ msgid "Invalid title"
 msgstr "Некорректное название"
 
 #: app/handlers/edit_router.py:24
-msgid "edit"
-msgstr "редактировать"
+msgid "open"
+msgstr "открыть"
 
 #: app/handlers/lang_router.py:17
 msgid "Select language"
@@ -124,8 +124,8 @@ msgid "Create"
 msgstr "Создать"
 
 #: app/handlers/start_router.py:15
-msgid "Edit"
-msgstr "Редактировать"
+msgid "Open"
+msgstr "Открыть"
 
 #: app/handlers/start_router.py:15
 msgid "Convert"
@@ -156,6 +156,6 @@ msgid "Presentation"
 msgstr "Презентация"
 
 #: app/utils/file_utils.py:21 app/utils/file_utils.py:56
-msgid "Form"
-msgstr "Форма"
+msgid "PDF form"
+msgstr "PDF форма"
 

@@ -13,12 +13,12 @@ onlyoffice_docs_formats_path = os.path.join(
 )
 
 
-def get_format_description():
+def get_format_descriptions():
     return [
-        _("Document").capitalize(),
-        _("Spreadsheet").capitalize(),
-        _("Presentation").capitalize(),
-        _("Form").capitalize(),
+        _("Document"),
+        _("Spreadsheet"),
+        _("Presentation"),
+        _("PDF form"),
     ]
 
 
@@ -44,16 +44,16 @@ def get_format_by_mime(mime):
 
 
 def get_mime_by_format_description(format):
-    format = format.capitalize()
-    if format == _("Document"):
+    format = format.casefold()
+    if format == _("Document").casefold():
         return "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    if format == _("Spreadsheet"):
+    if format == _("Spreadsheet").casefold():
         return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    if format == _("Presentation"):
+    if format == _("Presentation").casefold():
         return (
             "application/vnd.openxmlformats-officedocument.presentationml.presentation"
         )
-    if format == _("Form"):
+    if format == _("PDF form").casefold():
         return "application/pdf"
 
     return None

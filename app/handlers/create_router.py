@@ -11,7 +11,7 @@ from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
     get_format_by_mime,
-    get_format_description,
+    get_format_descriptions,
     get_mime_by_format_description,
 )
 from app.utils.lang_utils import _, __
@@ -25,20 +25,22 @@ router = Router()
 
 @router.message(MenuState.on_start, F.text.lower() == __("create"))
 async def handle_create_start(message: Message, state: FSMContext):
-    menu_items = get_format_description()
+    menu_items = get_format_descriptions()
     row_buttons = make_buttons(menu_items, with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
-    await message.answer(text=_("Select document format"), reply_markup=keyboard)
+    await message.answer(text=_("Select file format"), reply_markup=keyboard)
     await state.set_state(MenuState.on_create_start)
 
 
 @router.message(MenuState.on_create_start, F.text)
 async def handle_create_title(message: Message, state: FSMContext):
-    format_description = message.text.capitalize()
-    if format_description.capitalize() in get_format_description():
-        await state.update_data(format_description=format_description)
+    if any(
+        message.text.casefold() == format_description.casefold()
+        for format_description in get_format_descriptions()
+    ):
+        await state.update_data(format_description=message.text)
         await message.answer(
-            text=_("Enter document title"), reply_markup=ReplyKeyboardRemove()
+            text=_("Enter file title"), reply_markup=ReplyKeyboardRemove()
         )
         await state.set_state(MenuState.on_create_title)
     else:

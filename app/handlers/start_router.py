@@ -12,7 +12,7 @@ router = Router()
 
 @router.message(Command("start"))
 async def handle_start(message: Message, state: FSMContext):
-    menu_items = [_("Create"), _("Edit"), _("Convert")]
+    menu_items = [_("Create"), _("Open"), _("Convert")]
     await state.clear()
     row_buttons = make_buttons(menu_items, buttons_per_row=1, with_cancel=True)
     keyboard = make_keyboard(row_buttons)

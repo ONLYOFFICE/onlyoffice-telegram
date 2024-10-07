@@ -83,11 +83,11 @@ msgid "create"
 msgstr ""
 
 #: app/handlers/create_router.py:31
-msgid "Select document format"
+msgid "Select file format"
 msgstr ""
 
 #: app/handlers/create_router.py:41
-msgid "Enter document title"
+msgid "Enter file title"
 msgstr ""
 
 #: app/handlers/create_router.py:76 app/handlers/edit_router.py:64
@@ -101,7 +101,7 @@ msgid "Invalid title"
 msgstr ""
 
 #: app/handlers/edit_router.py:24
-msgid "edit"
+msgid "open"
 msgstr ""
 
 #: app/handlers/lang_router.py:17
@@ -121,7 +121,7 @@ msgid "Create"
 msgstr ""
 
 #: app/handlers/start_router.py:15
-msgid "Edit"
+msgid "Open"
 msgstr ""
 
 #: app/handlers/start_router.py:15
@@ -153,6 +153,6 @@ msgid "Presentation"
 msgstr ""
 
 #: app/utils/file_utils.py:21 app/utils/file_utils.py:56
-msgid "Form"
+msgid "PDF form"
 msgstr ""
 

@@ -21,7 +21,7 @@ logger = logging.getLogger(__name__)
 router = Router()
 
 
-@router.message(MenuState.on_start, F.text.lower() == __("edit"))
+@router.message(MenuState.on_start, F.text.lower() == __("open"))
 async def handle_edit_start(message: Message, state: FSMContext):
     row_buttons = make_buttons([], with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)

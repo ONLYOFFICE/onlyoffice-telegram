@@ -87,7 +87,7 @@ async def get_config(request: Request):
                     "document": {
                         "fileType": session["file_type"],
                         "key": config["document"]["key"],
-                        "title": session["file_name"] + session["file_type"],
+                        "title": f"{session['file_name']}.{session['file_type']}",
                         "url": config["document"]["url"],
                     },
                     "documentType": session["document_type"],

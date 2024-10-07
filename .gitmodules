@@ -1,6 +1,8 @@
 [submodule "static/assets/document-formats"]
 	path = static/assets/document-formats
-	url = git@git.onlyoffice.com:ONLYOFFICE/document-formats.git
+	url = https://github.com/ONLYOFFICE/document-formats
+	branch = master
 [submodule "static/assets/document-templates"]
 	path = static/assets/document-templates
-	url = git@git.onlyoffice.com:ONLYOFFICE/document-templates.git
+	url = https://github.com/ONLYOFFICE/document-templates
+	branch = main/en

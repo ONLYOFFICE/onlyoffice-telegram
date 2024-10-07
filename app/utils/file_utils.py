@@ -93,7 +93,7 @@ def get_file_by_file_type(file_type, lang="en"):
         PROJECT_ROOT,
         "static",
         "assets",
-        "document_templates",
+        "document-templates",
         "new",
         locale,
         "new." + file_type,

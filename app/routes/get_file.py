@@ -28,7 +28,9 @@ async def get_file(request: Request) -> Response:
             file_path = file.file_path
             file_data = await bot.download_file(file_path)
         else:
-            file_data = get_file_by_file_type(file_type .decode("utf-8"))
+            lang = r.hget(key, "lang")
+            lang = lang.decode("utf-8") if lang else "default"
+            file_data = get_file_by_file_type(file_type.decode("utf-8"), lang)
 
         response = Response(body=file_data, content_type="application/octet-stream")
         response.headers["Content-Disposition"] = "attachment;"

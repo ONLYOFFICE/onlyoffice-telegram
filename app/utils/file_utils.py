@@ -59,51 +59,18 @@ def get_mime_by_format_description(format):
     return None
 
 
-def get_file_by_file_type(file_type, lang="en"):
-    locale_path = {
-        "az": "az-Latn-AZ",
-        "bg": "bg-BG",
-        "cs": "cs-CZ",
-        "de": "de-DE",
-        "el": "el-GR",
-        "en-gb": "en-GB",
-        "en": "en-US",
-        "es": "es-ES",
-        "fr": "fr-FR",
-        "it": "it-IT",
-        "ja": "ja-JP",
-        "ko": "ko-KR",
-        "lv": "lv-LV",
-        "nl": "nl-NL",
-        "pl": "pl-PL",
-        "pt-br": "pt-BR",
-        "pt": "pt-PT",
-        "ru": "ru-RU",
-        "sk": "sk-SK",
-        "sv": "sv-SE",
-        "uk": "uk-UA",
-        "vi": "vi-VN",
-        "zh": "zh-CN",
-    }
-    locale = locale_path.get(lang)
-    if locale is None:
-        locale = locale_path.get("en")
+def get_file_by_file_type(file_type, lang="default"):
+    templates_path = os.path.join(
+        PROJECT_ROOT, "static", "assets", "document-templates"
+    )
 
-    file_path = os.path.join(
-        PROJECT_ROOT,
-        "static",
-        "assets",
-        "document-templates",
-        "new",
-        locale,
+    template = os.path.join(
+        templates_path,
+        lang
+        if os.path.exists(os.path.join(templates_path, lang, "new." + file_type))
+        else "default",
         "new." + file_type,
     )
-    file = open(
-        file_path,
-        "rb",
-    )
-    try:
-        file_data = file.read()
-        return file_data
-    finally:
-        file.close()
+
+    with open(template, "rb") as file:
+        return file.read()

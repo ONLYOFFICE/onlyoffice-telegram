@@ -62,6 +62,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             "document_type": format["type"],
             "file_name": file_name,
             "file_type": format["name"],
+            "lang": getattr(message.from_user, "language_code", "default"),
             "members": "",
         }
         if message.chat.type == "group":

@@ -45,9 +45,7 @@ def create_redis_storage() -> Redis:
     )
 
 
-def create_dispatcher(
-    bot: Bot, redis_client: Redis, redis_storage: RedisStorage
-) -> Dispatcher:
+def create_dispatcher(redis_client: Redis, redis_storage: RedisStorage) -> Dispatcher:
     dispatcher = Dispatcher(
         storage=redis_storage, events_isolation=SimpleEventIsolation()
     )
@@ -85,7 +83,7 @@ def main() -> None:
     bot = create_bot()
     redis_client = create_redis_client()
     redis_storage = create_redis_storage()
-    dispatcher = create_dispatcher(bot, redis_client, redis_storage)
+    dispatcher = create_dispatcher(redis_client, redis_storage)
     app = create_app(bot, redis_client)
 
     dispatcher.startup.register(on_startup)

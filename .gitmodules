@@ -5,4 +5,4 @@
 [submodule "static/assets/document-templates"]
 	path = static/assets/document-templates
 	url = https://github.com/ONLYOFFICE/document-templates
-	branch = main/en
+	branch = main/new-2letter-code

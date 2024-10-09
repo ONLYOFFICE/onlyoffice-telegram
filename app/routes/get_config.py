@@ -87,7 +87,7 @@ async def get_config(request: Request):
             },
         }
         token = encode_payload(config)
-        session["token"] = token
+        config["token"] = token
 
         return json_response({"ok": True, "config": config})
     except Exception as e:

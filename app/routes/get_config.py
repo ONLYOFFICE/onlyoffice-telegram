@@ -51,6 +51,7 @@ async def get_config(request: Request):
             config = {
                 "document": {
                     "key": uuid.uuid4().hex,
+                    "permissions": {"download": "false", "print": "false"},
                     "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
                 },
                 "editorConfig": {

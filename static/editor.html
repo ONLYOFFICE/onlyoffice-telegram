@@ -57,18 +57,9 @@
         }
 
         const initData = Telegram.WebApp.initData || "";
-        const initDataUnsafe = Telegram.WebApp.initDataUnsafe || {};
-        const key = initDataUnsafe.start_param;
 
         let config;
         const preset = {
-            editorConfig: {
-                mode: "edit",
-                user: {
-                    id: initDataUnsafe.user.id.toString(),
-                    name: initDataUnsafe.user.first_name
-                }
-            },
             width: "100%",
             height: "100%",
             type: "mobile"

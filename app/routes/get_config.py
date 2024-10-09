@@ -9,7 +9,7 @@ from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
 
-from app.utils.jwt_utils import decode_token, encode_payload
+from app.utils.jwt_utils import encode_payload
 from config import TTL, WEB_APP_URL
 
 logging.basicConfig(level=logging.INFO)
@@ -47,22 +47,9 @@ async def get_config(request: Request):
 
         pipeline = r.pipeline()
 
-        if "token" not in session:
-            config = {
-                "document": {
-                    "key": uuid.uuid4().hex,
-                    "permissions": {"download": "false", "print": "false"},
-                    "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
-                },
-                "editorConfig": {
-                    "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
-                },
-            }
-            token = encode_payload(config)
-            session["token"] = token
-            pipeline.hset(key, "token", token)
-        else:
-            config = decode_token(session["token"])
+        if "key" not in session:
+            session["key"] = uuid.uuid4().hex
+            pipeline.hset(key, "key", session["key"])
 
         user_id = str(user["id"])
         members = set(session["members"].split())
@@ -74,33 +61,35 @@ async def get_config(request: Request):
         pipeline.expire(f"{key}", TTL)
         pipeline.execute()
 
-        lang = (
+        session["lang"] = (
             results[1].decode("utf-8")
             if results[1]
             else user.get("language_code", "en")
         )
-        session["lang"] = lang
 
-        return json_response(
-            {
-                "ok": True,
-                "config": {
-                    "document": {
-                        "fileType": session["file_type"],
-                        "key": config["document"]["key"],
-                        "permissions": {"download": "false", "print": "false"},
-                        "title": f"{session['file_name']}.{session['file_type']}",
-                        "url": config["document"]["url"],
-                    },
-                    "documentType": session["document_type"],
-                    "editorConfig": {
-                        "callbackUrl": config["editorConfig"]["callbackUrl"],
-                        "lang": session["lang"],
-                    },
-                    "token": session["token"],
+        config = {
+            "document": {
+                "fileType": session["file_type"],
+                "key": session["key"],
+                "permissions": {"download": "false", "print": "false"},
+                "title": f"{session['file_name']}.{session['file_type']}",
+                "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
+            },
+            "documentType": session["document_type"],
+            "editorConfig": {
+                "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
+                "lang": session["lang"],
+                "mode": "edit",
+                "user": {
+                    "id": user.get("id", ""),
+                    "name": user.get("first_name", ""),
                 },
-            }
-        )
+            },
+        }
+        token = encode_payload(config)
+        session["token"] = token
+
+        return json_response({"ok": True, "config": config})
     except Exception as e:
         logger.error(f"Failed to get config: {e}")
         return json_response({"ok": False, "error": str(e)}, status=500)

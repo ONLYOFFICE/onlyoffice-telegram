@@ -56,7 +56,7 @@ async def send_file(request: Request):
                     logger.error(f"Failed to send document to user {member}: {e}")
 
             pipeline = r.pipeline()
-            pipeline.hdel(key, "token")
+            pipeline.hdel(key, "key")
             pipeline.hset(key, "members", "")
             pipeline.execute()
 

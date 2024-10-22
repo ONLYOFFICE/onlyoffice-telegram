@@ -3,7 +3,7 @@ import uuid
 
 from aiogram import F, Router
 from aiogram.fsm.context import FSMContext
-from aiogram.types import LinkPreviewOptions, Message, ReplyKeyboardRemove
+from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
 from app.filters import DocumentEditFilter
@@ -57,14 +57,12 @@ async def handle_edit_document_upload(
         pipeline.execute()
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
-        link_preview_options = LinkPreviewOptions(url=web_app_url)
 
         await state.clear()
         await message.answer(
             text=_(
                 "To start co-editing, send this message to other participants\n{web_app_url}"
             ).format(web_app_url=web_app_url),
-            link_preview_options=link_preview_options,
             reply_markup=ReplyKeyboardRemove(),
         )
 

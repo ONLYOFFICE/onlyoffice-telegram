@@ -14,12 +14,7 @@ onlyoffice_docs_formats_path = os.path.join(
 
 
 def get_format_descriptions():
-    return [
-        _("Document"),
-        _("Spreadsheet"),
-        _("Presentation"),
-        _("PDF form"),
-    ]
+    return [_("Document"), _("Spreadsheet"), _("Presentation")]
 
 
 def remove_extension(name):

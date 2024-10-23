@@ -8,6 +8,6 @@ class DocumentEditFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:
         if message.document:
             format = get_format_by_mime(message.document.mime_type)
-            if "edit" in format["actions"]:
+            if format and "edit" in format["actions"]:
                 return {"format": format}
         return False

@@ -2,6 +2,7 @@ import logging
 import uuid
 
 from aiogram import F, Router
+from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
@@ -19,6 +20,11 @@ logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
 
 router = Router()
+
+
+@router.message(StateFilter(None), DocumentEditFilter())
+async def handle_edit_no_file(message: Message, state: FSMContext, r: Redis, format):
+    await handle_edit_document_upload(message, state, r, format)
 
 
 @router.message(MenuState.on_start, F.text.lower() == __("open"))
@@ -68,13 +74,3 @@ async def handle_edit_document_upload(
 
     except Exception as e:
         logger.error(f"Failed to create web app link: {e}")
-
-
-@router.message(MenuState.on_edit_start, F.document)
-async def handle_edit_invalid_document_upload(message: Message):
-    await message.answer(_("File not supported"))
-
-
-@router.message(MenuState.on_edit_start)
-async def handle_edit_no_file(message: Message, state: FSMContext):
-    await handle_edit_start(message, state)

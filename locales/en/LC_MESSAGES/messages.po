@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-07 12:27+0300\n"
+"POT-Creation-Date: 2024-10-25 10:21+0300\n"
 "PO-Revision-Date: 2024-09-16 16:59+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -22,12 +22,33 @@ msgstr ""
 msgid "Start"
 msgstr ""
 
-#: app/commands/commands.py:15 app/keyboards/make_buttons.py:22
-msgid "❌ Cancel"
+#: app/commands/commands.py:15
+msgid "Cancel"
 msgstr ""
 
 #: app/commands/commands.py:16
 msgid "Change language"
+msgstr ""
+
+#: app/description/description.py:9
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations, PDF forms\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to create/edit files\n"
+msgstr ""
+
+#: app/description/description.py:14
+msgid "short_description"
+msgstr ""
+
+#: app/filters/document_edit_filter.py:16
+#: app/filters/document_edit_filter.py:18 app/handlers/convert_router.py:72
+msgid "File not supported"
 msgstr ""
 
 #: app/handlers/back_router.py:14
@@ -50,31 +71,27 @@ msgstr ""
 msgid "🔄 convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
+#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:34
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:40
+#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:46
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:67
+#: app/handlers/convert_router.py:69
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:70 app/handlers/edit_router.py:77
-msgid "File not supported"
-msgstr ""
-
-#: app/handlers/convert_router.py:152
+#: app/handlers/convert_router.py:154
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:157
+#: app/handlers/convert_router.py:159
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:163
+#: app/handlers/convert_router.py:165
 msgid "Invalid format"
 msgstr ""
 
@@ -90,17 +107,17 @@ msgstr ""
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:78 app/handlers/edit_router.py:64
+#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
 msgid ""
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:91
+#: app/handlers/create_router.py:90
 msgid "Invalid title"
 msgstr ""
 
-#: app/handlers/edit_router.py:24
+#: app/handlers/edit_router.py:30
 msgid "open"
 msgstr ""
 
@@ -132,27 +149,31 @@ msgstr ""
 msgid "Choose an action"
 msgstr ""
 
-#: app/keyboards/make_buttons.py:19
+#: app/keyboards/make_buttons.py:15 app/keyboards/make_buttons.py:29
 msgid "⬅️ Back"
+msgstr ""
+
+#: app/keyboards/make_buttons.py:17 app/keyboards/make_buttons.py:31
+msgid "❌ Cancel"
 msgstr ""
 
 #: app/middlewares/antiflood.py:47
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr ""
 
-#: app/utils/file_utils.py:18 app/utils/file_utils.py:48
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
 msgid "Document"
 msgstr ""
 
-#: app/utils/file_utils.py:19 app/utils/file_utils.py:50
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
 msgid "Spreadsheet"
 msgstr ""
 
-#: app/utils/file_utils.py:20 app/utils/file_utils.py:52
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
 msgid "Presentation"
 msgstr ""
 
-#: app/utils/file_utils.py:21 app/utils/file_utils.py:56
+#: app/utils/file_utils.py:51
 msgid "PDF form"
 msgstr ""
 

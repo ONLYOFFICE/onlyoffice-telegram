@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-07 12:27+0300\n"
+"POT-Creation-Date: 2024-10-25 10:21+0300\n"
 "PO-Revision-Date: 2024-08-28 13:52+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -23,13 +23,35 @@ msgstr ""
 msgid "Start"
 msgstr "Старт"
 
-#: app/commands/commands.py:15 app/keyboards/make_buttons.py:22
-msgid "❌ Cancel"
-msgstr "❌ Отмена"
+#: app/commands/commands.py:15
+#, fuzzy
+msgid "Cancel"
+msgstr "Отмена"
 
 #: app/commands/commands.py:16
 msgid "Change language"
 msgstr "Изменить язык"
+
+#: app/description/description.py:9
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations, PDF forms\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to create/edit files\n"
+msgstr ""
+
+#: app/description/description.py:14
+msgid "short_description"
+msgstr ""
+
+#: app/filters/document_edit_filter.py:16
+#: app/filters/document_edit_filter.py:18 app/handlers/convert_router.py:72
+msgid "File not supported"
+msgstr "Файл не поддерживается"
 
 #: app/handlers/back_router.py:14
 msgid "⬅️ back"
@@ -51,31 +73,27 @@ msgstr "Действие отменено"
 msgid "🔄 convert"
 msgstr "🔄 конвертировать"
 
-#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:28
+#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:34
 msgid "Send file"
 msgstr "Отправьте файл"
 
-#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:40
+#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:46
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr "Размер файла слишком большой. Максимально допустимый размер файла - 20 MB"
 
-#: app/handlers/convert_router.py:67
+#: app/handlers/convert_router.py:69
 msgid "Select format to convert"
 msgstr "Выберите формат для конвертации"
 
-#: app/handlers/convert_router.py:70 app/handlers/edit_router.py:77
-msgid "File not supported"
-msgstr "Файл не поддерживается"
-
-#: app/handlers/convert_router.py:152
+#: app/handlers/convert_router.py:154
 msgid "Done"
 msgstr "Готово"
 
-#: app/handlers/convert_router.py:157
+#: app/handlers/convert_router.py:159
 msgid "Failed to convert file"
 msgstr "Не удалось конвертировать файл"
 
-#: app/handlers/convert_router.py:163
+#: app/handlers/convert_router.py:165
 msgid "Invalid format"
 msgstr "Некорректный формат"
 
@@ -91,7 +109,7 @@ msgstr "Выберите формат документа"
 msgid "Enter file title"
 msgstr "Введите название файла"
 
-#: app/handlers/create_router.py:78 app/handlers/edit_router.py:64
+#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
 msgid ""
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
@@ -100,11 +118,11 @@ msgstr ""
 "участникам\n"
 "{web_app_url}"
 
-#: app/handlers/create_router.py:91
+#: app/handlers/create_router.py:90
 msgid "Invalid title"
 msgstr "Некорректное название"
 
-#: app/handlers/edit_router.py:24
+#: app/handlers/edit_router.py:30
 msgid "open"
 msgstr "открыть"
 
@@ -136,27 +154,31 @@ msgstr "🔄 Конвертировать"
 msgid "Choose an action"
 msgstr "Выберите действие"
 
-#: app/keyboards/make_buttons.py:19
+#: app/keyboards/make_buttons.py:15 app/keyboards/make_buttons.py:29
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
+
+#: app/keyboards/make_buttons.py:17 app/keyboards/make_buttons.py:31
+msgid "❌ Cancel"
+msgstr "❌ Отмена"
 
 #: app/middlewares/antiflood.py:47
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr "Слишком много запросов, попробуйте через {delta:.2f} секунд"
 
-#: app/utils/file_utils.py:18 app/utils/file_utils.py:48
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
 msgid "Document"
 msgstr "Документ"
 
-#: app/utils/file_utils.py:19 app/utils/file_utils.py:50
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
 msgid "Spreadsheet"
 msgstr "Таблица"
 
-#: app/utils/file_utils.py:20 app/utils/file_utils.py:52
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
 msgid "Presentation"
 msgstr "Презентация"
 
-#: app/utils/file_utils.py:21 app/utils/file_utils.py:56
+#: app/utils/file_utils.py:51
 msgid "PDF form"
 msgstr "PDF форма"
 

@@ -12,6 +12,7 @@ from dotenv import load_dotenv
 from redis import Redis
 
 from app import remove_commands, set_commands, setup_handlers, setup_routers
+from app.description import set_description
 from app.middlewares import setup_middlewares
 from config import (
     BOT_TOKEN,
@@ -67,6 +68,7 @@ async def on_startup(app: Application) -> None:
         await bot.delete_webhook(drop_pending_updates=True)
         await bot.set_webhook(f"{WEB_APP_URL}{WEBHOOK_PATH}")
         await set_commands(bot)
+        await set_description(bot)
     except Exception as e:
         logger.error(f"Error on startup: {e}")
 

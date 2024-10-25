@@ -34,17 +34,69 @@
         .form {
             height: 100%;
         }
+
+        #error {
+            height: 100%;
+        }
+
+        .error_container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error_logo {
+            margin-bottom: 40px;
+        }
+
+        #error_title {
+            max-width: 287px;
+            font-size: 23px;
+            font-weight: 700;
+            line-height: 28px;
+            text-align: center;
+            margin: 0 0 8px 0;
+        }
+
+        #error_description {
+            max-width: 287px;
+            font-size: 12px;
+            font-weight: 400;
+            line-height: 16px;
+            text-align: center;
+            margin: 0;
+        }
     </style>
   </head>
   <body>
     <div class="form">
       <div id="editor">
       </div>
+      <div id="error" style="display: none;">
+        <div class="error_container">
+            <img class="error_logo" src="/static/logo.svg">
+            <h1 id="error_title">Not available</h1>
+            <p id="error_description">The link has expired. Please create a new one or open this file in the chat.</p>
+        </div>
+      </div>
     </div>
     <script src="{{ DOCSERVER_URL }}/web-apps/apps/api/documents/api.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
+        const lang = {
+            ru: {
+                title: "Доступ недоступен",
+                description: "Ссылка устарела. Пожалуйста, создайте новую или откройте этот файл в чате."
+            },
+            en: {
+                title: "Not available",
+                description: "The link has expired. Please create a new one or open this file in the chat."
+            }
+        };
+
         const deepMerge = (target, source) => {
             for (const key in source) {
                 if (source[key] instanceof Object && key in target) {
@@ -86,11 +138,13 @@
                 connectEditor();
                 fixSize();
             } else if (result.error) {
+                showError();
                 console.log("getConfig error:", result.error);
             }
         };
 
         const handleGetConfigError = (error) => {
+            showError();
             console.log("getConfig error:", error);
         };
 
@@ -109,6 +163,21 @@
                 iframe.style.height = `${window.innerHeight}px`;
             }
         };
+
+        const showError = () => {
+            const err = document.getElementById("error");
+            const errTitle = document.getElementById('error_title');
+            const errDescription = document.getElementById('error_description');
+            const language_code = Telegram.WebApp.initDataUnsafe.user.language_code;
+            if (error) {
+                if (lang[language_code]) {
+                    errTitle.textContent = lang[language_code].title;
+                    errDescription.textContent = lang[language_code].description;
+                }
+                error.style.display = 'block';
+            }
+
+        }
 
         if (window.addEventListener) {
             window.addEventListener("load", onLoad);

@@ -7,6 +7,7 @@ from .send_file import send_file
 
 
 def setup_routers(app: Application) -> None:
+    app.router.add_static(prefix="/static", path="static")
     app.router.add_get("/editor", editor)
     app.router.add_get("/editor/getConfig", get_config)
     app.router.add_get("/editor/getFile", get_file)

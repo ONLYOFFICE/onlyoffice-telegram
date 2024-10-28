@@ -39,6 +39,11 @@ async def handle_conversion_start(message: Message, state: FSMContext):
     await state.set_state(MenuState.on_convert_start)
 
 
+@router.message(MenuState.on_convert_start, F.photo)
+async def handle_conversion_photo_upload(message: Message):
+    await message.answer(_("File not supported"))
+
+
 @router.message(MenuState.on_convert_start, F.document)
 async def handle_conversion_document_upload(message: Message, state: FSMContext):
     file = message.document

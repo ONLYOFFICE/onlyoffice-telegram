@@ -32,7 +32,12 @@ logger = logging.getLogger(__name__)
 
 
 def create_bot() -> Bot:
-    return Bot(BOT_TOKEN, default=DefaultBotProperties(parse_mode=ParseMode.HTML))
+    return Bot(
+        BOT_TOKEN,
+        default=DefaultBotProperties(
+            parse_mode=ParseMode.HTML, link_preview_is_disabled=True
+        ),
+    )
 
 
 def create_redis_client() -> Redis:

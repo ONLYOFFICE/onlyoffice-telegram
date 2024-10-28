@@ -76,8 +76,10 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         await state.clear()
         await message.answer(
             text=_(
-                "To start co-editing, send this message to other participants\n{web_app_url}"
-            ).format(web_app_url=web_app_url),
+                "Your file {file_name}\nTo start co-editing, send this message to other participants\n{web_app_url}"
+            ).format(
+                file_name=f"{file_name}.{format['name']}", web_app_url=web_app_url
+            ),
             reply_markup=ReplyKeyboardRemove(),
         )
 

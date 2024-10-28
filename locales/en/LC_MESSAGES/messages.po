@@ -7,8 +7,8 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-28 11:46+0300\n"
-"PO-Revision-Date: 2024-09-16 16:59+0300\n"
+"POT-Creation-Date: 2024-10-28 14:53+0300\n"
+"PO-Revision-Date: 2024-10-28 15:06+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
 "Language-Team: en <LL@li.org>\n"
@@ -49,7 +49,8 @@ msgid ""
 msgstr ""
 
 #: app/filters/document_edit_filter.py:16
-#: app/filters/document_edit_filter.py:18 app/handlers/convert_router.py:72
+#: app/filters/document_edit_filter.py:18 app/handlers/convert_router.py:44
+#: app/handlers/convert_router.py:77
 msgid "File not supported"
 msgstr ""
 
@@ -77,23 +78,23 @@ msgstr ""
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:49 app/handlers/edit_router.py:46
+#: app/handlers/convert_router.py:54 app/handlers/edit_router.py:46
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:69
+#: app/handlers/convert_router.py:74
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:154
+#: app/handlers/convert_router.py:159
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:159
+#: app/handlers/convert_router.py:164
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:165
+#: app/handlers/convert_router.py:170
 msgid "Invalid format"
 msgstr ""
 
@@ -109,26 +110,19 @@ msgstr ""
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:79
+#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
 msgid ""
 "Your file {file_name}\n"
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:91
+#: app/handlers/create_router.py:92
 msgid "Invalid title"
 msgstr ""
 
 #: app/handlers/edit_router.py:30
 msgid "open"
-msgstr ""
-
-#: app/handlers/edit_router.py:69
-msgid ""
-"Your file {file.file_name}\n"
-"To start co-editing, send this message to other participants\n"
-"{web_app_url}"
 msgstr ""
 
 #: app/handlers/lang_router.py:17
@@ -186,12 +180,4 @@ msgstr ""
 #: app/utils/file_utils.py:59
 msgid "PDF form"
 msgstr ""
-
-#~ msgid "short_description"
-#~ msgstr ""
-
-#~ msgid ""
-#~ "To start co-editing, send this message to other participants\n"
-#~ "{web_app_url}"
-#~ msgstr ""
 

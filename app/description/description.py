@@ -11,4 +11,9 @@ async def set_description(bot: Bot):
             ),
             language_code=lang,
         )
-        await bot.set_my_short_description(_("short_description"), language_code=lang)
+        await bot.set_my_short_description(
+            _(
+                "Easily create, convert, edit and collaborate on office files using the ONLYOFFICE bot."
+            ),
+            language_code=lang,
+        )

@@ -70,6 +70,7 @@ async def get_config(request: Request):
 
         format = get_format_by_name(session["file_type"])
 
+        mode = "edit" if "edit" or "lossy-edit" in format["actions"] else "view"
         config = {
             "document": {
                 "fileType": session["file_type"],
@@ -82,7 +83,7 @@ async def get_config(request: Request):
             "editorConfig": {
                 "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
                 "lang": session["lang"],
-                "mode": "edit" if "edit" in format["actions"] else "view",
+                "mode": mode,
                 "user": {
                     "id": user.get("id", ""),
                     "name": user.get("first_name", ""),

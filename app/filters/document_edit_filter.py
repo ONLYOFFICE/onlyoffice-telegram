@@ -10,7 +10,7 @@ class DocumentEditFilter(BaseFilter):
         if message.chat.type == "private":
             if message.document:
                 format = get_format_by_mime(message.document.mime_type)
-                if format:
+                if format and format["actions"]:
                     return {"format": format}
                 else:
                     return await message.answer(_("File not supported"))

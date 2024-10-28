@@ -9,6 +9,7 @@ from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
 
+from app.utils.file_utils import get_format_by_name
 from app.utils.jwt_utils import encode_payload
 from config import TTL, WEB_APP_URL
 
@@ -67,6 +68,8 @@ async def get_config(request: Request):
             else user.get("language_code", "en")
         )
 
+        format = get_format_by_name(session["file_type"])
+
         config = {
             "document": {
                 "fileType": session["file_type"],
@@ -79,7 +82,7 @@ async def get_config(request: Request):
             "editorConfig": {
                 "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
                 "lang": session["lang"],
-                "mode": "edit",
+                "mode": "edit" if "edit" in format["actions"] else "view",
                 "user": {
                     "id": user.get("id", ""),
                     "name": user.get("first_name", ""),

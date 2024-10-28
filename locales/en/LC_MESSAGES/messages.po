@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-25 10:21+0300\n"
+"POT-Creation-Date: 2024-10-28 11:46+0300\n"
 "PO-Revision-Date: 2024-09-16 16:59+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -42,8 +42,10 @@ msgid ""
 "Press /start to create/edit files\n"
 msgstr ""
 
-#: app/description/description.py:14
-msgid "short_description"
+#: app/description/description.py:15
+msgid ""
+"Easily create, convert, edit and collaborate on office files using the "
+"ONLYOFFICE bot."
 msgstr ""
 
 #: app/filters/document_edit_filter.py:16
@@ -107,18 +109,26 @@ msgstr ""
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
+#: app/handlers/create_router.py:79
 msgid ""
+"Your file {file_name}\n"
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:90
+#: app/handlers/create_router.py:91
 msgid "Invalid title"
 msgstr ""
 
 #: app/handlers/edit_router.py:30
 msgid "open"
+msgstr ""
+
+#: app/handlers/edit_router.py:69
+msgid ""
+"Your file {file.file_name}\n"
+"To start co-editing, send this message to other participants\n"
+"{web_app_url}"
 msgstr ""
 
 #: app/handlers/lang_router.py:17
@@ -161,19 +171,27 @@ msgstr ""
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:51
 msgid "Document"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:53
 msgid "Spreadsheet"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:55
 msgid "Presentation"
 msgstr ""
 
-#: app/utils/file_utils.py:51
+#: app/utils/file_utils.py:59
 msgid "PDF form"
 msgstr ""
+
+#~ msgid "short_description"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To start co-editing, send this message to other participants\n"
+#~ "{web_app_url}"
+#~ msgstr ""
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-25 10:21+0300\n"
+"POT-Creation-Date: 2024-10-28 11:46+0300\n"
 "PO-Revision-Date: 2024-08-28 13:52+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -44,8 +44,10 @@ msgid ""
 "Press /start to create/edit files\n"
 msgstr ""
 
-#: app/description/description.py:14
-msgid "short_description"
+#: app/description/description.py:15
+msgid ""
+"Easily create, convert, edit and collaborate on office files using the "
+"ONLYOFFICE bot."
 msgstr ""
 
 #: app/filters/document_edit_filter.py:16
@@ -109,8 +111,10 @@ msgstr "Выберите формат документа"
 msgid "Enter file title"
 msgstr "Введите название файла"
 
-#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
+#: app/handlers/create_router.py:79
+#, fuzzy
 msgid ""
+"Your file {file_name}\n"
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
@@ -118,13 +122,24 @@ msgstr ""
 "участникам\n"
 "{web_app_url}"
 
-#: app/handlers/create_router.py:90
+#: app/handlers/create_router.py:91
 msgid "Invalid title"
 msgstr "Некорректное название"
 
 #: app/handlers/edit_router.py:30
 msgid "open"
 msgstr "открыть"
+
+#: app/handlers/edit_router.py:69
+#, fuzzy
+msgid ""
+"Your file {file.file_name}\n"
+"To start co-editing, send this message to other participants\n"
+"{web_app_url}"
+msgstr ""
+"Чтобы начать совместное редактирование, отправьте это сообщение другим "
+"участникам\n"
+"{web_app_url}"
 
 #: app/handlers/lang_router.py:17
 msgid "Select language"
@@ -166,19 +181,22 @@ msgstr "❌ Отмена"
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr "Слишком много запросов, попробуйте через {delta:.2f} секунд"
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:51
 msgid "Document"
 msgstr "Документ"
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:53
 msgid "Spreadsheet"
 msgstr "Таблица"
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:55
 msgid "Presentation"
 msgstr "Презентация"
 
-#: app/utils/file_utils.py:51
+#: app/utils/file_utils.py:59
 msgid "PDF form"
 msgstr "PDF форма"
+
+#~ msgid "short_description"
+#~ msgstr ""
 

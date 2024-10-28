@@ -38,6 +38,14 @@ def get_format_by_mime(mime):
             return format
 
 
+def get_format_by_name(name):
+    with open(onlyoffice_docs_formats_path, "r") as onlyoffice_docs_formats:
+        formats = json.load(onlyoffice_docs_formats)
+    for format in formats:
+        if name in format["name"]:
+            return format
+
+
 def get_mime_by_format_description(format):
     format = format.casefold()
     if format == _("Document").casefold():

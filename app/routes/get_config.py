@@ -85,7 +85,7 @@ async def get_config(request: Request):
                 "lang": session["lang"],
                 "mode": mode,
                 "user": {
-                    "id": user.get("id", ""),
+                    "id": str(user.get("id", "")),
                     "name": user.get("first_name", ""),
                 },
             },

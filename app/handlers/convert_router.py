@@ -82,21 +82,6 @@ async def handle_conversion_no_file(message: Message, state: FSMContext):
     await handle_conversion_start(message, state)
 
 
-async def check_conversion_status(session: aiohttp.ClientSession, key: str) -> dict:
-    url = f"{WEB_APP_URL}/editor/getFile?file_id={key}"
-    async with session.get(url) as response:
-        response.raise_for_status()
-        return await response.json()
-
-
-async def send_status_message(msg: Message):
-    for sec in range(1, CONVERT_TIMEOUT + 1):
-        dots = "." * sec
-        message = f"🔄 Conversion{dots}"
-        await msg.edit_text(message)
-        await asyncio.sleep(1)
-
-
 @router.message(MenuState.on_convert_format_selection, SupportedConvertFormatsFilter())
 async def handle_conversion_finish(
     message: Message,
@@ -108,9 +93,7 @@ async def handle_conversion_finish(
     file_type: str,
     output_type: str,
 ):
-    remove_keyboard_msg = await message.answer("­", reply_markup=ReplyKeyboardRemove())
-    await remove_keyboard_msg.delete()
-    msg = await message.answer("🔄 Convertsion")
+    msg = await message.answer("🔄 Convertsion...", reply_markup=ReplyKeyboardRemove())
 
     key = uuid.uuid4().hex
     conversion_url = f"{DOCSERVER_URL}/{DOCSERVER_CONVERTER_URL}"
@@ -139,7 +122,6 @@ async def handle_conversion_finish(
     async with aiohttp.ClientSession() as session:
         end_convert = False
         for attempt in range(CONVERT_MAX_ATTEMPTS):
-            status_task_handle = asyncio.create_task(send_status_message(msg))
             try:
                 async with session.post(
                     conversion_url, json=payload, headers=headers
@@ -160,19 +142,19 @@ async def handle_conversion_finish(
             except RuntimeError as e:
                 logger.error(f"Attempt {attempt + 1} failed: {e}")
 
-    status_task_handle.cancel()
     await state.clear()
     if end_convert:
         document = URLInputFile(
             conversion_response.get("fileUrl"),
             filename=f"{file_name}.{output_type}",
         )
+        await msg.delete()
         await bot.send_document(
             chat_id=message.from_user.id, document=document, caption=_("Done")
         )
     else:
-        await message.answer(_("Failed to convert file"))
         await msg.delete()
+        await message.answer(_("Failed to convert file"))
 
 
 @router.message(MenuState.on_convert_format_selection)

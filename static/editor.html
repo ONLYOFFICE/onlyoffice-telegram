@@ -115,7 +115,16 @@
         const preset = {
             width: "100%",
             height: "100%",
-            type: DESKTOP_MODE ? "desktop" : "mobile"
+            type: DESKTOP_MODE ? "desktop" : "mobile",
+            editorConfig: {
+                customization: {
+                    compactHeader: true,
+                    toolbarNoTabs: true,
+                    logo: {
+                        visible: false
+                    }
+                }
+            }
         };
 
         const onLoad = () => {

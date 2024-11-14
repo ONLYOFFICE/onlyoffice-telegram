@@ -86,11 +86,6 @@ async def get_config(request: Request):
             "documentType": session["document_type"],
             "editorConfig": {
                 "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
-                "customization": {
-                    "compactHeader": "true",
-                    "toolbarNoTabs": "true",
-                    "logo": {"visible": "false"},
-                },
                 "lang": session["lang"],
                 "mode": mode,
                 "user": {

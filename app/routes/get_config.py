@@ -75,7 +75,9 @@ async def get_config(request: Request):
             "document": {
                 "fileType": session["file_type"],
                 "key": session["key"],
-                "permissions": {"download": "false", "print": "false",
+                "permissions": {
+                    "download": "false",
+                    "print": "false",
                     "protect": "false",
                 },
                 "title": f"{session['file_name']}.{session['file_type']}",

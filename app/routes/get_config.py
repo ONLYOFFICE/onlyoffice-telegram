@@ -70,7 +70,7 @@ async def get_config(request: Request):
 
         format = get_format_by_name(session["file_type"])
 
-        mode = "edit" if "edit" or "lossy-edit" in format["actions"] else "view"
+        mode = "edit" if "edit" in format["actions"] else "view"
         config = {
             "document": {
                 "fileType": session["file_type"],

@@ -23,7 +23,11 @@ router = Router()
 
 
 @router.message(StateFilter(None), DocumentEditFilter())
-async def handle_edit_no_file(message: Message, state: FSMContext, r: Redis, format):
+async def handle_edit_no_command(
+    message: Message, state: FSMContext, r: Redis, format, reply
+):
+    if reply:
+        message = message.reply_to_message
     await handle_edit_document_upload(message, state, r, format)
 
 

@@ -76,9 +76,9 @@ async def get_config(request: Request):
                 "fileType": session["file_type"],
                 "key": session["key"],
                 "permissions": {
-                    "download": "false",
-                    "print": "false",
-                    "protect": "false",
+                    "download": False,
+                    "print": False,
+                    "protect": False,
                 },
                 "title": f"{session['file_name']}.{session['file_type']}",
                 "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
@@ -86,6 +86,11 @@ async def get_config(request: Request):
             "documentType": session["document_type"],
             "editorConfig": {
                 "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
+                "customization": {
+                    "compactHeader": True,
+                    "toolbarNoTabs": True,
+                    "logo": {"visible": False},
+                },
                 "lang": session["lang"],
                 "mode": mode,
                 "user": {

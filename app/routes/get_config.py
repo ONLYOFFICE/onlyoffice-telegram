@@ -9,7 +9,7 @@ from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
 
-from app.utils.file_utils import get_format_by_name
+from app.utils.file_utils import get_format_by_extension
 from app.utils.jwt_utils import encode_payload
 from config import TTL, WEB_APP_URL
 
@@ -68,7 +68,7 @@ async def get_config(request: Request):
             else user.get("language_code", "en")
         )
 
-        format = get_format_by_name(session["file_type"])
+        format = get_format_by_extension(session["file_type"])
 
         mode = "edit" if "edit" in format["actions"] else "view"
         security_token = encode_payload({"auth": auth})

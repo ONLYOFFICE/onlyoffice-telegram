@@ -10,9 +10,9 @@ from app.filters import DocumentNameFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
-    get_format_by_mime,
+    get_extension_by_description,
+    get_format_by_extension,
     get_format_descriptions,
-    get_mime_by_format_description,
 )
 from app.utils.lang_utils import _, __
 from config import BOT_NAME, TTL, WEB_APP_NAME
@@ -52,8 +52,8 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
     file_name = message.text
     data = await state.get_data()
     format_description = data["format_description"]
-    mime = get_mime_by_format_description(format_description)
-    format = get_format_by_mime(mime)
+    extension = get_extension_by_description(format_description)
+    format = get_format_by_extension(extension)
     try:
         key = uuid.uuid4().hex
 

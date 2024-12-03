@@ -30,15 +30,7 @@ def get_extension_by_name(name):
     return name[name.rfind(".") + 1 :].lower()
 
 
-def get_format_by_mime(mime):
-    with open(onlyoffice_docs_formats_path, "r") as onlyoffice_docs_formats:
-        formats = json.load(onlyoffice_docs_formats)
-    for format in formats:
-        if mime in format["mime"]:
-            return format
-
-
-def get_format_by_name(name):
+def get_format_by_extension(name):
     with open(onlyoffice_docs_formats_path, "r") as onlyoffice_docs_formats:
         formats = json.load(onlyoffice_docs_formats)
     for format in formats:
@@ -46,18 +38,16 @@ def get_format_by_name(name):
             return format
 
 
-def get_mime_by_format_description(format):
-    format = format.casefold()
-    if format == _("Document").casefold():
-        return "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
-    if format == _("Spreadsheet").casefold():
-        return "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet"
-    if format == _("Presentation").casefold():
-        return (
-            "application/vnd.openxmlformats-officedocument.presentationml.presentation"
-        )
-    if format == _("PDF form").casefold():
-        return "application/pdf"
+def get_extension_by_description(description):
+    description = description.casefold()
+    if description == _("Document").casefold():
+        return "docx"
+    if description == _("Spreadsheet").casefold():
+        return "xlsx"
+    if description == _("Presentation").casefold():
+        return "pptx"
+    if description == _("PDF form").casefold():
+        return "pdf"
 
     return None
 

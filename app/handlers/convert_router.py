@@ -11,7 +11,7 @@ from redis import Redis
 from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
-from app.utils.file_utils import get_extension_by_name, get_format_by_mime
+from app.utils.file_utils import get_extension_by_name, get_format_by_extension
 from app.utils.jwt_utils import encode_payload
 from app.utils.lang_utils import _, __
 from config import (
@@ -55,12 +55,13 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         )
         return
 
-    format = get_format_by_mime(file.mime_type)
+    extension = get_extension_by_name(file.file_name)
+    format = get_format_by_extension(extension)
     if format and format["convert"]:
         await state.update_data(
             file_id=file.file_id,
             file_name=file.file_name,
-            file_type=get_extension_by_name(file.file_name),
+            file_type=extension,
             supported_convert_formats=format["convert"],
         )
         row_buttons = make_buttons(

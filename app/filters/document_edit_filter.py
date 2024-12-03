@@ -1,7 +1,7 @@
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
 
-from app.utils.file_utils import get_format_by_mime
+from app.utils.file_utils import get_extension_by_name, get_format_by_extension
 from app.utils.lang_utils import _
 
 
@@ -12,7 +12,8 @@ class DocumentEditFilter(BaseFilter):
                 return False
 
             if message.document:
-                format = get_format_by_mime(message.document.mime_type)
+                extension = get_extension_by_name(message.document.file_name)
+                format = get_format_by_extension(extension)
                 if format and format["actions"]:
                     return {"format": format, "reply": reply}
                 return await message.answer(_("File not supported"))

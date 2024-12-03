@@ -23,7 +23,6 @@ async def get_file(request: Request) -> Response:
 
     try:
         file_id = r.hget(key, "file_id")
-        file_type = r.hget(key, "file_type")
 
         if file_id:
             file = await bot.get_file(file_id.decode("utf-8"))
@@ -32,6 +31,7 @@ async def get_file(request: Request) -> Response:
         else:
             lang = r.hget(key, "lang")
             lang = lang.decode("utf-8") if lang else "default"
+            file_type = r.hget(key, "file_type")
             file_data = get_file_by_file_type(file_type.decode("utf-8"), lang)
 
         response = Response(body=file_data, content_type="application/octet-stream")

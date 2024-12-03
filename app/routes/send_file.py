@@ -2,7 +2,6 @@ import logging
 
 from aiogram import Bot
 from aiogram.types import URLInputFile
-from aiogram.utils.web_app import check_webapp_signature
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
 from redis import Redis
@@ -18,20 +17,14 @@ async def send_file(request: Request):
     bot: Bot = request.app["bot"]
     r: Redis = request.app["r"]
     security_token = request.query.get("security_token")
-    auth = decode_token(security_token).get("auth", None)
-
+    key = decode_token(security_token).get("key", None)
     response_json = {"error": 0}
 
-    if not auth or not check_webapp_signature(bot.token, auth):
-        return json_response({"ok": False, "error": "Unauthorized"}, status=401)
+    if not key:
+        raise ValueError("key must be provided")
 
     try:
         data = await request.json()
-        key = request.query.get("key")
-
-        if not key:
-            raise ValueError("key must be provided")
-
         status = data.get("status")
         if status in [2, 3]:
             ds_file_url = data.get("url")

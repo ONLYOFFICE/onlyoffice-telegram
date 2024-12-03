@@ -1,7 +1,6 @@
 import logging
 
 from aiogram import Bot
-from aiogram.utils.web_app import check_webapp_signature
 from aiohttp.web_request import Request
 from aiohttp.web_response import Response, json_response
 from redis import Redis
@@ -16,12 +15,8 @@ logger = logging.getLogger(__name__)
 async def get_file(request: Request) -> Response:
     bot: Bot = request.app["bot"]
     r: Redis = request.app["r"]
-    key = request.query.get("key")
     security_token = request.query.get("security_token")
-    auth = decode_token(security_token).get("auth", None)
-
-    if not auth or not check_webapp_signature(bot.token, auth):
-        return json_response({"ok": False, "error": "Unauthorized"}, status=401)
+    key = decode_token(security_token).get("key", None)
 
     if not key:
         return json_response({"ok": False, "error": "key is required"}, status=400)

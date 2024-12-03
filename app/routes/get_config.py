@@ -10,7 +10,7 @@ from aiohttp.web_response import json_response
 from redis import Redis
 
 from app.utils.file_utils import get_format_by_extension
-from app.utils.jwt_utils import encode_payload
+from app.utils.jwt_utils import create_token, encode_payload
 from config import TTL, WEB_APP_URL
 
 logging.basicConfig(level=logging.INFO)
@@ -71,10 +71,8 @@ async def get_config(request: Request):
         format = get_format_by_extension(session["file_type"])
 
         mode = "edit" if "edit" in format["actions"] else "view"
-        security_token = encode_payload({"auth": auth})
-        callback_url = (
-            f"{WEB_APP_URL}/editor/sendFile?key={key}&security_token={security_token}"
-        )
+        security_token = create_token(key)
+        callback_url = f"{WEB_APP_URL}/editor/sendFile?security_token={security_token}"
         config = {
             "document": {
                 "fileType": session["file_type"],
@@ -85,7 +83,7 @@ async def get_config(request: Request):
                     "protect": False,
                 },
                 "title": f"{session['file_name']}.{session['file_type']}",
-                "url": f"{WEB_APP_URL}/editor/getFile?key={key}&security_token={security_token}",
+                "url": f"{WEB_APP_URL}/editor/getFile?security_token={security_token}",
             },
             "documentType": session["document_type"],
             "editorConfig": {

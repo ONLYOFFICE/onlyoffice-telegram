@@ -12,7 +12,7 @@ from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import get_extension_by_name, get_format_by_extension
-from app.utils.jwt_utils import encode_payload
+from app.utils.jwt_utils import create_token, encode_payload
 from app.utils.lang_utils import _, __
 from config import (
     CONVERT_MAX_ATTEMPTS,
@@ -97,10 +97,11 @@ async def handle_conversion_finish(
     msg = await message.answer("🔄 Convertsion...", reply_markup=ReplyKeyboardRemove())
 
     key = uuid.uuid4().hex
+    security_token = create_token(key)
     conversion_url = f"{DOCSERVER_URL}/{DOCSERVER_CONVERTER_URL}"
     payload = {
         "async": "true",
-        "url": f"{WEB_APP_URL}/editor/getFile?key={key}",
+        "url": f"{WEB_APP_URL}/editor/getFile?security_token={security_token}",
         "key": f"{uuid.uuid4().hex}",
         "title": file_name,
         "filetype": file_type,

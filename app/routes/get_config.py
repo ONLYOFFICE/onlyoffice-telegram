@@ -71,6 +71,7 @@ async def get_config(request: Request):
         format = get_format_by_name(session["file_type"])
 
         mode = "edit" if "edit" in format["actions"] else "view"
+        security_token = encode_payload({"auth": auth})
         config = {
             "document": {
                 "fileType": session["file_type"],
@@ -81,7 +82,7 @@ async def get_config(request: Request):
                     "protect": False,
                 },
                 "title": f"{session['file_name']}.{session['file_type']}",
-                "url": f"${WEB_APP_URL}/editor/getFile?key={key}",
+                "url": f"${WEB_APP_URL}/editor/getFile?key={key}&security_token={security_token}",
             },
             "documentType": session["document_type"],
             "editorConfig": {

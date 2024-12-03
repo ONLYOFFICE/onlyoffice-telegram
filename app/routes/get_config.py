@@ -72,6 +72,9 @@ async def get_config(request: Request):
 
         mode = "edit" if "edit" in format["actions"] else "view"
         security_token = encode_payload({"auth": auth})
+        callback_url = (
+            f"{WEB_APP_URL}/editor/sendFile?key={key}&security_token={security_token}"
+        )
         config = {
             "document": {
                 "fileType": session["file_type"],
@@ -82,11 +85,11 @@ async def get_config(request: Request):
                     "protect": False,
                 },
                 "title": f"{session['file_name']}.{session['file_type']}",
-                "url": f"${WEB_APP_URL}/editor/getFile?key={key}&security_token={security_token}",
+                "url": f"{WEB_APP_URL}/editor/getFile?key={key}&security_token={security_token}",
             },
             "documentType": session["document_type"],
             "editorConfig": {
-                "callbackUrl": f"${WEB_APP_URL}/editor/sendFile?key={key}",
+                "callbackUrl": callback_url if mode == "edit" else "",
                 "customization": {
                     "compactHeader": True,
                     "toolbarNoTabs": True,

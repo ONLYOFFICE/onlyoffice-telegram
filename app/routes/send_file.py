@@ -56,20 +56,17 @@ async def send_file(request: Request):
                             await bot.send_document(
                                 chat_id=member,
                                 document=document,
-                                caption=f"{filename}.{file_type}",
                                 reply_to_message_id=message_id,
                             )
                         except Exception:
                             await bot.send_document(
                                 chat_id=member,
                                 document=document,
-                                caption=f"{filename}.{file_type}",
                             )
                     else:
                         await bot.send_document(
                             chat_id=member,
                             document=document,
-                            caption=f"{filename}.{file_type}",
                         )
                 except Exception as e:
                     logger.error(f"Failed to send document to user {member}: {e}")

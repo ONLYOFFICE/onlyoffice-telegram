@@ -35,6 +35,8 @@ async def send_file(request: Request):
             file_type = get_extension_by_name(ds_file_url)
             document = URLInputFile(ds_file_url, filename=f"{filename}.{file_type}")
 
+            owner = r.hget(key, "owner").decode("utf-8")
+            message_id = r.hget(key, "message_id").decode("utf-8")
             members = r.hget(key, "members")
             if not members:
                 raise ValueError("No members found for the given key")
@@ -48,11 +50,27 @@ async def send_file(request: Request):
             for member in members:
                 try:
                     # TODO: We cannot translate this string because the user's language is unknown
-                    await bot.send_document(
-                        chat_id=member,
-                        document=document,
-                        caption=f"{filename}.{file_type}",
-                    )
+                    if member == owner:
+                        try:
+                            await bot.set_message_reaction(member, message_id, None)
+                            await bot.send_document(
+                                chat_id=member,
+                                document=document,
+                                caption=f"{filename}.{file_type}",
+                                reply_to_message_id=message_id,
+                            )
+                        except Exception:
+                            await bot.send_document(
+                                chat_id=member,
+                                document=document,
+                                caption=f"{filename}.{file_type}",
+                            )
+                    else:
+                        await bot.send_document(
+                            chat_id=member,
+                            document=document,
+                            caption=f"{filename}.{file_type}",
+                        )
                 except Exception as e:
                     logger.error(f"Failed to send document to user {member}: {e}")
 

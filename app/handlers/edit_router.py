@@ -35,7 +35,11 @@ async def handle_edit_no_command(
 async def handle_edit_start(message: Message, state: FSMContext):
     row_buttons = make_buttons([], with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
-    await message.answer(text=_("Send file"), reply_markup=keyboard)
+    await message.answer(
+        text=_("Send file"),
+        reply_markup=keyboard,
+        reply_to_message_id=message.message_id,
+    )
     await state.set_state(MenuState.on_edit_start)
 
 
@@ -47,7 +51,8 @@ async def handle_edit_document_upload(
         file = message.document
         if file.file_size > MAX_FILE_SIZE_BYTES:
             await message.answer(
-                _("The file is too large. Maximum allowed file size is 20 MB")
+                _("The file is too large. Maximum allowed file size is 20 MB"),
+                reply_to_message_id=message.message_id,
             )
 
         key = uuid.uuid4().hex
@@ -59,6 +64,8 @@ async def handle_edit_document_upload(
             "file_name": remove_extension(file.file_name),
             "file_type": format["name"],
             "members": "",
+            "message_id": message.message_id,
+            "owner": message.from_user.id,
         }
         if message.chat.type == "group":
             session["group"] = message.chat.id
@@ -74,6 +81,7 @@ async def handle_edit_document_upload(
                 "Your file {file_name}\nTo start co-editing, send this message to other participants\n{web_app_url}"
             ).format(file_name=file.file_name, web_app_url=web_app_url),
             reply_markup=ReplyKeyboardRemove(),
+            reply_to_message_id=message.message_id,
         )
 
     except Exception as e:

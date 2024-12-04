@@ -28,7 +28,11 @@ async def handle_create_start(message: Message, state: FSMContext):
     menu_items = get_format_descriptions()
     row_buttons = make_buttons(menu_items, with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
-    await message.answer(text=_("Select file format"), reply_markup=keyboard)
+    await message.answer(
+        text=_("Select file format"),
+        reply_markup=keyboard,
+        reply_to_message_id=message.message_id,
+    )
     await state.set_state(MenuState.on_create_start)
 
 
@@ -40,7 +44,9 @@ async def handle_create_title(message: Message, state: FSMContext):
     ):
         await state.update_data(format_description=message.text)
         await message.answer(
-            text=_("Enter file title"), reply_markup=ReplyKeyboardRemove()
+            text=_("Enter file title"),
+            reply_markup=ReplyKeyboardRemove(),
+            reply_to_message_id=message.message_id,
         )
         await state.set_state(MenuState.on_create_title)
     else:
@@ -64,6 +70,8 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             "file_type": format["name"],
             "lang": getattr(message.from_user, "language_code", "default"),
             "members": "",
+            "message_id": message.message_id,
+            "owner": message.from_user.id,
         }
         if message.chat.type == "group":
             session["group"] = message.chat.id
@@ -81,6 +89,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
                 file_name=f"{file_name}.{format['name']}", web_app_url=web_app_url
             ),
             reply_markup=ReplyKeyboardRemove(),
+            reply_to_message_id=message.message_id,
         )
 
     except Exception as e:
@@ -89,4 +98,4 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
 
 @router.message(MenuState.on_create_title, F.text)
 async def handle_edit_invalid_document_upload(message: Message):
-    await message.answer(_("Invalid title"))
+    await message.answer(_("Invalid title"), reply_to_message_id=message.message_id)

@@ -35,13 +35,19 @@ router = Router()
 async def handle_conversion_start(message: Message, state: FSMContext):
     row_buttons = make_buttons([], with_back=True, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
-    await message.answer(text=_("Send file"), reply_markup=keyboard)
+    await message.answer(
+        text=_("Send file"),
+        reply_markup=keyboard,
+        reply_to_message_id=message.message_id,
+    )
     await state.set_state(MenuState.on_convert_start)
 
 
 @router.message(MenuState.on_convert_start, F.photo)
 async def handle_conversion_photo_upload(message: Message):
-    await message.answer(_("File not supported"))
+    await message.answer(
+        _("File not supported"), reply_to_message_id=message.message_id
+    )
 
 
 @router.message(MenuState.on_convert_start, F.document)
@@ -51,7 +57,8 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
 
     if file_size > MAX_FILE_SIZE_BYTES:
         await message.answer(
-            _("The file is too large. Maximum allowed file size is 20 MB")
+            _("The file is too large. Maximum allowed file size is 20 MB"),
+            reply_to_message_id=message.message_id,
         )
         return
 
@@ -72,10 +79,16 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
             with_cancel=True,
         )
         keyboard = make_keyboard(row_buttons)
-        await message.answer(text=_("Select format to convert"), reply_markup=keyboard)
+        await message.answer(
+            text=_("Select format to convert"),
+            reply_markup=keyboard,
+            reply_to_message_id=message.message_id,
+        )
         await state.set_state(MenuState.on_convert_format_selection)
     else:
-        await message.answer(_("File not supported"))
+        await message.answer(
+            _("File not supported", reply_to_message_id=message.message_id)
+        )
 
 
 @router.message(MenuState.on_convert_start)
@@ -94,7 +107,11 @@ async def handle_conversion_finish(
     file_type: str,
     output_type: str,
 ):
-    msg = await message.answer("🔄 Convertsion...", reply_markup=ReplyKeyboardRemove())
+    msg = await message.answer(
+        "🔄 Convertsion...",
+        reply_markup=ReplyKeyboardRemove(),
+        reply_to_message_id=message.message_id,
+    )
 
     key = uuid.uuid4().hex
     security_token = create_token(key)
@@ -152,13 +169,18 @@ async def handle_conversion_finish(
         )
         await msg.delete()
         await bot.send_document(
-            chat_id=message.from_user.id, document=document, caption=_("Done")
+            chat_id=message.from_user.id,
+            document=document,
+            caption=_("Done"),
+            reply_to_message_id=message.message_id,
         )
     else:
         await msg.delete()
-        await message.answer(_("Failed to convert file"))
+        await message.answer(
+            _("Failed to convert file"), reply_to_message_id=message.message_id
+        )
 
 
 @router.message(MenuState.on_convert_format_selection)
 async def handle_conversion_invalid_format_selection(message: Message):
-    await message.answer(_("Invalid format"))
+    await message.answer(_("Invalid format"), reply_to_message_id=message.message_id)

@@ -86,17 +86,6 @@
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
     <script type="text/javascript" language="javascript">
-        const lang = {
-            ru: {
-                title: "Доступ недоступен",
-                description: "Ссылка устарела. Пожалуйста, создайте новую или откройте этот файл в чате."
-            },
-            en: {
-                title: "Not available",
-                description: "The link has expired. Please create a new one or open this file in the chat."
-            }
-        };
-
         const deepMerge = (target, source) => {
             for (const key in source) {
                 if (source[key] instanceof Object && key in target) {
@@ -165,15 +154,19 @@
             }
         };
 
-        const showError = () => {
+        const showError = async () => {
+            const response = await fetch("/editor/getLocales", {
+                method: "GET"
+            });
+            const locales = await response.json();
             const err = document.getElementById("error");
             const errTitle = document.getElementById('error_title');
             const errDescription = document.getElementById('error_description');
             const language_code = Telegram.WebApp.initDataUnsafe.user.language_code;
             if (error) {
                 if (lang[language_code]) {
-                    errTitle.textContent = lang[language_code].title;
-                    errDescription.textContent = lang[language_code].description;
+                    errTitle.textContent = locales.title;
+                    errDescription.textContent = locales.description;
                 }
                 error.style.display = 'block';
             }

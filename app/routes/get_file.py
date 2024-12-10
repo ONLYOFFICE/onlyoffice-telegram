@@ -13,15 +13,23 @@ logger = logging.getLogger(__name__)
 
 
 async def get_file(request: Request) -> Response:
+    try:
+        authorization = request.headers.get("Authorization")
+        header_jwt = authorization[len("Bearer ") :]
+        decode_token(header_jwt)
+    except Exception as e:
+        logger.error(f"Error when checking jwt: {e}")
+        return json_response({"ok": False, "error": str(e)}, status=500)
+
     bot: Bot = request.app["bot"]
     r: Redis = request.app["r"]
-    security_token = request.query.get("security_token")
-    key = decode_token(security_token).get("key", None)
-
-    if not key:
-        return json_response({"ok": False, "error": "key is required"}, status=400)
 
     try:
+        security_token = request.query.get("security_token")
+        key = decode_token(security_token).get("key", None)
+        if not key:
+            raise ValueError("key must be provided")
+
         file_id = r.hget(key, "file_id")
 
         if file_id:

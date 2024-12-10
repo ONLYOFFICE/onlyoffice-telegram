@@ -14,19 +14,28 @@ logger = logging.getLogger(__name__)
 
 
 async def send_file(request: Request):
+    try:
+        authorization = request.headers.get("Authorization")
+        header_jwt = authorization[len("Bearer ") :]
+        decode_token(header_jwt)
+    except Exception as e:
+        logger.error(f"Error when checking jwt: {e}")
+        return json_response({"ok": False, "error": str(e)}, status=500)
+
     bot: Bot = request.app["bot"]
     r: Redis = request.app["r"]
-    security_token = request.query.get("security_token")
-    key = decode_token(security_token).get("key", None)
-    response_json = {"error": 0}
 
-    if not key:
-        raise ValueError("key must be provided")
+    response_json = {"error": 0}
 
     try:
         data = await request.json()
         status = data.get("status")
         if status in [2, 3]:
+            security_token = request.query.get("security_token")
+            key = decode_token(security_token).get("key", None)
+            if not key:
+                raise ValueError("key must be provided")
+
             ds_file_url = data.get("url")
             if not ds_file_url:
                 raise ValueError("URL must be provided")

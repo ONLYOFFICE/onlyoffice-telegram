@@ -99,7 +99,7 @@
 
         const initData = Telegram.WebApp.initData || "";
         
-        const DESKTOP_MODE = {{DESKTOP_MODE}} && ['tdesktop', 'macos'].includes(Telegram.WebApp.platform) //, 'weba', 'webk', 'web'
+        const DESKTOP_MODE = {{DESKTOP_MODE}} && ["tdesktop", "macos"].includes(Telegram.WebApp.platform) //, "weba", "webk", "web"
         let config;
         const preset = {
             width: "100%",
@@ -155,21 +155,28 @@
         };
 
         const showError = async () => {
-            const response = await fetch("/editor/getLocales", {
-                method: "GET"
-            });
-            const locales = await response.json();
-            const err = document.getElementById("error");
-            const errTitle = document.getElementById('error_title');
-            const errDescription = document.getElementById('error_description');
             const language_code = Telegram.WebApp.initDataUnsafe.user.language_code;
-            if (error) {
-                if (lang[language_code]) {
-                    errTitle.textContent = locales.title;
-                    errDescription.textContent = locales.description;
+            $.ajax("/editor/getLocales", {
+                type: "GET",
+                data: {
+                    _auth: initData,
+                    lang: language_code
+                },
+                dataType: "json",
+                success: (locales) => {
+                    const error = document.getElementById("error");
+                    const errorTitle = document.getElementById("error_title");
+                    const errorDescription = document.getElementById("error_description");
+                    errorTitle.textContent = locales.title;
+                    errorDescription.textContent = locales.description;
+                    error.style.display = "block";
+                },
+                error: () => {
+                    const error = document.getElementById("error");
+                    error.style.display = "block";
                 }
-                error.style.display = 'block';
-            }
+            });
+
 
         }
 

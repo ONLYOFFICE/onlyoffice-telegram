@@ -110,7 +110,7 @@
 
         const initData = Telegram.WebApp.initData || "";
         
-        const DESKTOP_MODE = {{DESKTOP_MODE}} && ['tdesktop'].includes(Telegram.WebApp.platform) //'macos', 'weba', 'webk', 'web'
+        const DESKTOP_MODE = {{DESKTOP_MODE}} && ['tdesktop', 'macos'].includes(Telegram.WebApp.platform) //, 'weba', 'webk', 'web'
         let config;
         const preset = {
             width: "100%",

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-10-28 14:53+0300\n"
+"POT-Creation-Date: 2024-12-10 18:21+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,15 +41,14 @@ msgid ""
 "Press /start to create/edit files\n"
 msgstr ""
 
-#: app/description/description.py:15
+#: app/description/description.py:14
 msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
 msgstr ""
 
-#: app/filters/document_edit_filter.py:16
-#: app/filters/document_edit_filter.py:18 app/handlers/convert_router.py:44
-#: app/handlers/convert_router.py:77
+#: app/filters/document_edit_filter.py:19
+#: app/filters/document_edit_filter.py:22 app/handlers/convert_router.py:49
 msgid "File not supported"
 msgstr ""
 
@@ -73,27 +72,27 @@ msgstr ""
 msgid "🔄 convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:38 app/handlers/edit_router.py:34
+#: app/handlers/convert_router.py:39 app/handlers/edit_router.py:39
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:54 app/handlers/edit_router.py:46
+#: app/handlers/convert_router.py:60 app/handlers/edit_router.py:54
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:74
+#: app/handlers/convert_router.py:83
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:159
+#: app/handlers/convert_router.py:174
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:164
+#: app/handlers/convert_router.py:180
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:170
+#: app/handlers/convert_router.py:186
 msgid "Invalid format"
 msgstr ""
 
@@ -101,27 +100,42 @@ msgstr ""
 msgid "create"
 msgstr ""
 
-#: app/handlers/create_router.py:31
+#: app/handlers/create_router.py:32
 msgid "Select file format"
 msgstr ""
 
-#: app/handlers/create_router.py:43
+#: app/handlers/create_router.py:47
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:78 app/handlers/edit_router.py:69
+#: app/handlers/create_router.py:86
 msgid ""
 "Your file {file_name}\n"
 "To start co-editing, send this message to other participants\n"
 "{web_app_url}"
 msgstr ""
 
-#: app/handlers/create_router.py:92
+#: app/handlers/create_router.py:101
 msgid "Invalid title"
 msgstr ""
 
-#: app/handlers/edit_router.py:30
+#: app/handlers/edit_router.py:34
 msgid "open"
+msgstr ""
+
+#: app/handlers/edit_router.py:80
+msgid "To start co-editing, send this message to other participants"
+msgstr ""
+
+#: app/handlers/edit_router.py:82
+msgid "To start co-viewing, send this message to other participants"
+msgstr ""
+
+#: app/handlers/edit_router.py:87
+msgid ""
+"Your file {file_name}\n"
+"{text_message}\n"
+"{web_app_url}"
 msgstr ""
 
 #: app/handlers/lang_router.py:17
@@ -132,24 +146,28 @@ msgstr ""
 msgid "Available languages:"
 msgstr ""
 
-#: app/handlers/lang_router.py:28
+#: app/handlers/lang_router.py:29
 msgid "Language changed"
 msgstr ""
 
-#: app/handlers/start_router.py:15
+#: app/handlers/start_router.py:16
 msgid "Create"
 msgstr ""
 
-#: app/handlers/start_router.py:15
+#: app/handlers/start_router.py:16
 msgid "Open"
 msgstr ""
 
-#: app/handlers/start_router.py:15
+#: app/handlers/start_router.py:16
 msgid "🔄 Convert"
 msgstr ""
 
-#: app/handlers/start_router.py:19
+#: app/handlers/start_router.py:20
 msgid "Choose an action"
+msgstr ""
+
+#: app/handlers/start_router.py:26
+msgid "Please choose an action to work with bot"
 msgstr ""
 
 #: app/keyboards/make_buttons.py:15 app/keyboards/make_buttons.py:29
@@ -164,19 +182,29 @@ msgstr ""
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:51
+#: app/routes/get_locales.py:35
+msgid "Not available"
+msgstr ""
+
+#: app/routes/get_locales.py:36
+msgid ""
+"The link has expired. Please create a new one or open this file in the "
+"chat."
+msgstr ""
+
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
 msgid "Document"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:53
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
 msgid "Spreadsheet"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:55
+#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
 msgid "Presentation"
 msgstr ""
 
-#: app/utils/file_utils.py:59
+#: app/utils/file_utils.py:49
 msgid "PDF form"
 msgstr ""
 

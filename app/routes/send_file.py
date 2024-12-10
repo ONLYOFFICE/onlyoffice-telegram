@@ -80,10 +80,7 @@ async def send_file(request: Request):
                 except Exception as e:
                     logger.error(f"Failed to send document to user {member}: {e}")
 
-            pipeline = r.pipeline()
-            pipeline.hdel(key, "key")
-            pipeline.hset(key, "members", "")
-            pipeline.execute()
+            r.delete(key)
 
     except Exception as e:
         response_json["error"] = 1

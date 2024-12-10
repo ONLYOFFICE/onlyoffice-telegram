@@ -42,6 +42,11 @@ async def get_config(request: Request):
         pipeline.get(f"{user['id']}:lang")
         results = pipeline.execute()
 
+        if not results[0]:
+            return json_response(
+                {"ok": False, "error": "The link has expired"}, status=410
+            )
+
         session = {}
         for field, value in results[0].items():
             session[field.decode("utf-8")] = value.decode("utf-8")

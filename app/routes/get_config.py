@@ -104,6 +104,11 @@ async def get_config(request: Request):
                 f"{WEB_APP_URL}/editor/sendFile?security_token={security_token}"
             )
             config["editorConfig"]["callbackUrl"] = callback_url
+        if "file_id" not in session:  # This is file creation
+            config["editorConfig"]["customization"]["mobile"] = {
+                "forceView": False,
+                "standardView": True,
+            }
         token = encode_payload(config)
         config["token"] = token
 

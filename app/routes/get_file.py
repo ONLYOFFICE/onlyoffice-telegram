@@ -7,6 +7,7 @@ from redis import Redis
 
 from app.utils.file_utils import get_file_by_file_type
 from app.utils.jwt_utils import decode_token
+from config import JWT_HEADER
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -14,7 +15,7 @@ logger = logging.getLogger(__name__)
 
 async def get_file(request: Request) -> Response:
     try:
-        authorization = request.headers.get("Authorization")
+        authorization = request.headers.get(JWT_HEADER)
         header_jwt = authorization[len("Bearer ") :]
         decode_token(header_jwt)
     except Exception as e:

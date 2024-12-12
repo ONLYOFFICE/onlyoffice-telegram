@@ -21,7 +21,7 @@ async def send_file(request: Request):
         decode_token(header_jwt)
     except Exception as e:
         logger.error(f"Error when checking jwt: {e}")
-        return json_response({"ok": False, "error": str(e)}, status=500)
+        return json_response({"ok": False, "error": str(e)}, status=403)
 
     bot: Bot = request.app["bot"]
     r: Redis = request.app["r"]

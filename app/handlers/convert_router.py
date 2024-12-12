@@ -108,7 +108,7 @@ async def handle_conversion_finish(
     output_type: str,
 ):
     msg = await message.answer(
-        "🔄 Convertsion...",
+        _("🔄 Conversion..."),
         reply_markup=ReplyKeyboardRemove(),
         reply_to_message_id=message.message_id,
     )

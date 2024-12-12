@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-10 18:21+0300\n"
+"POT-Creation-Date: 2024-12-12 08:32+0300\n"
 "PO-Revision-Date: 2024-12-10 18:39+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -83,6 +83,10 @@ msgstr ""
 
 #: app/handlers/convert_router.py:83
 msgid "Select format to convert"
+msgstr ""
+
+#: app/handlers/convert_router.py:111
+msgid "🔄 Conversion..."
 msgstr ""
 
 #: app/handlers/convert_router.py:174

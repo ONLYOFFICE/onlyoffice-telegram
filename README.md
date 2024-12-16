@@ -37,18 +37,26 @@ There are 2 ways:
 
 In both cases, the bot will send a message with the link to open. If you send several files in one message, the link will be generated for the first file in the message.
 
-File formats available for editing and co-editing:
+File formats available for editing:
 
-* **WORD**: DOCM, DOCX, DOTM, DOTX, EPUB, FB2, HTML, ODT, OTT, RTF, TXT
-* **CELL**: XLSM, XLSX, XLTM, XLTX, CSV, ODS, OTS
-* **SLIDE**: POTM, POTX, PPSM, PPSX, PPTM, PPTX, ODP, OTP
+* **WORD**: DOCM, DOCX, DOTM, DOTX
+* **CELL**: XLSM, XLSX, XLTM, XLTX
+* **SLIDE**: POTM, POTX, PPSM, PPSX, PPTM, PPTX
+* **PDF**: PDF
 
-File formats available for viewing only:
+File formats available for viewing:
 
 * **WORD**: DOC, DOCM, DOCX, DOT, DOTM, DOTX, EPUB, FB2, FODT, HTM, HTML, MHT, MHTML, ODT, OTT, RTF, STW, SXW, TXT, WPS, WPT, XML
 * **CELL**: CSV, ET, ETT, FODS, ODS, OTS, SXC, XLS, XLSB, XLSM, XLSX, XLT, XLTM, XLTX
 * **SLIDE**: DPS, DPT, FODP, ODP, OTP, POT, POTM, POTX, PPS, PPSM, PPSX, PPT, PPTM, PPTX, SXI
 * **PDF**: DJVU, DOCXF, OFORM, OXPS, PDF, XPS
+
+File formats available for conveting:
+
+* **WORD:** DOC, DOCM, DOT, DOTM, DOTX, EPUB, FB2, FODT, HTM, HTML, MHT, MHTML, ODT, OTT, RTF, STW, SXW, WPS, WPT, XML
+* **CELL:** ET, ETT, FODS, ODS, OTS, SXC, XLS, XLSB, XLSM, XLT, XLTM, XLTX
+* **SLIDE:** DPS, DPT, FODP, ODP, OTP, POT, POTM, POTX, PPS, PPSM, PPSX, PPT, PPTM, SXI
+* **PDF**: DOCXF, OXPS, PDF, XPS
 
 ## Converting files
 

@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-12 08:32+0300\n"
+"POT-Creation-Date: 2024-12-17 15:35+0300\n"
 "PO-Revision-Date: 2024-12-10 18:39+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: ru\n"
@@ -19,19 +19,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app/commands/commands.py:14
+#: app/commands/commands.py:30
 msgid "Start"
 msgstr "Старт"
 
-#: app/commands/commands.py:15
+#: app/commands/commands.py:31
 msgid "Cancel"
 msgstr "Отмена"
 
-#: app/commands/commands.py:16
+#: app/commands/commands.py:32
 msgid "Change language"
 msgstr "Изменить язык"
 
-#: app/description/description.py:9
+#: app/description/description.py:25
 msgid ""
 "📑 ONLYOFFICE bot can create, open and convert office files\n"
 "\n"
@@ -44,14 +44,14 @@ msgid ""
 msgstr ""
 "📑 Бот ONLYOFFICE может создавать, открывать и конвертировать документы\n"
 "\n"
-"- Создавайте документы, электронные таблицы, презентации, PDF формы\n"
+"- Создавайте документы, электронные таблицы, презентации\n"
 "- Открывайте локальные файлы и редактируйте их\n"
 "- Редактируйте файлы с другими людьми в режиме реального времени\n"
 "- Конвертируйте файлы в различные форматы\n"
 "\n"
 "Нажмите /start для создания/редактирования файлов\n"
 
-#: app/description/description.py:14
+#: app/description/description.py:30
 msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
@@ -59,176 +59,168 @@ msgstr ""
 "Легко создавайте, конвертируйте и совместно редактируйте документы с "
 "помощью бота ONLYOFFICE."
 
-#: app/filters/document_edit_filter.py:19
-#: app/filters/document_edit_filter.py:22 app/handlers/convert_router.py:49
+#: app/filters/document_edit_filter.py:35
+#: app/filters/document_edit_filter.py:38 app/handlers/convert_router.py:65
 msgid "File not supported"
 msgstr "Файл не поддерживается"
 
-#: app/handlers/back_router.py:14
+#: app/handlers/back_router.py:30
 msgid "⬅️ back"
 msgstr "⬅️ назад"
 
-#: app/handlers/cancel_router.py:12 app/handlers/cancel_router.py:21
+#: app/handlers/cancel_router.py:28 app/handlers/cancel_router.py:37
 msgid "❌ cancel"
 msgstr "❌ отмена"
 
-#: app/handlers/cancel_router.py:16
+#: app/handlers/cancel_router.py:32
 msgid "There is nothing to cancel"
 msgstr "Отменять нечего"
 
-#: app/handlers/cancel_router.py:24
+#: app/handlers/cancel_router.py:40
 msgid "Action canceled"
 msgstr "Действие отменено"
 
-#: app/handlers/convert_router.py:34
+#: app/handlers/convert_router.py:50
 msgid "🔄 convert"
 msgstr "🔄 конвертировать"
 
-#: app/handlers/convert_router.py:39 app/handlers/edit_router.py:39
+#: app/handlers/convert_router.py:55 app/handlers/edit_router.py:55
 msgid "Send file"
 msgstr "Отправьте файл"
 
-#: app/handlers/convert_router.py:60 app/handlers/edit_router.py:54
+#: app/handlers/convert_router.py:76 app/handlers/edit_router.py:70
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr "Размер файла слишком большой. Максимально допустимый размер файла - 20 MB"
 
-#: app/handlers/convert_router.py:83
+#: app/handlers/convert_router.py:99
 msgid "Select format to convert"
 msgstr "Выберите формат для конвертации"
 
-#: app/handlers/convert_router.py:111
+#: app/handlers/convert_router.py:127
 msgid "🔄 Conversion..."
 msgstr "🔄 Конвертация..."
 
-#: app/handlers/convert_router.py:174
+#: app/handlers/convert_router.py:190
 msgid "Done"
 msgstr "Готово"
 
-#: app/handlers/convert_router.py:180
+#: app/handlers/convert_router.py:196
 msgid "Failed to convert file"
 msgstr "Не удалось конвертировать файл"
 
-#: app/handlers/convert_router.py:186
+#: app/handlers/convert_router.py:202
 msgid "Invalid format"
 msgstr "Некорректный формат"
 
-#: app/handlers/create_router.py:26
+#: app/handlers/create_router.py:42
 msgid "create"
 msgstr "создать"
 
-#: app/handlers/create_router.py:32
+#: app/handlers/create_router.py:48
 msgid "Select file format"
 msgstr "Выберите формат документа"
 
-#: app/handlers/create_router.py:47
+#: app/handlers/create_router.py:63
 msgid "Enter file title"
 msgstr "Введите название файла"
 
-#: app/handlers/create_router.py:86
-msgid ""
-"Your file {file_name}\n"
-"To start co-editing, send this message to other participants\n"
-"{web_app_url}"
-msgstr ""
-"Ваш файл {file_name}\n"
-"Чтобы начать совместное редактирование, отправьте это сообщение другим участникам\n"
-"{web_app_url}"
+#: app/handlers/create_router.py:101 app/handlers/edit_router.py:95
+msgid "Your file"
+msgstr "Ваш файл"
 
-#: app/handlers/create_router.py:101
+#: app/handlers/create_router.py:102 app/handlers/edit_router.py:97
+msgid "To start co-editing, send this message to other participants"
+msgstr "Чтобы начать совместное редактирование, отправьте это сообщение другим участникам."
+
+#: app/handlers/create_router.py:103 app/handlers/edit_router.py:95
+msgid "The ONLYOFFICE editor link:"
+msgstr "Ссылка на редактор ONLYOFFICE:"
+
+#: app/handlers/create_router.py:119
 msgid "Invalid title"
 msgstr "Некорректное название"
 
-#: app/handlers/edit_router.py:34
+#: app/handlers/edit_router.py:50
 msgid "open"
 msgstr "открыть"
 
-#: app/handlers/edit_router.py:80
-msgid "To start co-editing, send this message to other participants"
-msgstr "Чтобы начать совместное редактирование, отправьте это сообщение другим участникам"
-
-#: app/handlers/edit_router.py:82
-msgid "To start co-viewing, send this message to other participants"
-msgstr "Чтобы начать совместный просмотр, отправьте это сообщение другим участникам"
-
-#: app/handlers/edit_router.py:87
+#: app/handlers/edit_router.py:101
 msgid ""
-"Your file {file_name}\n"
-"{text_message}\n"
-"{web_app_url}"
+"To open the file for viewing by several users, send this message to other"
+" participants. The link is available for 24 hours."
 msgstr ""
-"Ваш файл {file_name}\n"
-"{text_message}\n"
-"{web_app_url}"
+"Чтобы открыть файл для просмотра нескольким пользователям, отправьте это "
+"сообщение другим участникам. Ссылка доступна 24 часа.\n"
 
-#: app/handlers/lang_router.py:17
+#: app/handlers/lang_router.py:33
 msgid "Select language"
 msgstr "Выберите язык"
 
-#: app/handlers/lang_router.py:19
+#: app/handlers/lang_router.py:35
 msgid "Available languages:"
 msgstr "Доступные языки:"
 
-#: app/handlers/lang_router.py:29
+#: app/handlers/lang_router.py:45
 msgid "Language changed"
 msgstr "Язык изменен"
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "Create"
 msgstr "Создать"
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "Open"
 msgstr "Открыть"
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "🔄 Convert"
 msgstr "🔄 Конвертировать"
 
-#: app/handlers/start_router.py:20
+#: app/handlers/start_router.py:36
 msgid "Choose an action"
 msgstr "Выберите действие"
 
-#: app/handlers/start_router.py:26
+#: app/handlers/start_router.py:42
 msgid "Please choose an action to work with bot"
 msgstr "Пожалуйста, выберите действие для работы с ботом"
 
-#: app/keyboards/make_buttons.py:15 app/keyboards/make_buttons.py:29
+#: app/keyboards/make_buttons.py:31 app/keyboards/make_buttons.py:45
 msgid "⬅️ Back"
 msgstr "⬅️ Назад"
 
-#: app/keyboards/make_buttons.py:17 app/keyboards/make_buttons.py:31
+#: app/keyboards/make_buttons.py:33 app/keyboards/make_buttons.py:47
 msgid "❌ Cancel"
 msgstr "❌ Отмена"
 
-#: app/middlewares/antiflood.py:47
+#: app/middlewares/antiflood.py:64
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr "Слишком много запросов, попробуйте через {delta:.2f} секунд"
 
-#: app/routes/get_locales.py:35
-msgid "Not available"
-msgstr "Недоступно"
+#: app/routes/get_locales.py:51
+msgid "The link has expired"
+msgstr "Срок действия ссылки истек"
 
-#: app/routes/get_locales.py:36
-msgid ""
-"The link has expired. Please create a new one or open this file in the "
-"chat."
-msgstr ""
-"Срок действия ссылки истек. Пожалуйста, создайте новый или откройте этот файл в "
-"чате."
+#: app/routes/get_locales.py:52
+msgid "Please create a new one or open this file in the chat."
+msgstr "Пожалуйста, создайте новый или откройте этот файл в чате."
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
+#: app/routes/send_file.py:79
+msgid "Your file is ready. Please find the final version here."
+msgstr "Ваш файл готов. Финальная версия находится здесь."
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:59
 msgid "Document"
 msgstr "Документ"
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:61
 msgid "Spreadsheet"
 msgstr "Таблица"
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:63
 msgid "Presentation"
 msgstr "Презентация"
 
-#: app/utils/file_utils.py:49
+#: app/utils/file_utils.py:65
 msgid "PDF form"
 msgstr "PDF форма"
 

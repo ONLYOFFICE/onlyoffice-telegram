@@ -7,7 +7,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-12 08:32+0300\n"
+"POT-Creation-Date: 2024-12-17 15:35+0300\n"
 "PO-Revision-Date: 2024-12-10 18:39+0300\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language: en\n"
@@ -18,19 +18,19 @@ msgstr ""
 "Content-Transfer-Encoding: 8bit\n"
 "Generated-By: Babel 2.16.0\n"
 
-#: app/commands/commands.py:14
+#: app/commands/commands.py:30
 msgid "Start"
 msgstr ""
 
-#: app/commands/commands.py:15
+#: app/commands/commands.py:31
 msgid "Cancel"
 msgstr ""
 
-#: app/commands/commands.py:16
+#: app/commands/commands.py:32
 msgid "Change language"
 msgstr ""
 
-#: app/description/description.py:9
+#: app/description/description.py:25
 msgid ""
 "📑 ONLYOFFICE bot can create, open and convert office files\n"
 "\n"
@@ -42,174 +42,232 @@ msgid ""
 "Press /start to create/edit files\n"
 msgstr ""
 
-#: app/description/description.py:14
+#: app/description/description.py:30
 msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
 msgstr ""
 
-#: app/filters/document_edit_filter.py:19
-#: app/filters/document_edit_filter.py:22 app/handlers/convert_router.py:49
+#: app/filters/document_edit_filter.py:35
+#: app/filters/document_edit_filter.py:38 app/handlers/convert_router.py:65
 msgid "File not supported"
 msgstr ""
 
-#: app/handlers/back_router.py:14
+#: app/handlers/back_router.py:30
 msgid "⬅️ back"
 msgstr ""
 
-#: app/handlers/cancel_router.py:12 app/handlers/cancel_router.py:21
+#: app/handlers/cancel_router.py:28 app/handlers/cancel_router.py:37
 msgid "❌ cancel"
 msgstr ""
 
-#: app/handlers/cancel_router.py:16
+#: app/handlers/cancel_router.py:32
 msgid "There is nothing to cancel"
 msgstr ""
 
-#: app/handlers/cancel_router.py:24
+#: app/handlers/cancel_router.py:40
 msgid "Action canceled"
 msgstr ""
 
-#: app/handlers/convert_router.py:34
+#: app/handlers/convert_router.py:50
 msgid "🔄 convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:39 app/handlers/edit_router.py:39
+#: app/handlers/convert_router.py:55 app/handlers/edit_router.py:55
 msgid "Send file"
 msgstr ""
 
-#: app/handlers/convert_router.py:60 app/handlers/edit_router.py:54
+#: app/handlers/convert_router.py:76 app/handlers/edit_router.py:70
 msgid "The file is too large. Maximum allowed file size is 20 MB"
 msgstr ""
 
-#: app/handlers/convert_router.py:83
+#: app/handlers/convert_router.py:99
 msgid "Select format to convert"
 msgstr ""
 
-#: app/handlers/convert_router.py:111
+#: app/handlers/convert_router.py:127
 msgid "🔄 Conversion..."
 msgstr ""
 
-#: app/handlers/convert_router.py:174
+#: app/handlers/convert_router.py:190
 msgid "Done"
 msgstr ""
 
-#: app/handlers/convert_router.py:180
+#: app/handlers/convert_router.py:196
 msgid "Failed to convert file"
 msgstr ""
 
-#: app/handlers/convert_router.py:186
+#: app/handlers/convert_router.py:202
 msgid "Invalid format"
 msgstr ""
 
-#: app/handlers/create_router.py:26
+#: app/handlers/create_router.py:42
 msgid "create"
 msgstr ""
 
-#: app/handlers/create_router.py:32
+#: app/handlers/create_router.py:48
 msgid "Select file format"
 msgstr ""
 
-#: app/handlers/create_router.py:47
+#: app/handlers/create_router.py:63
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:86
-msgid ""
-"Your file {file_name}\n"
-"To start co-editing, send this message to other participants\n"
-"{web_app_url}"
+#: app/handlers/create_router.py:101 app/handlers/edit_router.py:95
+msgid "Your file"
 msgstr ""
 
-#: app/handlers/create_router.py:101
-msgid "Invalid title"
-msgstr ""
-
-#: app/handlers/edit_router.py:34
-msgid "open"
-msgstr ""
-
-#: app/handlers/edit_router.py:80
+#: app/handlers/create_router.py:102 app/handlers/edit_router.py:97
 msgid "To start co-editing, send this message to other participants"
 msgstr ""
 
-#: app/handlers/edit_router.py:82
-msgid "To start co-viewing, send this message to other participants"
+#: app/handlers/create_router.py:103 app/handlers/edit_router.py:95
+msgid "The ONLYOFFICE editor link:"
 msgstr ""
 
-#: app/handlers/edit_router.py:87
+#: app/handlers/create_router.py:119
+msgid "Invalid title"
+msgstr ""
+
+#: app/handlers/edit_router.py:50
+msgid "open"
+msgstr ""
+
+#: app/handlers/edit_router.py:101
 msgid ""
-"Your file {file_name}\n"
-"{text_message}\n"
-"{web_app_url}"
+"To open the file for viewing by several users, send this message to other"
+" participants. The link is available for 24 hours."
 msgstr ""
 
-#: app/handlers/lang_router.py:17
+#: app/handlers/lang_router.py:33
 msgid "Select language"
 msgstr ""
 
-#: app/handlers/lang_router.py:19
+#: app/handlers/lang_router.py:35
 msgid "Available languages:"
 msgstr ""
 
-#: app/handlers/lang_router.py:29
+#: app/handlers/lang_router.py:45
 msgid "Language changed"
 msgstr ""
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "Create"
 msgstr ""
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "Open"
 msgstr ""
 
-#: app/handlers/start_router.py:16
+#: app/handlers/start_router.py:32
 msgid "🔄 Convert"
 msgstr ""
 
-#: app/handlers/start_router.py:20
+#: app/handlers/start_router.py:36
 msgid "Choose an action"
 msgstr ""
 
-#: app/handlers/start_router.py:26
+#: app/handlers/start_router.py:42
 msgid "Please choose an action to work with bot"
 msgstr ""
 
-#: app/keyboards/make_buttons.py:15 app/keyboards/make_buttons.py:29
+#: app/keyboards/make_buttons.py:31 app/keyboards/make_buttons.py:45
 msgid "⬅️ Back"
 msgstr ""
 
-#: app/keyboards/make_buttons.py:17 app/keyboards/make_buttons.py:31
+#: app/keyboards/make_buttons.py:33 app/keyboards/make_buttons.py:47
 msgid "❌ Cancel"
 msgstr ""
 
-#: app/middlewares/antiflood.py:47
+#: app/middlewares/antiflood.py:64
 msgid "Too many requests, try again in {delta:.2f} seconds"
 msgstr ""
 
-#: app/routes/get_locales.py:35
-msgid "Not available"
+#: app/routes/get_locales.py:51
+msgid "The link has expired"
 msgstr ""
 
-#: app/routes/get_locales.py:36
-msgid ""
-"The link has expired. Please create a new one or open this file in the "
-"chat."
+#: app/routes/get_locales.py:52
+msgid "Please create a new one or open this file in the chat."
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:43
+#: app/routes/send_file.py:79
+msgid "Your file is ready. Please find the final version here."
+msgstr ""
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:59
 msgid "Document"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:45
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:61
 msgid "Spreadsheet"
 msgstr ""
 
-#: app/utils/file_utils.py:17 app/utils/file_utils.py:47
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:63
 msgid "Presentation"
 msgstr ""
 
-#: app/utils/file_utils.py:49
+#: app/utils/file_utils.py:65
 msgid "PDF form"
 msgstr ""
+
+#~ msgid ""
+#~ "Your file {file_name}\n"
+#~ "To start co-editing, send this message to other participants\n"
+#~ "{web_app_url}"
+#~ msgstr ""
+
+#~ msgid "To start co-editing, send this message to other participants"
+#~ msgstr ""
+
+#~ msgid "To start co-viewing, send this message to other participants"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your file {file_name}\n"
+#~ "{text_message}\n"
+#~ "{web_app_url}"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "Your file <b>{file_name}</b>\n"
+#~ "{text_message}\n"
+#~ "{web_app_url}"
+#~ msgstr ""
+
+#~ msgid "Not available"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "The link has expired. Please create "
+#~ "a new one or open this file "
+#~ "in the chat."
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To start co-editing, send this message to other participants\n"
+#~ "\n"
+#~ "The ONLYOFFICE editor link:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "{create_messages_01} <b>{file_name}</b>\n"
+#~ "{create_messages_02}\n"
+#~ "{web_app_url}"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "To open the file for viewing by"
+#~ " several users, send this message to"
+#~ " other participants. The link is "
+#~ "available for 24 hours.\n"
+#~ "\n"
+#~ "The ONLYOFFICE editor link:"
+#~ msgstr ""
+
+#~ msgid ""
+#~ "{edit_messages_01} <b>{file_name}</b>\n"
+#~ "{edit_messages_02}\n"
+#~ "{web_app_url}"
+#~ msgstr ""
 

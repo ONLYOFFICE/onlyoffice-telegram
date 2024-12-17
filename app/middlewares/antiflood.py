@@ -51,8 +51,9 @@ class ThrottlingMiddleware(BaseMiddleware):
 
     async def on_process_event(self, event: Message, r: Redis) -> None:
         user_id = event.from_user.id
+        media_group_id = getattr(event, 'media_group_id', None)
         try:
-            await self.check_throttling(user_id, r)
+            await self.check_throttling(user_id, media_group_id, r)
         except Throttled as t:
             await self.event_throttled(event, t)
             raise CancelHandler()
@@ -64,7 +65,13 @@ class ThrottlingMiddleware(BaseMiddleware):
         )
         await asyncio.sleep(delta)
 
-    async def check_throttling(self, user_id: int, r: Redis):
+    async def check_throttling(
+        self, user_id: int, media_group_id: str | bool, r: Redis
+    ):
+        try:
+            media_group_id = int(media_group_id)
+        except (ValueError, TypeError):
+            media_group_id = 0
         now = time.time()
         key = f"{user_id}:throttle"
 
@@ -76,6 +83,10 @@ class ThrottlingMiddleware(BaseMiddleware):
 
         last_message = float(data.get("last_message", now))
         exceeded_count = int(data.get("exceeded_count", 0))
+        last_media_group_id = int(data.get("last_media_group_id", 0))
+
+        if last_media_group_id and last_media_group_id == media_group_id:
+            return
 
         delta = now - last_message
 
@@ -88,6 +99,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         data["last_message"] = now
         data["delta"] = delta
         data["exceeded_count"] = exceeded_count
+        data["last_media_group_id"] = media_group_id
 
         r.hset(key, mapping=data)
         r.expire(key, FLOOD_TTL)

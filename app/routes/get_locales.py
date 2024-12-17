@@ -48,9 +48,9 @@ async def get_locales(request: Request):
         lang = data.get("lang", "en")
 
     locales = {
-        "title": _("Not available", locale=lang),
+        "title": _("The link has expired", locale=lang),
         "description": _(
-            "The link has expired. Please create a new one or open this file in the chat.",
+            "Please create a new one or open this file in the chat.",
             locale=lang,
         ),
     }

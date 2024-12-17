@@ -97,13 +97,15 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
+        create_messages = {
+            "01": _("Your file"),
+            "02": _("To start co-editing, send this message to other participants"),
+            "03": _("The ONLYOFFICE editor link:"),
+        }
+
         await state.clear()
         await message.answer(
-            text=_(
-                "Your file {file_name}\nTo start co-editing, send this message to other participants\n{web_app_url}"
-            ).format(
-                file_name=f"{file_name}.{format['name']}", web_app_url=web_app_url
-            ),
+            text=f"{create_messages['01']} <b>{file_name}.{format['name']}</b>\n{create_messages['02']}\n\n{create_messages['03']}\n{web_app_url}",
             reply_markup=ReplyKeyboardRemove(),
             reply_to_message_id=message.message_id,
         )

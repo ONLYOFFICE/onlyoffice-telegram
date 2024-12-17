@@ -24,6 +24,7 @@ from redis import Redis
 
 from app.utils.file_utils import get_extension_by_name
 from app.utils.jwt_utils import decode_token
+from app.utils.lang_utils import _
 from config import JWT_HEADER
 
 logging.basicConfig(level=logging.INFO)
@@ -75,6 +76,9 @@ async def send_file(request: Request):
 
             for member in members:
                 try:
+                    caption = _(
+                        "Your file is ready. Please find the final version here."
+                    )
                     # TODO: We cannot translate this string because the user's language is unknown
                     if member == owner:
                         try:
@@ -82,17 +86,20 @@ async def send_file(request: Request):
                             await bot.send_document(
                                 chat_id=member,
                                 document=document,
+                                caption=caption,
                                 reply_to_message_id=message_id,
                             )
                         except Exception:
                             await bot.send_document(
                                 chat_id=member,
                                 document=document,
+                                caption=caption,
                             )
                     else:
                         await bot.send_document(
                             chat_id=member,
                             document=document,
+                            caption=caption,
                         )
                 except Exception as e:
                     logger.error(f"Failed to send document to user {member}: {e}")

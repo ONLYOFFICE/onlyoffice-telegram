@@ -92,17 +92,19 @@ async def handle_edit_document_upload(
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
         edit_mode = True if "edit" in format["actions"] else False
-        text_message = (
-            _("To start co-editing, send this message to other participants")
-            if edit_mode
-            else _("To start co-viewing, send this message to other participants")
-        )
+        edit_messages = {"01": _("Your file"), "03": _("The ONLYOFFICE editor link:")}
+        if edit_mode:
+            edit_messages["02"] = _(
+                "To start co-editing, send this message to other participants"
+            )
+        else:
+            edit_messages["02"] = _(
+                "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."
+            )
 
         await state.clear()
         await message.answer(
-            text=_("Your file {file_name}\n{text_message}\n{web_app_url}").format(
-                file_name=file.file_name, text_message=text_message, web_app_url=web_app_url
-            ),
+            text=f"{edit_messages['01']} <b>{file.file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
             reply_markup=ReplyKeyboardRemove(),
             reply_to_message_id=message.message_id,
         )

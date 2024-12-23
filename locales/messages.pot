@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-23 14:15+0300\n"
+"POT-Creation-Date: 2024-12-23 16:51+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -26,6 +26,10 @@ msgid "Cancel"
 msgstr ""
 
 #: app/commands/commands.py:32
+msgid "Help"
+msgstr ""
+
+#: app/commands/commands.py:33
 msgid "Change language"
 msgstr ""
 
@@ -139,6 +143,22 @@ msgstr ""
 msgid ""
 "To open the file for viewing by several users, send this message to other"
 " participants. The link is available for 24 hours."
+msgstr ""
+
+#: app/handlers/help_router.py:29
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to get started and see the available options:\n"
+"☑️ Click the Create button to create new files and send them to other "
+"Telegram users for co-editing.\n"
+"☑️ Click the Open button to upload and open files from your device.\n"
+"☑️ Click the Convert button to select files for conversion."
 msgstr ""
 
 #: app/handlers/lang_router.py:33

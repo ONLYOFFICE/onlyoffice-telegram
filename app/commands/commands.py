@@ -29,6 +29,7 @@ def get_commands(lang: str = "en"):
     commands = [
         BotCommand(command="/start", description=_("Start", locale=lang)),
         BotCommand(command="/cancel", description=_("Cancel", locale=lang)),
+        BotCommand(command="/help", description=_("Help", locale=lang)),
         BotCommand(command="/lang", description=_("Change language", locale=lang)),
     ]
 

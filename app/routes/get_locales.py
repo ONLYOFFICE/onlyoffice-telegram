@@ -50,7 +50,7 @@ async def get_locales(request: Request):
     locales = {
         "title": _("The link has expired", locale=lang),
         "description": _(
-            "Please create a new one or open this file in the chat.",
+            "Please create a new one by opening this file again in the chat.",
             locale=lang,
         ),
     }

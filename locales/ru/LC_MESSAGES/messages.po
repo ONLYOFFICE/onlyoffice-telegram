@@ -101,8 +101,8 @@ msgid "🔄 Conversion..."
 msgstr "🔄 Конвертация..."
 
 #: app/handlers/convert_router.py:190
-msgid "Done"
-msgstr "Готово"
+msgid "Your file is ready. Please find the final version here."
+msgstr "Ваш файл готов. Финальная версия находится здесь."
 
 #: app/handlers/convert_router.py:196
 msgid "Failed to convert file"
@@ -201,8 +201,8 @@ msgid "The link has expired"
 msgstr "Срок действия ссылки истек"
 
 #: app/routes/get_locales.py:52
-msgid "Please create a new one or open this file in the chat."
-msgstr "Пожалуйста, создайте новый или откройте этот файл в чате."
+msgid "Please create a new one by opening this file again in the chat."
+msgstr "Пожалуйста, создайте новую, снова открыв этот файл в чате."
 
 #: app/routes/send_file.py:79
 msgid "Your file is ready. Please find the final version here."

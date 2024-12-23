@@ -90,7 +90,7 @@ msgid "🔄 Conversion..."
 msgstr ""
 
 #: app/handlers/convert_router.py:190
-msgid "Done"
+msgid "Your file is ready. Please find the final version here."
 msgstr ""
 
 #: app/handlers/convert_router.py:196
@@ -188,7 +188,7 @@ msgid "The link has expired"
 msgstr ""
 
 #: app/routes/get_locales.py:52
-msgid "Please create a new one or open this file in the chat."
+msgid "Please create a new one by opening this file again in the chat."
 msgstr ""
 
 #: app/routes/send_file.py:79

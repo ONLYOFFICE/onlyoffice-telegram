@@ -187,7 +187,7 @@ async def handle_conversion_finish(
         await bot.send_document(
             chat_id=message.from_user.id,
             document=document,
-            caption=_("Done"),
+            caption=_("Your file is ready. Please find the final version here."),
             reply_to_message_id=message.message_id,
         )
     else:

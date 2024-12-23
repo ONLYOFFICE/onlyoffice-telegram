@@ -91,24 +91,25 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         }
         if message.chat.type == "group":
             session["group"] = message.chat.id
-        pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
-        pipeline.execute()
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
         create_messages = {
             "01": _("Your file"),
-            "02": _("To start co-editing, send this message to other participants"),
+            "02": _("To start co-editing, send this message to other participants."),
             "03": _("The ONLYOFFICE editor link:"),
         }
 
         await state.clear()
-        await message.answer(
+        link_message = await message.answer(
             text=f"{create_messages['01']} <b>{file_name}.{format['name']}</b>\n{create_messages['02']}\n\n{create_messages['03']}\n{web_app_url}",
-            reply_markup=ReplyKeyboardRemove(),
             reply_to_message_id=message.message_id,
         )
+        session["link_message_id"] = link_message.message_id
+
+        pipeline.hset(key, mapping=session)
+        pipeline.expire(key, TTL)
+        pipeline.execute()
 
     except Exception as e:
         logger.error(f"Failed to create web app link: {e}")

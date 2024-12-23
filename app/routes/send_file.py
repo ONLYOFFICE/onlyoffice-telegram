@@ -58,58 +58,69 @@ async def send_file(request: Request):
             if not ds_file_url:
                 raise ValueError("URL must be provided")
 
-            filename = r.hget(key, "file_name").decode("utf-8")
+            pipeline = r.pipeline()
+            pipeline.hgetall(key)
+            results = pipeline.execute()
+            config = {}
+            for field, value in results[0].items():
+                config[field.decode("utf-8")] = value.decode("utf-8")
+
             file_type = get_extension_by_name(ds_file_url)
-            document = URLInputFile(ds_file_url, filename=f"{filename}.{file_type}")
+            document = URLInputFile(ds_file_url, filename=f"{config['file_name']}.{file_type}")
 
-            owner = r.hget(key, "owner").decode("utf-8")
-            message_id = r.hget(key, "message_id").decode("utf-8")
-            members = r.hget(key, "members")
-            if not members:
+            if not config["members"]:
                 raise ValueError("No members found for the given key")
-            members = members.decode("utf-8").split()
+            config["members"] = config["members"].split()
 
-            group = r.hget(key, "group")
-            if group:
-                group = group.decode("utf-8")
-                members.append(group)
+            if "group" in config:
+                config["members"].append(config["group"])
 
-            for member in members:
+            for member in config["members"]:
                 try:
-                    caption = _(
-                        "Your file is ready. Please find the final version here."
-                    )
-                    # TODO: We cannot translate this string because the user's language is unknown
-                    if member == owner:
-                        try:
-                            await bot.set_message_reaction(member, message_id, None)
-                            await bot.send_document(
-                                chat_id=member,
-                                document=document,
-                                caption=caption,
-                                reply_to_message_id=message_id,
-                            )
-                        except Exception:
-                            await bot.send_document(
-                                chat_id=member,
-                                document=document,
-                                caption=caption,
-                            )
+                    lang_key = f"{member}:lang"
+                    lang = r.get(lang_key)
+                    if lang:
+                        lang = lang.decode("utf-8")
                     else:
-                        await bot.send_document(
-                            chat_id=member,
-                            document=document,
-                            caption=caption,
-                        )
+                        lang = config["lang"]
+                    caption = _("Your file is ready. Please find the final version here.", locale=lang)
+                    if member == config["owner"]:
+                        try:
+                            await bot.set_message_reaction(member, config["link_message_id"], None)
+                            link_messages = {
+                                "01": _("Your file", locale=lang),
+                                "02": _("To start co-editing, send this message to other participants.", locale=lang),
+                                "03": _("The ONLYOFFICE editor link:", locale=lang),
+                                "04": _("expired", locale=lang),
+                            }
+                            edited_text = f"{link_messages['01']} <b>{config['file_name']}.{config['file_type']}</b>\n{link_messages['02']}\n\n{link_messages['03']} {link_messages['04']}"
+                            await bot.edit_message_text(
+                                text=edited_text, chat_id=member, message_id=config["link_message_id"]
+                            )
+                        except Exception as e:
+                            logger.error(f"Error edit_message_text on message with link to editor: {e}")
+
+                        try:
+                            await bot.set_message_reaction(member, config["message_id"], None)
+                            await bot.send_document(
+                                chat_id=member,
+                                document=document,
+                                caption=caption,
+                                reply_to_message_id=config["message_id"],
+                            )
+                        except Exception as e:
+                            logger.error(f"Error send document with reply_to_message_id param: {e}")
+                            await bot.send_document(chat_id=member, document=document, caption=caption)
+                    else:
+                        await bot.send_document(chat_id=member, document=document, caption=caption)
                 except Exception as e:
                     logger.error(f"Failed to send document to user {member}: {e}")
 
             r.delete(key)
 
     except Exception as e:
+        logger.error(f"Failed to send document: {e}")
         response_json["error"] = 1
         response_json["message"] = str(e)
 
-    return json_response(
-        data=response_json, status=500 if response_json["error"] == 1 else 200
-    )
+    return json_response(data=response_json, status=500 if response_json["error"] == 1 else 200)

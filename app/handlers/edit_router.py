@@ -20,7 +20,7 @@ import uuid
 from aiogram import F, Router
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message, ReplyKeyboardRemove
+from aiogram.types import Message
 from redis import Redis
 
 from app.filters import DocumentEditFilter
@@ -85,9 +85,6 @@ async def handle_edit_document_upload(
         }
         if message.chat.type == "group":
             session["group"] = message.chat.id
-        pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
-        pipeline.execute()
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
@@ -95,7 +92,7 @@ async def handle_edit_document_upload(
         edit_messages = {"01": _("Your file"), "03": _("The ONLYOFFICE editor link:")}
         if edit_mode:
             edit_messages["02"] = _(
-                "To start co-editing, send this message to other participants"
+                "To start co-editing, send this message to other participants."
             )
         else:
             edit_messages["02"] = _(
@@ -103,11 +100,15 @@ async def handle_edit_document_upload(
             )
 
         await state.clear()
-        await message.answer(
+        link_message = await message.answer(
             text=f"{edit_messages['01']} <b>{file.file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
-            reply_markup=ReplyKeyboardRemove(),
             reply_to_message_id=message.message_id,
         )
+        session["link_message_id"] = link_message.message_id
+
+        pipeline.hset(key, mapping=session)
+        pipeline.expire(key, TTL)
+        pipeline.execute()
 
     except Exception as e:
         logger.error(f"Failed to create web app link: {e}")

@@ -8,7 +8,7 @@ msgid ""
 msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
-"POT-Creation-Date: 2024-12-17 15:35+0300\n"
+"POT-Creation-Date: 2024-12-23 14:15+0300\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
@@ -41,7 +41,7 @@ msgid ""
 "Press /start to create/edit files\n"
 msgstr ""
 
-#: app/description/description.py:30
+#: app/description/description.py:31
 msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
@@ -88,7 +88,7 @@ msgstr ""
 msgid "🔄 Conversion..."
 msgstr ""
 
-#: app/handlers/convert_router.py:190
+#: app/handlers/convert_router.py:190 app/routes/send_file.py:86
 msgid "Your file is ready. Please find the final version here."
 msgstr ""
 
@@ -112,19 +112,22 @@ msgstr ""
 msgid "Enter file title"
 msgstr ""
 
-#: app/handlers/create_router.py:101 app/handlers/edit_router.py:95
+#: app/handlers/create_router.py:98 app/handlers/edit_router.py:92
+#: app/routes/send_file.py:91
 msgid "Your file"
 msgstr ""
 
-#: app/handlers/create_router.py:102 app/handlers/edit_router.py:97
-msgid "To start co-editing, send this message to other participants"
+#: app/handlers/create_router.py:99 app/handlers/edit_router.py:94
+#: app/routes/send_file.py:92
+msgid "To start co-editing, send this message to other participants."
 msgstr ""
 
-#: app/handlers/create_router.py:103 app/handlers/edit_router.py:95
+#: app/handlers/create_router.py:100 app/handlers/edit_router.py:92
+#: app/routes/send_file.py:93
 msgid "The ONLYOFFICE editor link:"
 msgstr ""
 
-#: app/handlers/create_router.py:119
+#: app/handlers/create_router.py:120
 msgid "Invalid title"
 msgstr ""
 
@@ -132,7 +135,7 @@ msgstr ""
 msgid "open"
 msgstr ""
 
-#: app/handlers/edit_router.py:101
+#: app/handlers/edit_router.py:98
 msgid ""
 "To open the file for viewing by several users, send this message to other"
 " participants. The link is available for 24 hours."
@@ -190,8 +193,8 @@ msgstr ""
 msgid "Please create a new one by opening this file again in the chat."
 msgstr ""
 
-#: app/routes/send_file.py:79
-msgid "Your file is ready. Please find the final version here."
+#: app/routes/send_file.py:94
+msgid "expired"
 msgstr ""
 
 #: app/utils/file_utils.py:33 app/utils/file_utils.py:59

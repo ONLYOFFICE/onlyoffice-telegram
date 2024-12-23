@@ -27,7 +27,7 @@ from redis import Redis
 from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
-from app.utils.file_utils import get_extension_by_name, get_format_by_extension
+from app.utils.file_utils import get_extension_by_name, get_format_by_extension, remove_extension
 from app.utils.jwt_utils import create_token, encode_payload
 from app.utils.lang_utils import _, __
 from config import (
@@ -181,7 +181,7 @@ async def handle_conversion_finish(
     if end_convert:
         document = URLInputFile(
             conversion_response.get("fileUrl"),
-            filename=f"{file_name}.{output_type}",
+            filename=f"{remove_extension(file_name)}.{output_type}",
         )
         await msg.delete()
         await bot.send_document(

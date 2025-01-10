@@ -15,6 +15,7 @@
 #
 
 import logging
+import re
 import uuid
 
 from aiogram import F, Router
@@ -97,8 +98,9 @@ async def handle_edit_document_upload(
             )
 
         await state.clear()
+        file_name = re.sub(r'\.(?!.*\.)', '\u200B.', file.file_name)
         link_message = await message.answer(
-            text=f"{edit_messages['01']} <b>{file.file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
+            text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
             reply_to_message_id=message.message_id,
         )
         session["link_message_id"] = link_message.message_id

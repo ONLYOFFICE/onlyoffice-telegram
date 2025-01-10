@@ -45,7 +45,7 @@ def get_language_name(lang):
         "fr": "Français",
         "it": "Italiano",
         "ja": "日本語",
-        "pt_BR": "Português",
+        "pt": "Português",
         "ru": "Русский",
     }
 

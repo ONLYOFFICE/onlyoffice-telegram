@@ -20,12 +20,11 @@ import uuid
 from aiogram import F, Router
 from aiogram.filters import StateFilter
 from aiogram.fsm.context import FSMContext
-from aiogram.types import Message
+from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
 from app.filters import DocumentEditFilter
 from app.fsm import MenuState
-from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
     remove_extension,
 )
@@ -49,11 +48,9 @@ async def handle_edit_no_command(
 
 @router.message(MenuState.on_start, F.text.lower() == __("open"))
 async def handle_edit_start(message: Message, state: FSMContext):
-    row_buttons = make_buttons([], with_back=True, with_cancel=True)
-    keyboard = make_keyboard(row_buttons)
     await message.answer(
         text=_("Send file"),
-        reply_markup=keyboard,
+        reply_markup=ReplyKeyboardRemove(),
         reply_to_message_id=message.message_id,
     )
     await state.set_state(MenuState.on_edit_start)

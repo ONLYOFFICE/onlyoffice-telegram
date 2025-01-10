@@ -27,10 +27,26 @@ class LangCallback(CallbackData, prefix="lang"):
 
 def make_lang_buttons() -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
+    builder.max_width = 4
 
     [
-        builder.button(text=lang.upper(), callback_data=LangCallback(lang=lang))
+        builder.button(text=get_language_name(lang), callback_data=LangCallback(lang=lang))
         for lang in i18n.available_locales
     ]
 
-    return builder.as_markup()
+    return builder.as_markup(resize_keyboard=True)
+
+
+def get_language_name(lang):
+    language_map = {
+        "de": "Deutsch",
+        "en": "English",
+        "es": "Español",
+        "fr": "Français",
+        "it": "Italiano",
+        "ja": "日本語",
+        "pt_BR": "Português",
+        "ru": "Русский",
+    }
+
+    return language_map.get(lang, lang)

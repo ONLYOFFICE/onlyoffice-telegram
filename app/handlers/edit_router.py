@@ -62,6 +62,12 @@ async def handle_edit_document_upload(
     message: Message, state: FSMContext, r: Redis, format
 ):
     try:
+        lang = r.get(f"{message.chat.id}:lang")
+        if not lang:
+            lang = getattr(message.from_user, "language_code", "default") or "default"
+        else:
+            lang = lang.decode("utf-8")
+
         file = message.document
         if file.file_size > MAX_FILE_SIZE_BYTES:
             await message.answer(
@@ -77,6 +83,7 @@ async def handle_edit_document_upload(
             "file_id": file.file_id,
             "file_name": remove_extension(file.file_name),
             "file_type": format["name"],
+            "lang": lang,
             "members": "",
             "message_id": message.message_id,
             "owner": message.from_user.id,

@@ -77,6 +77,12 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
     extension = get_extension_by_description(format_description)
     format = get_format_by_extension(extension)
     try:
+        lang = r.get(f"{message.chat.id}:lang")
+        if not lang:
+            lang = getattr(message.from_user, "language_code", "default") or "default"
+        else:
+            lang = lang.decode("utf-8")
+
         key = uuid.uuid4().hex
 
         pipeline = r.pipeline()
@@ -84,7 +90,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             "document_type": format["type"],
             "file_name": file_name,
             "file_type": format["name"],
-            "lang": getattr(message.from_user, "language_code", "default"),
+            "lang": lang,
             "members": "",
             "message_id": message.message_id,
             "owner": message.from_user.id,

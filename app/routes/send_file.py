@@ -77,12 +77,13 @@ async def send_file(request: Request):
 
             for member in config["members"]:
                 try:
-                    lang_key = f"{member}:lang"
-                    lang = r.get(lang_key)
-                    if lang:
-                        lang = lang.decode("utf-8")
+                    lang = r.get(f"{member}:lang")
+                    if not lang:
+                        lang = config.get("lang", "en")
                     else:
-                        lang = config["lang"]
+                        lang = lang.decode("utf-8")
+                    if lang == "default":
+                        lang = "en"
                     caption = _("Your file is ready. Please find the final version here.", locale=lang)
                     if member == config["owner"]:
                         try:

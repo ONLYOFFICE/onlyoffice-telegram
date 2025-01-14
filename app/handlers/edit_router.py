@@ -42,9 +42,7 @@ router = Router()
 async def handle_edit_no_command(
     message: Message, state: FSMContext, r: Redis, format, reply
 ):
-    if reply:
-        message = message.reply_to_message
-    await handle_edit_document_upload(message, state, r, format)
+    await handle_edit_document_upload(message, state, r, format, reply)
 
 
 @router.message(MenuState.on_start, F.text.lower() == __("open"))
@@ -59,7 +57,7 @@ async def handle_edit_start(message: Message, state: FSMContext):
 
 @router.message(MenuState.on_edit_start, DocumentEditFilter())
 async def handle_edit_document_upload(
-    message: Message, state: FSMContext, r: Redis, format
+    message: Message, state: FSMContext, r: Redis, format, reply: bool
 ):
     try:
         lang = r.get(f"{message.chat.id}:lang")
@@ -68,6 +66,8 @@ async def handle_edit_document_upload(
         else:
             lang = lang.decode("utf-8")
 
+        if reply:
+            message = message.reply_to_message
         file = message.document
         if file.file_size > MAX_FILE_SIZE_BYTES:
             await message.answer(

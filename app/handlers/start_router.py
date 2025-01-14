@@ -39,4 +39,5 @@ async def handle_start(message: Message, state: FSMContext):
 
 @router.message(StateFilter(None), IsNotReplyFilter(), F.text)
 async def handle_no_command(message: Message):
-    await message.answer(text=_("Please choose an action to work with bot"))
+    if message.chat.type == "private":
+        await message.answer(text=_("Please choose an action to work with bot"))

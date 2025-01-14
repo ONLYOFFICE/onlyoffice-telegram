@@ -98,19 +98,14 @@ async def send_file(request: Request):
                             await bot.edit_message_text(
                                 text=edited_text, chat_id=member, message_id=config["link_message_id"]
                             )
-                        except Exception as e:
-                            logger.error(f"Error edit_message_text on message with link to editor: {e}")
-
-                        try:
-                            await bot.set_message_reaction(member, config["message_id"], None)
                             await bot.send_document(
                                 chat_id=member,
                                 document=document,
                                 caption=caption,
-                                reply_to_message_id=config["message_id"],
+                                reply_to_message_id=config["link_message_id"],
                             )
                         except Exception as e:
-                            logger.error(f"Error send document with reply_to_message_id param: {e}")
+                            logger.error(f"Error edit_message_text on message with link to editor: {e}")
                             await bot.send_document(chat_id=member, document=document, caption=caption)
                     else:
                         await bot.send_document(chat_id=member, document=document, caption=caption)

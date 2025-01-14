@@ -86,7 +86,7 @@ async def handle_edit_document_upload(
             "lang": lang,
             "members": "",
             "message_id": message.message_id,
-            "owner": message.from_user.id,
+            "owner": message.chat.id,
         }
         if message.chat.type == "group":
             session["group"] = message.chat.id

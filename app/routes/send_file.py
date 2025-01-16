@@ -17,6 +17,7 @@
 import logging
 
 from aiogram import Bot
+from aiogram.enums.chat_member_status import ChatMemberStatus
 from aiogram.types import URLInputFile
 from aiohttp.web_request import Request
 from aiohttp.web_response import json_response
@@ -76,6 +77,15 @@ async def send_file(request: Request):
                 config["members"].append(config["group"])
 
             for member in config["members"]:
+                if "group" in config and member != config["members"]:
+                    user_exists_in_group = await check_user_exists_in_group(
+                        bot=bot,
+                        chat_id=config["group"],
+                        user_id=member,
+                    )
+                    if user_exists_in_group:
+                        continue
+
                 try:
                     lang = r.get(f"{member}:lang")
                     if not lang:
@@ -87,7 +97,7 @@ async def send_file(request: Request):
                     caption = _("Your file is ready. Please find the final version here.", locale=lang)
                     if member == config["owner"]:
                         try:
-                            await bot.set_message_reaction(member, config["link_message_id"], None)
+                            await check_message_exists(bot=bot, chat_id=member, message_id=config["link_message_id"])
                             link_messages = {
                                 "01": _("Your file", locale=lang),
                                 "02": _("To start co-editing, send this message to other participants.", locale=lang),
@@ -120,3 +130,38 @@ async def send_file(request: Request):
         response_json["message"] = str(e)
 
     return json_response(data=response_json, status=500 if response_json["error"] == 1 else 200)
+
+
+async def check_message_exists(bot: Bot, chat_id: int | str, message_id: int):
+    try:
+        await bot.set_message_reaction(chat_id, message_id, None)
+        return True
+
+    except Exception as e:
+        match str(e):
+            case "Telegram server says - Bad Request: REACTION_EMPTY":
+                return True
+            case "Telegram server says - Bad Request: MESSAGE_ID_INVALID":
+                raise e
+            case "Telegram server says - Bad Request: message to react not found":
+                raise e
+        raise e
+
+
+async def check_user_exists_in_group(bot: Bot, chat_id: int | str, user_id: int):
+    try:
+        chat_member = await bot.get_chat_member(chat_id=chat_id, user_id=user_id)
+        statur = chat_member.status
+        if statur == ChatMemberStatus.LEFT or statur == ChatMemberStatus.KICKED:
+            return False
+        if statur == ChatMemberStatus.RESTRICTED and not chat_member.is_member:
+            return False
+        return True
+
+    except Exception as e:
+        match str(e):
+            case "Telegram server says - Bad Request: member not found":
+                return False
+            case "Telegram server says - Bad Request: invalid user_id specified":
+                return False
+        raise e

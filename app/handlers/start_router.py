@@ -33,7 +33,11 @@ async def handle_start(message: Message, state: FSMContext):
     await state.clear()
     row_buttons = make_buttons(menu_items, with_cancel=True)
     keyboard = make_keyboard(row_buttons)
-    await message.answer(text=_("Choose an action"), reply_markup=keyboard)
+    await message.answer(
+        text=_("Choose an action"),
+        reply_markup=keyboard,
+        reply_to_message_id=message.message_id,
+    )
     await state.set_state(MenuState.on_start)
 
 

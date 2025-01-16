@@ -30,7 +30,7 @@ router = Router()
 async def handle_lang(message: Message, state: FSMContext):
     await state.clear()
     # Keyboard removal is only available when sending a message with reply_markup, so we're sending two messages
-    await message.answer(text=_("Select language"), reply_markup=ReplyKeyboardRemove())
+    await message.answer(text=_("Select language"), reply_markup=ReplyKeyboardRemove(selective=True))
     await message.answer(
         text=_("Available languages:"), reply_markup=make_lang_buttons()
     )

@@ -49,7 +49,7 @@ async def handle_edit_no_command(
 async def handle_edit_start(message: Message, state: FSMContext):
     await message.answer(
         text=_("Send file"),
-        reply_markup=ReplyKeyboardRemove(),
+        reply_markup=ReplyKeyboardRemove(selective=True),
         reply_to_message_id=message.message_id,
     )
     await state.set_state(MenuState.on_edit_start)

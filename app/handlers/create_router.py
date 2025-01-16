@@ -61,7 +61,7 @@ async def handle_create_title(message: Message, state: FSMContext):
         await state.update_data(format_description=message.text)
         await message.answer(
             text=_("Enter file title"),
-            reply_markup=ReplyKeyboardRemove(),
+            reply_markup=ReplyKeyboardRemove(selective=True),
             reply_to_message_id=message.message_id,
         )
         await state.set_state(MenuState.on_create_title)

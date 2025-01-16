@@ -125,7 +125,7 @@ async def handle_conversion_finish(
 ):
     msg = await message.answer(
         _("🔄 Conversion..."),
-        reply_markup=ReplyKeyboardRemove(),
+        reply_markup=ReplyKeyboardRemove(selective=True),
         reply_to_message_id=message.message_id,
     )
 

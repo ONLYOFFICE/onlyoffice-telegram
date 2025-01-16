@@ -21,5 +21,6 @@ from .lang import i18n_middleware
 
 
 def setup_middlewares(dp: Dispatcher) -> None:
-    dp.update.middleware(i18n_middleware)
+    # throttling_middleware runs first to filter out messages that do not need a lang definition
     dp.update.middleware(throttling_middleware)
+    dp.update.middleware(i18n_middleware)

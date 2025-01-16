@@ -16,7 +16,6 @@
 
 from __future__ import annotations
 
-import asyncio
 import logging
 import time
 from typing import Any, Awaitable, Callable, Dict
@@ -26,7 +25,7 @@ from aiogram.types import Message
 from redis import Redis
 
 from app.utils.lang_utils import _
-from config import FLOOD_INTERVAL, FLOOD_MESSAGES_LIMIT, FLOOD_TTL
+from config import BOT_NAME, FLOOD_INTERVAL, FLOOD_MESSAGES_LIMIT, FLOOD_TTL
 
 logging.basicConfig(level=logging.INFO)
 logger = logging.getLogger(__name__)
@@ -40,7 +39,19 @@ class ThrottlingMiddleware(BaseMiddleware):
         data: Dict[str, Any],
     ) -> Any:
         try:
-            await self.on_process_event(event.event, data["r"])
+            message = getattr(event, "message", None)
+            if message and (message.chat.type == "group" or message.chat.type == "supergroup"):
+                reply_to_message = getattr(message, "reply_to_message", None)
+                if reply_to_message and reply_to_message.from_user.username == BOT_NAME:
+                    await self.on_process_event(event.event, data["r"])
+                elif await data["state"].get_state() is not None:
+                    await self.on_process_event(event.event, data["r"])
+                elif BOT_NAME in message.text:
+                    await self.on_process_event(event.event, data["r"])
+                else:
+                    return
+            else:
+                await self.on_process_event(event.event, data["r"])
         except CancelHandler:
             return
 
@@ -51,23 +62,19 @@ class ThrottlingMiddleware(BaseMiddleware):
 
     async def on_process_event(self, event: Message, r: Redis) -> None:
         user_id = event.from_user.id
-        media_group_id = getattr(event, 'media_group_id', None)
+        media_group_id = getattr(event, "media_group_id", None)
         try:
             await self.check_throttling(user_id, media_group_id, r)
         except Throttled as t:
-            await self.event_throttled(event, t)
+            if t.exceeded_count == FLOOD_MESSAGES_LIMIT:
+                await self.event_throttled(event, t)
             raise CancelHandler()
 
     async def event_throttled(self, event: Message, throttled: Throttled) -> None:
         delta = FLOOD_INTERVAL - throttled.delta
-        await event.answer(
-            _("Too many requests, try again in {delta:.2f} seconds").format(delta=delta)
-        )
-        await asyncio.sleep(delta)
+        await event.answer(_("Too many requests, try again in {delta:.2f} seconds").format(delta=delta))
 
-    async def check_throttling(
-        self, user_id: int, media_group_id: str | bool, r: Redis
-    ):
+    async def check_throttling(self, user_id: int, media_group_id: str | bool, r: Redis):
         try:
             media_group_id = int(media_group_id)
         except (ValueError, TypeError):
@@ -76,10 +83,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         key = f"{user_id}:throttle"
 
         result = r.hgetall(key)
-        data = {
-            field.decode("utf-8"): value.decode("utf-8")
-            for field, value in result.items()
-        }
+        data = {field.decode("utf-8"): value.decode("utf-8") for field, value in result.items()}
 
         last_message = float(data.get("last_message", now))
         exceeded_count = int(data.get("exceeded_count", 0))
@@ -104,7 +108,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         r.hset(key, mapping=data)
         r.expire(key, FLOOD_TTL)
 
-        if exceeded_count > FLOOD_MESSAGES_LIMIT:
+        if exceeded_count >= FLOOD_MESSAGES_LIMIT:
             raise Throttled(user_id, exceeded_count, delta)
 
 

@@ -94,19 +94,31 @@ async def send_file(request: Request):
                         lang = lang.decode("utf-8")
                     if lang == "default":
                         lang = "en"
-                    caption = _("Your file is ready. Please find the final version here.", locale=lang)
+                    caption = _(
+                        "Your file is ready. Please find the final version here.",
+                        locale=lang,
+                    )
                     if member == config["owner"]:
                         try:
-                            await check_message_exists(bot=bot, chat_id=member, message_id=config["link_message_id"])
+                            await check_message_exists(
+                                bot=bot,
+                                chat_id=member,
+                                message_id=config["link_message_id"],
+                            )
                             link_messages = {
                                 "01": _("Your file", locale=lang),
-                                "02": _("To start co-editing, send this message to other participants.", locale=lang),
+                                "02": _(
+                                    "To start co-editing, send this message to other participants.",
+                                    locale=lang,
+                                ),
                                 "03": _("The ONLYOFFICE editor link:", locale=lang),
                                 "04": _("expired", locale=lang),
                             }
                             edited_text = f"{link_messages['01']} <b>{config['file_name']}.{config['file_type']}</b>\n{link_messages['02']}\n\n{link_messages['03']} {link_messages['04']}"
                             await bot.edit_message_text(
-                                text=edited_text, chat_id=member, message_id=config["link_message_id"]
+                                text=edited_text,
+                                chat_id=member,
+                                message_id=config["link_message_id"],
                             )
                             await bot.send_document(
                                 chat_id=member,

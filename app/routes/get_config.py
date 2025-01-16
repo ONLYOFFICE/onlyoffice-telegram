@@ -59,9 +59,7 @@ async def get_config(request: Request):
         results = pipeline.execute()
 
         if not results[0]:
-            return json_response(
-                {"ok": False, "error": "The link has expired"}, status=410
-            )
+            return json_response({"ok": False, "error": "The link has expired"}, status=410)
 
         session = {}
         for field, value in results[0].items():
@@ -83,11 +81,7 @@ async def get_config(request: Request):
         pipeline.expire(f"{key}", TTL)
         pipeline.execute()
 
-        session["lang"] = (
-            results[1].decode("utf-8")
-            if results[1]
-            else user.get("language_code", "en")
-        )
+        session["lang"] = results[1].decode("utf-8") if results[1] else user.get("language_code", "en")
 
         format = get_format_by_extension(session["file_type"])
 
@@ -121,9 +115,7 @@ async def get_config(request: Request):
             },
         }
         if mode == "edit":
-            callback_url = (
-                f"{WEB_APP_URL}/editor/sendFile?security_token={security_token}"
-            )
+            callback_url = f"{WEB_APP_URL}/editor/sendFile?security_token={security_token}"
             config["editorConfig"]["callbackUrl"] = callback_url
         if "file_id" not in session:  # This is file creation
             config["editorConfig"]["customization"]["mobile"] = {

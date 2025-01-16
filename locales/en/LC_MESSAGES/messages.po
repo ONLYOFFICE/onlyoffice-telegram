@@ -251,4 +251,3 @@ msgstr ""
 #~ "☑️ Click the Open button to upload and open files from your device.\n"
 #~ "☑️ Click the Convert button to select files for conversion.\n"
 #~ msgstr ""
-

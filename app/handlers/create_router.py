@@ -55,8 +55,7 @@ async def handle_create_start(message: Message, state: FSMContext):
 @router.message(MenuState.on_create_start, F.text)
 async def handle_create_title(message: Message, state: FSMContext):
     if any(
-        message.text.casefold() == format_description.casefold()
-        for format_description in get_format_descriptions()
+        message.text.casefold() == format_description.casefold() for format_description in get_format_descriptions()
     ):
         await state.update_data(format_description=message.text)
         await message.answer(

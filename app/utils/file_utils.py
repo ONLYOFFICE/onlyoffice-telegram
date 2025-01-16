@@ -69,15 +69,11 @@ def get_extension_by_description(description):
 
 
 def get_file_by_file_type(file_type, lang="default"):
-    templates_path = os.path.join(
-        PROJECT_ROOT, "static", "assets", "document-templates"
-    )
+    templates_path = os.path.join(PROJECT_ROOT, "static", "assets", "document-templates")
 
     template = os.path.join(
         templates_path,
-        lang
-        if os.path.exists(os.path.join(templates_path, lang, "new." + file_type))
-        else "default",
+        (lang if os.path.exists(os.path.join(templates_path, lang, "new." + file_type)) else "default"),
         "new." + file_type,
     )
 

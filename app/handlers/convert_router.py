@@ -27,7 +27,11 @@ from redis import Redis
 from app.filters import SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
-from app.utils.file_utils import get_extension_by_name, get_format_by_extension, remove_extension
+from app.utils.file_utils import (
+    get_extension_by_name,
+    get_format_by_extension,
+    remove_extension,
+)
 from app.utils.jwt_utils import create_token, encode_payload
 from app.utils.lang_utils import _, __
 from config import (
@@ -61,9 +65,7 @@ async def handle_conversion_start(message: Message, state: FSMContext):
 
 @router.message(MenuState.on_convert_start, F.photo)
 async def handle_conversion_photo_upload(message: Message):
-    await message.answer(
-        _("File not supported"), reply_to_message_id=message.message_id
-    )
+    await message.answer(_("File not supported"), reply_to_message_id=message.message_id)
 
 
 @router.message(MenuState.on_convert_start, F.document)
@@ -102,9 +104,7 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         )
         await state.set_state(MenuState.on_convert_format_selection)
     else:
-        await message.answer(
-            _("File not supported", reply_to_message_id=message.message_id)
-        )
+        await message.answer(_("File not supported", reply_to_message_id=message.message_id))
 
 
 @router.message(MenuState.on_convert_start)
@@ -158,13 +158,9 @@ async def handle_conversion_finish(
         end_convert = False
         for attempt in range(CONVERT_MAX_ATTEMPTS):
             try:
-                async with session.post(
-                    conversion_url, json=payload, headers=headers
-                ) as response:
+                async with session.post(conversion_url, json=payload, headers=headers) as response:
                     if response.status != 200:
-                        raise RuntimeError(
-                            f"Conversion service returned status: {response.status}"
-                        )
+                        raise RuntimeError(f"Conversion service returned status: {response.status}")
                     try:
                         conversion_response = await response.json()
                     except aiohttp.ContentTypeError:
@@ -192,9 +188,7 @@ async def handle_conversion_finish(
         )
     else:
         await msg.delete()
-        await message.answer(
-            _("Failed to convert file"), reply_to_message_id=message.message_id
-        )
+        await message.answer(_("Failed to convert file"), reply_to_message_id=message.message_id)
 
 
 @router.message(MenuState.on_convert_format_selection)

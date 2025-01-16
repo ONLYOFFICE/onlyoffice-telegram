@@ -31,15 +31,9 @@ def make_buttons(
             items.append(_("⬅️ Back"))
         if with_cancel:
             items.append(_("❌ Cancel"))
-        rows = [
-            items[i : i + buttons_per_row]
-            for i in range(0, len(items), buttons_per_row)
-        ]
+        rows = [items[i : i + buttons_per_row] for i in range(0, len(items), buttons_per_row)]
     else:
-        rows = [
-            items[i : i + buttons_per_row]
-            for i in range(0, len(items), buttons_per_row)
-        ]
+        rows = [items[i : i + buttons_per_row] for i in range(0, len(items), buttons_per_row)]
         function_buttons = []
         if with_back:
             function_buttons.append(_("⬅️ Back"))

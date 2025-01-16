@@ -8,7 +8,7 @@ To start the bot, follow the given link and click the **Start** button. Then, en
 
 ## Creating files
 
-Using the bot, you can create new files in docx, xlsx, and pptx formats. 
+Using the bot, you can create new files in docx, xlsx, and pptx formats.
 
 1. Click the **Create** button in the menu.
 2. Select the desired file format (Document, Spreadsheet, Presentation).
@@ -20,7 +20,7 @@ After the editing session is over, the bot will send the file with all the chang
 
 ## Collaborating on files
 
-To co-edit the created file, forward the message with the link to other Telegram users. 
+To co-edit the created file, forward the message with the link to other Telegram users.
 
 The link is valid for 24 hours. If someone clicks on it within 24 hours, the counter is reset and is valid for another 24 hours. When opening an expired link, an error is displayed.
 
@@ -79,5 +79,5 @@ Code repository: [github.com/ONLYOFFICE/onlyoffice-telegram](https://github.com/
 
 ## User feedback and support
 
-In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/onlyoffice-telegram/issues). 
+In case of technical problems, the best way to get help is to submit your issues [here](https://github.com/ONLYOFFICE/onlyoffice-telegram/issues).
 Alternatively, you can contact ONLYOFFICE team on [forum.onlyoffice.com](https://forum.onlyoffice.com/).

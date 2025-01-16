@@ -50,9 +50,7 @@ logger = logging.getLogger(__name__)
 def create_bot() -> Bot:
     return Bot(
         BOT_TOKEN,
-        default=DefaultBotProperties(
-            parse_mode=ParseMode.HTML, link_preview_is_disabled=True
-        ),
+        default=DefaultBotProperties(parse_mode=ParseMode.HTML, link_preview_is_disabled=True),
     )
 
 
@@ -68,9 +66,7 @@ def create_redis_storage() -> Redis:
 
 
 def create_dispatcher(redis_client: Redis, redis_storage: RedisStorage) -> Dispatcher:
-    dispatcher = Dispatcher(
-        storage=redis_storage, events_isolation=SimpleEventIsolation()
-    )
+    dispatcher = Dispatcher(storage=redis_storage, events_isolation=SimpleEventIsolation())
     dispatcher["base_url"] = WEB_APP_URL
     dispatcher["r"] = redis_client
     return dispatcher
@@ -117,9 +113,7 @@ def main() -> None:
     setup_routers(app)
     setup_application(app, dispatcher, bot=bot)
 
-    SimpleRequestHandler(dispatcher=dispatcher, bot=bot).register(
-        app, path=WEBHOOK_PATH
-    )
+    SimpleRequestHandler(dispatcher=dispatcher, bot=bot).register(app, path=WEBHOOK_PATH)
     run_app(app, host=WEBHOOK_HOST, port=WEBHOOK_PORT)
 
 

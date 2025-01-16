@@ -39,9 +39,7 @@ def get_commands(lang: str = "en"):
 async def set_commands(bot: Bot):
     await bot.set_my_commands(get_commands(), scope=BotCommandScopeDefault())
     for lang in i18n.available_locales:
-        await bot.set_my_commands(
-            get_commands(lang), scope=BotCommandScopeDefault(), language_code=lang
-        )
+        await bot.set_my_commands(get_commands(lang), scope=BotCommandScopeDefault(), language_code=lang)
     await bot.set_chat_menu_button(menu_button=MenuButtonDefault())
 
 

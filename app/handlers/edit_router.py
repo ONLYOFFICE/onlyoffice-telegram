@@ -39,9 +39,7 @@ router = Router()
 
 
 @router.message(StateFilter(None), DocumentEditFilter())
-async def handle_edit_no_command(
-    message: Message, state: FSMContext, r: Redis, format, reply
-):
+async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, format, reply):
     await handle_edit_document_upload(message, state, r, format, reply)
 
 
@@ -56,9 +54,7 @@ async def handle_edit_start(message: Message, state: FSMContext):
 
 
 @router.message(MenuState.on_edit_start, DocumentEditFilter())
-async def handle_edit_document_upload(
-    message: Message, state: FSMContext, r: Redis, format, reply: bool
-):
+async def handle_edit_document_upload(message: Message, state: FSMContext, r: Redis, format, reply: bool):
     try:
         lang = r.get(f"{message.chat.id}:lang")
         if not lang:
@@ -96,16 +92,14 @@ async def handle_edit_document_upload(
         edit_mode = True if "edit" in format["actions"] else False
         edit_messages = {"01": _("Your file"), "03": _("The ONLYOFFICE editor link:")}
         if edit_mode:
-            edit_messages["02"] = _(
-                "To start co-editing, send this message to other participants."
-            )
+            edit_messages["02"] = _("To start co-editing, send this message to other participants.")
         else:
             edit_messages["02"] = _(
                 "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."
             )
 
         await state.clear()
-        file_name = re.sub(r'\.(?!.*\.)', '\u200B.', file.file_name)
+        file_name = re.sub(r"\.(?!.*\.)", "\u200b.", file.file_name)
         link_message = await message.answer(
             text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
             reply_to_message_id=message.message_id,

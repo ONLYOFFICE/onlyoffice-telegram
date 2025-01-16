@@ -74,7 +74,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
     data = await state.get_data()
     format_description = data["format_description"]
     extension = get_extension_by_description(format_description)
-    format = get_format_by_extension(extension)
+    f = get_format_by_extension(extension)
     try:
         lang = r.get(f"{message.chat.id}:lang")
         if not lang:
@@ -86,9 +86,9 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
 
         pipeline = r.pipeline()
         session = {
-            "document_type": format["type"],
+            "document_type": f["type"],
             "file_name": file_name,
-            "file_type": format["name"],
+            "file_type": f["name"],
             "lang": lang,
             "members": "",
             "message_id": message.message_id,
@@ -107,7 +107,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
 
         await state.clear()
         link_message = await message.answer(
-            text=f"{create_messages['01']} <b>{file_name}.{format['name']}</b>\n{create_messages['02']}\n\n{create_messages['03']}\n{web_app_url}",
+            text=f"{create_messages['01']} <b>{file_name}.{f['name']}</b>\n{create_messages['02']}\n\n{create_messages['03']}\n{web_app_url}",  # pylint: disable=line-too-long
             reply_to_message_id=message.message_id,
         )
         session["link_message_id"] = link_message.message_id

@@ -83,9 +83,9 @@ async def get_config(request: Request):
 
         session["lang"] = results[1].decode("utf-8") if results[1] else user.get("language_code", "en")
 
-        format = get_format_by_extension(session["file_type"])
+        f = get_format_by_extension(session["file_type"])
 
-        mode = "edit" if "edit" in format["actions"] else "view"
+        mode = "edit" if "edit" in f["actions"] else "view"
         security_token = create_token(key)
         config = {
             "document": {

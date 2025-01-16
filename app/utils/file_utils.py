@@ -49,9 +49,9 @@ def get_extension_by_name(name):
 def get_format_by_extension(name):
     with open(onlyoffice_docs_formats_path, "r") as onlyoffice_docs_formats:
         formats = json.load(onlyoffice_docs_formats)
-    for format in formats:
-        if name in format["name"]:
-            return format
+    for f in formats:
+        if name in f["name"]:
+            return f
 
 
 def get_extension_by_description(description):

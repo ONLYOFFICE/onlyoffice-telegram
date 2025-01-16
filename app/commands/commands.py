@@ -43,8 +43,8 @@ async def set_commands(bot: Bot):
     await bot.set_chat_menu_button(menu_button=MenuButtonDefault())
 
 
-async def remove_commands(bot: Bot, id: int = None):
-    scope = BotCommandScopeChat(chat_id=id) if id else BotCommandScopeDefault()
+async def remove_commands(bot: Bot, chat_id: int = None):
+    scope = BotCommandScopeChat(chat_id=chat_id) if chat_id else BotCommandScopeDefault()
     await bot.delete_my_commands(scope=scope)
     for lang in i18n.available_locales:
         await bot.delete_my_commands(scope=scope, language_code=lang)

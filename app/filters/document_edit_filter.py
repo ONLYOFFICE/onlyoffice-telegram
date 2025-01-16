@@ -29,9 +29,9 @@ class DocumentEditFilter(BaseFilter):
 
             if message.document:
                 extension = get_extension_by_name(message.document.file_name)
-                format = get_format_by_extension(extension)
-                if format and format["actions"]:
-                    return {"format": format, "reply": reply}
+                f = get_format_by_extension(extension)
+                if f and f["actions"]:
+                    return {"f": f, "reply": reply}
                 return await message.answer(_("File not supported"))
 
             if message.photo:

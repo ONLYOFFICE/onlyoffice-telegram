@@ -81,16 +81,16 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         return
 
     extension = get_extension_by_name(file.file_name)
-    format = get_format_by_extension(extension)
-    if format and format["convert"]:
+    f = get_format_by_extension(extension)
+    if f and f["convert"]:
         await state.update_data(
             file_id=file.file_id,
             file_name=file.file_name,
             file_type=extension,
-            supported_convert_formats=format["convert"],
+            supported_convert_formats=f["convert"],
         )
         row_buttons = make_buttons(
-            [item.upper() for item in format["convert"]],
+            [item.upper() for item in f["convert"]],
             buttons_per_row=4,
             separate=True,
             with_back=True,
@@ -104,7 +104,7 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         )
         await state.set_state(MenuState.on_convert_format_selection)
     else:
-        await message.answer(_("File not supported", reply_to_message_id=message.message_id))
+        await message.answer(text=_("File not supported"), reply_to_message_id=message.message_id)
 
 
 @router.message(MenuState.on_convert_start)
@@ -163,8 +163,8 @@ async def handle_conversion_finish(
                         raise RuntimeError(f"Conversion service returned status: {response.status}")
                     try:
                         conversion_response = await response.json()
-                    except aiohttp.ContentTypeError:
-                        raise RuntimeError("Failed to parse response as JSON")
+                    except aiohttp.ContentTypeError as e:
+                        raise RuntimeError("Failed to parse response as JSON") from e
 
                     end_convert = conversion_response.get("endConvert", False)
                     if end_convert:

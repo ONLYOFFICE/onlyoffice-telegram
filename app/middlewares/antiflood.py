@@ -68,7 +68,7 @@ class ThrottlingMiddleware(BaseMiddleware):
         except Throttled as t:
             if t.exceeded_count == FLOOD_MESSAGES_LIMIT:
                 await self.event_throttled(event, t)
-            raise CancelHandler()
+            raise CancelHandler() from t
 
     async def event_throttled(self, event: Message, throttled: Throttled) -> None:
         delta = FLOOD_INTERVAL - throttled.delta

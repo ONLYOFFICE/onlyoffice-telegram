@@ -114,7 +114,7 @@ async def send_file(request: Request):
                                 "03": _("The ONLYOFFICE editor link:", locale=lang),
                                 "04": _("expired", locale=lang),
                             }
-                            edited_text = f"{link_messages['01']} <b>{config['file_name']}.{config['file_type']}</b>\n{link_messages['02']}\n\n{link_messages['03']} {link_messages['04']}"
+                            edited_text = f"{link_messages['01']} <b>{config['file_name']}.{config['file_type']}</b>\n{link_messages['02']}\n\n{link_messages['03']} {link_messages['04']}"  # pylint: disable=line-too-long
                             await bot.edit_message_text(
                                 text=edited_text,
                                 chat_id=member,

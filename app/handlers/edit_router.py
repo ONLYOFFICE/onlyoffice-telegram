@@ -39,8 +39,8 @@ router = Router()
 
 
 @router.message(StateFilter(None), DocumentEditFilter())
-async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, format, reply):
-    await handle_edit_document_upload(message, state, r, format, reply)
+async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, f, reply):
+    await handle_edit_document_upload(message, state, r, f, reply)
 
 
 @router.message(MenuState.on_start, F.text.lower() == __("open"))
@@ -54,7 +54,7 @@ async def handle_edit_start(message: Message, state: FSMContext):
 
 
 @router.message(MenuState.on_edit_start, DocumentEditFilter())
-async def handle_edit_document_upload(message: Message, state: FSMContext, r: Redis, format, reply: bool):
+async def handle_edit_document_upload(message: Message, state: FSMContext, r: Redis, f, reply: bool):
     try:
         lang = r.get(f"{message.chat.id}:lang")
         if not lang:
@@ -75,10 +75,10 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
 
         pipeline = r.pipeline()
         session = {
-            "document_type": format["type"],
+            "document_type": f["type"],
             "file_id": file.file_id,
             "file_name": remove_extension(file.file_name),
-            "file_type": format["name"],
+            "file_type": f["name"],
             "lang": lang,
             "members": "",
             "message_id": message.message_id,
@@ -89,19 +89,19 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
-        edit_mode = True if "edit" in format["actions"] else False
+        edit_mode = True if "edit" in f["actions"] else False
         edit_messages = {"01": _("Your file"), "03": _("The ONLYOFFICE editor link:")}
         if edit_mode:
             edit_messages["02"] = _("To start co-editing, send this message to other participants.")
         else:
             edit_messages["02"] = _(
-                "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."
+                "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."  # pylint: disable=line-too-long
             )
 
         await state.clear()
         file_name = re.sub(r"\.(?!.*\.)", "\u200b.", file.file_name)
         link_message = await message.answer(
-            text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
+            text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",  # pylint: disable=line-too-long
             reply_to_message_id=message.message_id,
         )
         session["link_message_id"] = link_message.message_id

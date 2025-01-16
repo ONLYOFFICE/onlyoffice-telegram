@@ -88,7 +88,7 @@ async def handle_edit_document_upload(
             "message_id": message.message_id,
             "owner": message.chat.id,
         }
-        if message.chat.type == "group":
+        if message.chat.type == "group" or message.chat.type == "supergroup":
             session["group"] = message.chat.id
 
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"

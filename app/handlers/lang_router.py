@@ -36,13 +36,13 @@ async def handle_lang(message: Message, state: FSMContext):
         reply_to_message_id=message.message_id,
     )
     await message.answer(
-        text=_("Available languages:"), reply_markup=make_lang_buttons()
+        text=_("Available languages:"), reply_markup=make_lang_buttons(message.from_user.id)
     )
 
 
 @router.callback_query(LangCallback.filter())
 async def lang_callback(call: CallbackQuery, r: Redis, callback_data: LangCallback):
-    key = f"{call.message.chat.id}:lang"
+    key = f"{callback_data.user_id}:lang"
     r.set(key, callback_data.lang)
 
     await call.message.edit_text(

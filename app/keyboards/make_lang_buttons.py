@@ -23,14 +23,15 @@ from app.utils.lang_utils import i18n
 
 class LangCallback(CallbackData, prefix="lang"):
     lang: str
+    user_id: int
 
 
-def make_lang_buttons() -> InlineKeyboardMarkup:
+def make_lang_buttons(user_id: int) -> InlineKeyboardMarkup:
     builder = InlineKeyboardBuilder()
     builder.max_width = 4
 
     [
-        builder.button(text=get_language_name(lang), callback_data=LangCallback(lang=lang))
+        builder.button(text=get_language_name(lang), callback_data=LangCallback(lang=lang, user_id=user_id))
         for lang in i18n.available_locales
     ]
 

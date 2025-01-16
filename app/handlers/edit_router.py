@@ -118,3 +118,8 @@ async def handle_edit_document_upload(
 
     except Exception as e:
         logger.error(f"Failed to create web app link: {e}")
+
+
+@router.message(MenuState.on_edit_start)
+async def handle_edit_no_file(message: Message, state: FSMContext):
+    await handle_edit_start(message, state)

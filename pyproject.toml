@@ -5,7 +5,7 @@ build-backend = "setuptools.build_meta"
 [project]
 name = "onlyoffice-telegram"
 version = "0.0.0"  # Placeholder
-description = "ONLYOFFICE integration bot for Telegram allows working with office files directly within Telegram"
+description = "ONLYOFFICE bot for Telegram allows working with office files directly within Telegram"
 readme = "README.md"
 requires-python = ">=3.11"
 license = { file = "LICENSE" }

@@ -1,6 +1,6 @@
-# Telegram ONLYOFFICE Integration bot
+# ONLYOFFICE bot for Telegram
 
-ONLYOFFICE integration bot for Telegram allows working with office files directly within [Telegram](https://web.telegram.org).
+ONLYOFFICE bot for Telegram allows working with office files directly within [Telegram](https://web.telegram.org).
 
 ## Getting started
 

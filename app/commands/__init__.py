@@ -14,4 +14,4 @@
 # limitations under the License.
 #
 
-from .commands import remove_commands, set_commands
+from .commands import get_group_chats_commands, get_private_chats_commands, remove_commands, set_commands

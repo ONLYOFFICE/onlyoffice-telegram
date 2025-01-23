@@ -24,7 +24,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
-from app.filters import DocumentEditFilter
+from app.filters import DocumentEditFilter, NotCommandFilter
 from app.fsm import MenuState
 from app.utils.file_utils import (
     remove_extension,
@@ -114,6 +114,6 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
         logger.error(f"Failed to create web app link: {e}")
 
 
-@router.message(MenuState.on_edit_start)
+@router.message(MenuState.on_edit_start, NotCommandFilter())
 async def handle_edit_no_file(message: Message, state: FSMContext):
     await handle_edit_start(message, state)

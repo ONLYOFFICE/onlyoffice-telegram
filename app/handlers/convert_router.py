@@ -24,7 +24,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove, URLInputFile
 from redis import Redis
 
-from app.filters import SupportedConvertFormatsFilter
+from app.filters import NotCommandFilter, SupportedConvertFormatsFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
@@ -107,7 +107,7 @@ async def handle_conversion_document_upload(message: Message, state: FSMContext)
         await message.answer(text=_("File not supported"), reply_to_message_id=message.message_id)
 
 
-@router.message(MenuState.on_convert_start)
+@router.message(MenuState.on_convert_start, NotCommandFilter())
 async def handle_conversion_no_file(message: Message, state: FSMContext):
     await handle_conversion_start(message, state)
 
@@ -191,6 +191,6 @@ async def handle_conversion_finish(
         await message.answer(_("Failed to convert file"), reply_to_message_id=message.message_id)
 
 
-@router.message(MenuState.on_convert_format_selection)
+@router.message(MenuState.on_convert_format_selection, NotCommandFilter())
 async def handle_conversion_invalid_format_selection(message: Message):
     await message.answer(_("Invalid format"), reply_to_message_id=message.message_id)

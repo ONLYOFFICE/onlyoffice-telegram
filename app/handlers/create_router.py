@@ -22,7 +22,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
-from app.filters import DocumentNameFilter
+from app.filters import DocumentNameFilter, NotCommandFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
@@ -52,7 +52,7 @@ async def handle_create_start(message: Message, state: FSMContext):
     await state.set_state(MenuState.on_create_start)
 
 
-@router.message(MenuState.on_create_start, F.text)
+@router.message(MenuState.on_create_start, F.text, NotCommandFilter())
 async def handle_create_title(message: Message, state: FSMContext):
     if any(
         message.text.casefold() == format_description.casefold() for format_description in get_format_descriptions()
@@ -120,6 +120,6 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         logger.error(f"Failed to create web app link: {e}")
 
 
-@router.message(MenuState.on_create_title, F.text)
+@router.message(MenuState.on_create_title, F.text, NotCommandFilter())
 async def handle_edit_invalid_document_upload(message: Message):
     await message.answer(_("Invalid title"), reply_to_message_id=message.message_id)

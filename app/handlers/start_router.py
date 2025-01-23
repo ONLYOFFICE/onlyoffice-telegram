@@ -27,7 +27,7 @@ from app.utils.lang_utils import _
 router = Router()
 
 
-@router.message(Command("start"))
+@router.message(F.chat.type == "private", Command("start"))
 async def handle_start(message: Message, state: FSMContext):
     menu_items = [_("Create"), _("Open"), _("🔄 Convert")]
     await state.clear()
@@ -41,7 +41,6 @@ async def handle_start(message: Message, state: FSMContext):
     await state.set_state(MenuState.on_start)
 
 
-@router.message(StateFilter(None), IsNotReplyFilter(), F.text)
+@router.message(F.chat.type == "private", StateFilter(None), IsNotReplyFilter(), F.text)
 async def handle_no_command(message: Message):
-    if message.chat.type == "private":
-        await message.answer(text=_("Please choose an action to work with bot"))
+    await message.answer(text=_("Please choose an action to work with bot"))

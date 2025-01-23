@@ -38,7 +38,7 @@ logger = logging.getLogger(__name__)
 router = Router()
 
 
-@router.message(StateFilter(None), DocumentEditFilter())
+@router.message(StateFilter(None), F.chat.type == "private", DocumentEditFilter())
 async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, f, reply):
     await handle_edit_document_upload(message, state, r, f, reply)
 

@@ -14,17 +14,19 @@
 # limitations under the License.
 #
 
-from aiogram import Router
-from aiogram.filters import Command, StateFilter
-from aiogram.types import Message
+from aiogram import F, Router
+from aiogram.filters import Command
+from aiogram.fsm.context import FSMContext
+from aiogram.types import Message, ReplyKeyboardRemove
 
 from app.utils.lang_utils import _
 
 router = Router()
 
 
-@router.message(StateFilter(None), Command("help"))
-async def handle_help(message: Message):
+@router.message(F.chat.type == "private", Command("help"))
+async def handle_help_private_chat(message: Message, state: FSMContext):
+    await state.clear()
     await message.answer(
         text=_(
             "📑 ONLYOFFICE bot can create, open and convert office files\n\n- Create documents, spreadsheets, presentations\n- Open your local files and edit them\n- Collaborate with other people in real time\n- Convert files to multiple formats\n\nPress /start to get started and see the available options:\n☑️ Click the Create button to create new files and send them to other Telegram users for co-editing.\n☑️ Click the Open button to upload and open files from your device.\n☑️ Click the Convert button to select files for conversion."  # pylint: disable=line-too-long

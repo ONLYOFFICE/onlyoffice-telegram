@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-from aiogram import Router
+from aiogram import F, Router
 from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import CallbackQuery, Message, ReplyKeyboardRemove
@@ -26,7 +26,7 @@ from app.utils.lang_utils import _
 router = Router()
 
 
-@router.message(Command("lang"))
+@router.message(F.chat.type == "private", Command("lang"))
 async def handle_lang(message: Message, state: FSMContext):
     await state.clear()
     # Keyboard removal is only available when sending a message with reply_markup, so we're sending two messages

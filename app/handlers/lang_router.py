@@ -43,7 +43,8 @@ async def handle_lang(message: Message, state: FSMContext):
 
 @router.callback_query(LangCallback.filter())
 async def lang_callback(call: CallbackQuery, r: Redis, callback_data: LangCallback):
-    key = f"{callback_data.user_id}:lang"
-    r.set(key, callback_data.lang)
+    if call.from_user and call.from_user.id == callback_data.user_id:
+        key = f"{callback_data.user_id}:lang"
+        r.set(key, callback_data.lang)
 
-    await call.message.edit_text(_("Language changed", locale=callback_data.lang), reply_markup=None)
+        await call.message.edit_text(_("Language changed", locale=callback_data.lang), reply_markup=None)

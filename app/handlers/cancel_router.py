@@ -44,3 +44,18 @@ async def cmd_cancel(message: Message, state: FSMContext):
         reply_markup=ReplyKeyboardRemove(selective=True),
         reply_to_message_id=message.message_id,
     )
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", StateFilter(None), Command(commands=["cancel"]))
+async def cmd_cancel_no_state_group():
+    return
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command(commands=["cancel"]))
+async def cmd_cancel_group(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer(
+        text=_("Action canceled"),
+        reply_markup=ReplyKeyboardRemove(selective=True),
+        reply_to_message_id=message.message_id,
+    )

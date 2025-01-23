@@ -30,5 +30,17 @@ async def handle_help_private_chat(message: Message, state: FSMContext):
     await message.answer(
         text=_(
             "📑 ONLYOFFICE bot can create, open and convert office files\n\n- Create documents, spreadsheets, presentations\n- Open your local files and edit them\n- Collaborate with other people in real time\n- Convert files to multiple formats\n\nPress /start to get started and see the available options:\n☑️ Click the Create button to create new files and send them to other Telegram users for co-editing.\n☑️ Click the Open button to upload and open files from your device.\n☑️ Click the Convert button to select files for conversion."  # pylint: disable=line-too-long
-        )
+        ),
+        reply_markup=ReplyKeyboardRemove(selective=True),
+    )
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("help"))
+async def handle_help_group(message: Message, state: FSMContext):
+    await state.clear()
+    await message.answer(
+        text=_(
+            "📑 ONLYOFFICE bot can create, open and convert office files\n\n- Create documents, spreadsheets, presentations\n- Open your local files and edit them\n- Collaborate with other people in real time\n\n"  # pylint: disable=line-too-long
+        ),
+        reply_markup=ReplyKeyboardRemove(selective=True),
     )

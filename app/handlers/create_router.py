@@ -18,6 +18,7 @@ import logging
 import uuid
 
 from aiogram import F, Router
+from aiogram.filters import Command, CommandObject
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
@@ -50,6 +51,20 @@ async def handle_create_start(message: Message, state: FSMContext):
         reply_to_message_id=message.message_id,
     )
     await state.set_state(MenuState.on_create_start)
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("document"))
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("spreadsheet"))
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("presentation"))
+async def handle_create_group(message: Message, state: FSMContext, command: CommandObject):
+    await state.clear()
+    await state.update_data(format_description=_(command.command.capitalize()))
+    await message.answer(
+        text=_("Enter file title"),
+        reply_markup=ReplyKeyboardRemove(selective=True),
+        reply_to_message_id=message.message_id,
+    )
+    await state.set_state(MenuState.on_create_title)
 
 
 @router.message(MenuState.on_create_start, F.text, NotCommandFilter())

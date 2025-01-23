@@ -19,7 +19,7 @@ import re
 import uuid
 
 from aiogram import F, Router
-from aiogram.filters import StateFilter
+from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
@@ -41,6 +41,19 @@ router = Router()
 @router.message(StateFilter(None), F.chat.type == "private", DocumentEditFilter())
 async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, f, reply):
     await handle_edit_document_upload(message, state, r, f, reply)
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("open"), DocumentEditFilter())
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", DocumentEditFilter())
+async def handle_edit_file_group(message: Message, state: FSMContext, r: Redis, f, reply):
+    await state.clear()
+    await handle_edit_document_upload(message, state, r, f, reply)
+
+
+@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("open"))
+async def handle_edit_group(message: Message, state: FSMContext):
+    await state.clear()
+    await handle_edit_start(message, state)
 
 
 @router.message(MenuState.on_start, F.text.lower() == __("open"))

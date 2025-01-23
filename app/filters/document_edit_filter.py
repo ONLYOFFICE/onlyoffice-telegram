@@ -24,9 +24,6 @@ from app.utils.lang_utils import _
 class DocumentEditFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:
         async def process_message(reply=False) -> bool:
-            if message.chat.type != "private":
-                return False
-
             if message.document:
                 extension = get_extension_by_name(message.document.file_name)
                 f = get_format_by_extension(extension)

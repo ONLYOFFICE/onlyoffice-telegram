@@ -120,7 +120,7 @@ async def get_config(request: Request):
         if "file_id" not in session:  # This is file creation
             config["editorConfig"]["customization"]["mobile"] = {
                 "forceView": False,
-                "standardView": True,
+                "standardView": False,
             }
         token = encode_payload(config)
         config["token"] = token

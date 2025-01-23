@@ -17,6 +17,8 @@
 from aiogram import Bot
 from aiogram.types import (
     BotCommand,
+    BotCommandScopeAllGroupChats,
+    BotCommandScopeAllPrivateChats,
     BotCommandScopeChat,
     BotCommandScopeDefault,
     MenuButtonDefault,
@@ -25,21 +27,45 @@ from aiogram.types import (
 from app.utils.lang_utils import _, i18n
 
 
-def get_commands(lang: str = "en"):
+def get_private_chats_commands(lang: str = "en") -> list[BotCommand]:
     commands = [
         BotCommand(command="/start", description=_("Start", locale=lang)),
-        BotCommand(command="/cancel", description=_("Cancel", locale=lang)),
-        BotCommand(command="/help", description=_("Help", locale=lang)),
         BotCommand(command="/lang", description=_("Change language", locale=lang)),
+        BotCommand(command="/help", description=_("Help", locale=lang)),
+        BotCommand(command="/cancel", description=_("Cancel", locale=lang)),
     ]
+    return commands
 
+
+def get_group_chats_commands(lang: str = "en") -> list[BotCommand]:
+    commands = [
+        BotCommand(command="/document", description=_("Create document", locale=lang)),
+        BotCommand(command="/spreadsheet", description=_("Create spreadsheet", locale=lang)),
+        BotCommand(command="/presentation", description=_("Create presentation", locale=lang)),
+        BotCommand(command="/open", description=_("Open", locale=lang)),
+        BotCommand(command="/help", description=_("Help", locale=lang)),
+        BotCommand(command="/cancel", description=_("Cancel", locale=lang)),
+    ]
     return commands
 
 
 async def set_commands(bot: Bot):
-    await bot.set_my_commands(get_commands(), scope=BotCommandScopeDefault())
+    await bot.set_my_commands(get_private_chats_commands(), scope=BotCommandScopeDefault())
     for lang in i18n.available_locales:
-        await bot.set_my_commands(get_commands(lang), scope=BotCommandScopeDefault(), language_code=lang)
+        await bot.set_my_commands(
+            get_private_chats_commands(lang),
+            scope=BotCommandScopeAllPrivateChats(),
+            language_code=lang,
+        )
+
+    await bot.set_my_commands(get_group_chats_commands(), scope=BotCommandScopeAllGroupChats())
+    for lang in i18n.available_locales:
+        await bot.set_my_commands(
+            get_group_chats_commands(lang),
+            scope=BotCommandScopeAllGroupChats(),
+            language_code=lang,
+        )
+
     await bot.set_chat_menu_button(menu_button=MenuButtonDefault())
 
 

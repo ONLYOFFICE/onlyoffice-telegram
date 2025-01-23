@@ -55,15 +55,13 @@ def get_format_by_extension(name):
 
 
 def get_extension_by_description(description):
-    description = description.casefold()
-    if description == _("Document").casefold():
+    description = description.lower()
+    if description == _("Document").lower():
         return "docx"
-    if description == _("Spreadsheet").casefold():
+    if description == _("Spreadsheet").lower():
         return "xlsx"
-    if description == _("Presentation").casefold():
+    if description == _("Presentation").lower():
         return "pptx"
-    if description == _("PDF form").casefold():
-        return "pdf"
 
     return None
 

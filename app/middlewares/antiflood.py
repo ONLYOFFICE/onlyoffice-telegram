@@ -46,7 +46,9 @@ class ThrottlingMiddleware(BaseMiddleware):
                     await self.on_process_event(event.event, data["r"])
                 elif await data["state"].get_state() is not None:
                     await self.on_process_event(event.event, data["r"])
-                elif BOT_NAME in message.text:
+                elif message.text and BOT_NAME in message.text:
+                    await self.on_process_event(event.event, data["r"])
+                elif message.caption and BOT_NAME in message.caption:
                     await self.on_process_event(event.event, data["r"])
                 else:
                     return

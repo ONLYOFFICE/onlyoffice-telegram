@@ -24,7 +24,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
-from app.filters import DocumentEditFilter, NotCommandFilter
+from app.filters import ChatGroupFilter, DocumentEditFilter, NotCommandFilter
 from app.fsm import MenuState
 from app.utils.file_utils import (
     remove_extension,
@@ -43,14 +43,14 @@ async def handle_edit_no_command(message: Message, state: FSMContext, r: Redis, 
     await handle_edit_document_upload(message, state, r, f, reply)
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("open"), DocumentEditFilter())
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", DocumentEditFilter())
+@router.message(ChatGroupFilter(), Command("open"), DocumentEditFilter())
+@router.message(ChatGroupFilter(), DocumentEditFilter())
 async def handle_edit_file_group(message: Message, state: FSMContext, r: Redis, f, reply):
     await state.clear()
     await handle_edit_document_upload(message, state, r, f, reply)
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("open"))
+@router.message(ChatGroupFilter(), Command("open"))
 async def handle_edit_group(message: Message, state: FSMContext):
     await state.clear()
     await handle_edit_start(message, state)

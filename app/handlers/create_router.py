@@ -23,7 +23,7 @@ from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 from redis import Redis
 
-from app.filters import DocumentNameFilter, NotCommandFilter
+from app.filters import ChatGroupFilter, DocumentNameFilter, NotCommandFilter
 from app.fsm import MenuState
 from app.keyboards import make_buttons, make_keyboard
 from app.utils.file_utils import (
@@ -53,9 +53,9 @@ async def handle_create_start(message: Message, state: FSMContext):
     await state.set_state(MenuState.on_create_start)
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("document"))
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("spreadsheet"))
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("presentation"))
+@router.message(ChatGroupFilter(), Command("document"))
+@router.message(ChatGroupFilter(), Command("spreadsheet"))
+@router.message(ChatGroupFilter(), Command("presentation"))
 async def handle_create_group(message: Message, state: FSMContext, command: CommandObject):
     await state.clear()
     await state.update_data(format_description=_(command.command.capitalize()))

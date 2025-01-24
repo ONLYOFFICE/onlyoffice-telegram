@@ -19,6 +19,7 @@ from aiogram.filters import Command
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 
+from app.filters import ChatGroupFilter
 from app.utils.lang_utils import _
 
 router = Router()
@@ -35,7 +36,7 @@ async def handle_help_private_chat(message: Message, state: FSMContext):
     )
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command("help"))
+@router.message(ChatGroupFilter(), Command("help"))
 async def handle_help_group(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(

@@ -19,6 +19,7 @@ from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
 
+from app.filters import ChatGroupFilter
 from app.utils.lang_utils import _, __
 
 router = Router()
@@ -46,12 +47,12 @@ async def cmd_cancel(message: Message, state: FSMContext):
     )
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", StateFilter(None), Command(commands=["cancel"]))
+@router.message(ChatGroupFilter(), StateFilter(None), Command(commands=["cancel"]))
 async def cmd_cancel_no_state_group():
     return
 
 
-@router.message(F.chat.type == "group" or F.chat.type == "supergroup", Command(commands=["cancel"]))
+@router.message(ChatGroupFilter(), Command(commands=["cancel"]))
 async def cmd_cancel_group(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(

@@ -14,9 +14,16 @@
 # limitations under the License.
 #
 
-from .chat_group_filter import ChatGroupFilter
-from .document_edit_filter import DocumentEditFilter
-from .document_name_filter import DocumentNameFilter
-from .is_not_reply_filter import IsNotReplyFilter
-from .not_command_filter import NotCommandFilter
-from .supported_convert_formats_filter import SupportedConvertFormatsFilter
+from aiogram.enums import ChatType
+from aiogram.filters import BaseFilter
+from aiogram.types import Message
+
+
+class ChatGroupFilter(BaseFilter):
+    def __init__(self):
+        self.chat_type = [ChatType.GROUP, ChatType.SUPERGROUP]
+
+    async def __call__(self, message: Message) -> bool:
+        if isinstance(self.chat_type, str):
+            return message.chat.type == self.chat_type
+        return message.chat.type in self.chat_type

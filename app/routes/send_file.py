@@ -108,7 +108,7 @@ async def send_file(request: Request):
                             link_messages = {
                                 "01": _("Your file", locale=lang),
                                 "02": _(
-                                    "To start co-editing, send this message to other participants.",
+                                    "To start editing again, reply to the message with the file.",
                                     locale=lang,
                                 ),
                                 "03": _("The ONLYOFFICE editor link:", locale=lang),

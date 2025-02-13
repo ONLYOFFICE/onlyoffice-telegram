@@ -41,7 +41,7 @@ async def handle_help_group(message: Message, state: FSMContext):
     await state.clear()
     await message.answer(
         text=_(
-            "📑 ONLYOFFICE bot can create, open and convert office files\n\n- Create documents, spreadsheets, presentations\n- Open your local files and edit them\n- Collaborate with other people in real time\n\n"  # pylint: disable=line-too-long
+            "📑 ONLYOFFICE bot can open office files in Telegram group chats\n\n- Create documents, spreadsheets, presentations\n- Open your local files and edit them\n- Collaborate with other people in real time\n\n☑️ Click /document, /spreadsheet or /presentation command to create new files and send them to other Telegram users for co-editing.\n☑️ Click the /open command to upload and open files from your device. Or send file to the chat and tag bot to open this file for you and other group participants."  # pylint: disable=line-too-long
         ),
         reply_markup=ReplyKeyboardRemove(selective=True),
     )

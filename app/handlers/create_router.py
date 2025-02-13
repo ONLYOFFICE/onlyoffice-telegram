@@ -16,8 +16,10 @@
 
 import logging
 import uuid
+from datetime import datetime
 
 from aiogram import F, Router
+from aiogram.enums import ChatType
 from aiogram.filters import Command, CommandObject
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
@@ -56,15 +58,11 @@ async def handle_create_start(message: Message, state: FSMContext):
 @router.message(ChatGroupFilter(), Command("document"))
 @router.message(ChatGroupFilter(), Command("spreadsheet"))
 @router.message(ChatGroupFilter(), Command("presentation"))
-async def handle_create_group(message: Message, state: FSMContext, command: CommandObject):
+async def handle_create_group(message: Message, state: FSMContext, command: CommandObject, r: Redis):
     await state.clear()
     await state.update_data(format_description=_(command.command.capitalize()))
-    await message.answer(
-        text=_("Enter file title"),
-        reply_markup=ReplyKeyboardRemove(selective=True),
-        reply_to_message_id=message.message_id,
-    )
     await state.set_state(MenuState.on_create_title)
+    await handle_create_document(message, state, r)
 
 
 @router.message(MenuState.on_create_start, F.text, NotCommandFilter())
@@ -85,21 +83,33 @@ async def handle_create_title(message: Message, state: FSMContext):
 
 @router.message(MenuState.on_create_title, DocumentNameFilter())
 async def handle_create_document(message: Message, state: FSMContext, r: Redis):
-    file_name = message.text
-    data = await state.get_data()
-    format_description = data["format_description"]
-    extension = get_extension_by_description(format_description)
-    f = get_format_by_extension(extension)
     try:
-        lang = r.get(f"{message.chat.id}:lang")
-        if not lang:
-            lang = getattr(message.from_user, "language_code", "default") or "default"
-        else:
-            lang = lang.decode("utf-8")
+        data = await state.get_data()
+        format_description = data["format_description"]
+        extension = get_extension_by_description(format_description)
+        f = get_format_by_extension(extension)
 
-        key = uuid.uuid4().hex
-
+        lang = None
         pipeline = r.pipeline()
+        pipeline.get(f"{message.chat.id}:lang")
+        pipeline.get(f"{message.from_user.id}:lang")
+        results = pipeline.execute()
+        if results[0]:
+            lang = results[0].decode("utf-8")
+        elif results[1]:
+            lang = results[1].decode("utf-8")
+        else:
+            lang = getattr(message.from_user, "language_code", "default") or "default"
+
+        file_name = message.text
+        if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
+            if lang in ["en", "ar", "hi", "mr", "bn", "pa", "te", "ta", "ml", "gu", "kn", "ml", "mr", "ur"]:
+                time_str = datetime.now().strftime("%Y-%m-%d_%I-%M %p")
+            else:
+                time_str = datetime.now().strftime("%Y-%m-%d_%H-%M")
+            file_types = {"docx": _("New document"), "xlsx": _("New spreadsheet"), "pptx": _("New presentation")}
+            file_name = file_types[extension] + " " + time_str
+
         session = {
             "document_type": f["type"],
             "file_name": file_name,
@@ -109,9 +119,10 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             "message_id": message.message_id,
             "owner": message.chat.id,
         }
-        if message.chat.type == "group" or message.chat.type == "supergroup":
+        if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
             session["group"] = message.chat.id
 
+        key = uuid.uuid4().hex
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
         create_messages = {
@@ -119,6 +130,8 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
             "02": _("To start co-editing, send this message to other participants."),
             "03": _("The ONLYOFFICE editor link:"),
         }
+        if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
+            create_messages["02"] = _("All group members can edit this file.")
 
         await state.clear()
         link_message = await message.answer(
@@ -127,6 +140,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         )
         session["link_message_id"] = link_message.message_id
 
+        pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
         pipeline.expire(key, TTL)
         pipeline.execute()

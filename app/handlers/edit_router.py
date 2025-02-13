@@ -19,6 +19,7 @@ import re
 import uuid
 
 from aiogram import F, Router
+from aiogram.enums import ChatType
 from aiogram.filters import Command, StateFilter
 from aiogram.fsm.context import FSMContext
 from aiogram.types import Message, ReplyKeyboardRemove
@@ -69,11 +70,17 @@ async def handle_edit_start(message: Message, state: FSMContext):
 @router.message(MenuState.on_edit_start, DocumentEditFilter())
 async def handle_edit_document_upload(message: Message, state: FSMContext, r: Redis, f, reply: bool):
     try:
-        lang = r.get(f"{message.chat.id}:lang")
-        if not lang:
-            lang = getattr(message.from_user, "language_code", "default") or "default"
+        lang = None
+        pipeline = r.pipeline()
+        pipeline.get(f"{message.chat.id}:lang")
+        pipeline.get(f"{message.from_user.id}:lang")
+        results = pipeline.execute()
+        if results[0]:
+            lang = results[0].decode("utf-8")
+        elif results[1]:
+            lang = results[1].decode("utf-8")
         else:
-            lang = lang.decode("utf-8")
+            lang = getattr(message.from_user, "language_code", "default") or "default"
 
         if reply:
             message = message.reply_to_message
@@ -84,9 +91,6 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
                 reply_to_message_id=message.message_id,
             )
 
-        key = uuid.uuid4().hex
-
-        pipeline = r.pipeline()
         session = {
             "document_type": f["type"],
             "file_id": file.file_id,
@@ -97,28 +101,36 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
             "message_id": message.message_id,
             "owner": message.chat.id,
         }
-        if message.chat.type == "group" or message.chat.type == "supergroup":
+        if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
             session["group"] = message.chat.id
 
+        key = uuid.uuid4().hex
         web_app_url = f"https://t.me/{BOT_NAME}/{WEB_APP_NAME}?startapp={key}"
 
         edit_mode = True if "edit" in f["actions"] else False
         edit_messages = {"01": _("Your file"), "03": _("The ONLYOFFICE editor link:")}
         if edit_mode:
-            edit_messages["02"] = _("To start co-editing, send this message to other participants.")
+            if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
+                edit_messages["02"] = _("All group members can edit this file.")
+            else:
+                edit_messages["02"] = _("To start co-editing, send this message to other participants.")
         else:
-            edit_messages["02"] = _(
-                "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."  # pylint: disable=line-too-long
-            )
+            if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
+                edit_messages["02"] = _("All group members can view this file. The link is available for 24 hours.")
+            else:
+                edit_messages["02"] = _(
+                    "To open the file for viewing by several users, send this message to other participants. The link is available for 24 hours."  # pylint: disable=line-too-long
+                )
 
         await state.clear()
         file_name = re.sub(r"\.(?!.*\.)", "\u200b.", file.file_name)
         link_message = await message.answer(
-            text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",  # pylint: disable=line-too-long
+            text=f"{edit_messages['01']} <b>{file_name}</b>\n{edit_messages['02']}\n\n{edit_messages['03']}\n{web_app_url}",
             reply_to_message_id=message.message_id,
         )
         session["link_message_id"] = link_message.message_id
 
+        pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
         pipeline.expire(key, TTL)
         pipeline.execute()

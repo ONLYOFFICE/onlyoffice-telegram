@@ -21,6 +21,7 @@ import time
 from typing import Any, Awaitable, Callable, Dict
 
 from aiogram import BaseMiddleware
+from aiogram.enums import ChatType, ContentType
 from aiogram.types import Message
 from redis import Redis
 
@@ -40,11 +41,10 @@ class ThrottlingMiddleware(BaseMiddleware):
     ) -> Any:
         try:
             message = getattr(event, "message", None)
-            if message and (message.chat.type == "group" or message.chat.type == "supergroup"):
-                reply_to_message = getattr(message, "reply_to_message", None)
-                if reply_to_message and reply_to_message.from_user.username == BOT_NAME:
-                    await self.on_process_event(event.event, data["r"])
-                elif await data["state"].get_state() is not None:
+            if message and (message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]):
+                if message.content_type not in [ContentType.TEXT, ContentType.DOCUMENT]:
+                    return
+                if await data["state"].get_state() is not None:
                     await self.on_process_event(event.event, data["r"])
                 elif message.text and BOT_NAME in message.text:
                     await self.on_process_event(event.event, data["r"])

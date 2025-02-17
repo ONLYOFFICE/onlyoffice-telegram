@@ -16,7 +16,6 @@
 
 import logging
 import uuid
-from datetime import datetime
 
 from aiogram import F, Router
 from aiogram.enums import ChatType
@@ -104,11 +103,11 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         file_name = message.text
         if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
             if lang in ["en", "ar", "hi", "mr", "bn", "pa", "te", "ta", "ml", "gu", "kn", "ml", "mr", "ur"]:
-                time_str = datetime.now().strftime("%Y-%m-%d_%I-%M %p")
+                time_str = message.date.strftime("%Y-%m-%d_%I-%M %p")
             else:
-                time_str = datetime.now().strftime("%Y-%m-%d_%H-%M")
+                time_str = message.date.strftime("%Y-%m-%d_%H-%M")
             file_types = {"docx": _("New document"), "xlsx": _("New spreadsheet"), "pptx": _("New presentation")}
-            file_name = file_types[extension] + " " + time_str
+            file_name = file_types[extension] + " " + time_str + " UTC"
 
         session = {
             "document_type": f["type"],

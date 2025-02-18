@@ -8,48 +8,48 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-02-13 13:31+0300\n"
-"PO-Revision-Date: 2025-02-18 17:49+0300\n"
+"PO-Revision-Date: 2025-02-18 18:18+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
-"Language: de_DE\n"
+"Language: zh_CN\n"
 "MIME-Version: 1.0\n"
-"Content-Type: text/plain; charset=utf-8\n"
+"Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
 "Generated-By: Babel 2.16.0\n"
 "X-Generator: Poedit 3.4.1\n"
 
 #: app/commands/commands.py:32
 msgid "Start"
-msgstr "Start"
+msgstr "开始"
 
 #: app/commands/commands.py:33
 msgid "Change language"
-msgstr "Sprache ändern"
+msgstr "更改语言"
 
 #: app/commands/commands.py:34 app/commands/commands.py:46
 msgid "Help"
-msgstr "Hilfe"
+msgstr "帮助"
 
 #: app/commands/commands.py:35 app/commands/commands.py:47
 msgid "Cancel"
-msgstr "Abbrechen"
+msgstr "取消"
 
 #: app/commands/commands.py:42
 msgid "Create document"
-msgstr "Dokument erstellen"
+msgstr ""
 
 #: app/commands/commands.py:43
 msgid "Create spreadsheet"
-msgstr "Kalkulationstabelle erstellen"
+msgstr ""
 
 #: app/commands/commands.py:44
 msgid "Create presentation"
-msgstr "Präsentation erstellen"
+msgstr ""
 
 #: app/commands/commands.py:45 app/handlers/start_router.py:32
 msgid "Open"
-msgstr "Öffnen"
+msgstr "打开"
 
 #: app/description/description.py:25
 msgid ""
@@ -62,141 +62,135 @@ msgid ""
 "\n"
 "Press /start to create/edit files\n"
 msgstr ""
-"📑 Der ONLYOFFICE-Bot kann Office-Dateien erstellen, öffnen und konvertieren\n"
+"📑 ONLYOFFICE 机器人能够创建、打开和转换办公文件\n"
 "\n"
-"- Dokumente, Tabellenkalkulationen und Präsentationen erstellen\n"
-"- Lokale Dateien öffnen und bearbeiten\n"
-"- Zusammenarbeit mit anderen Personen in Echtzeit\n"
-"- Dateien in mehrere Formate konvertieren\n"
+"- 创建文档、电子表格、演示文稿\n"
+"- 打开并编辑您的本地文件\n"
+"- 与他人实时协作\n"
+"- 将文件转换为多种格式\n"
 "\n"
-"Drücken Sie /Start zum Erstellen oder Bearbeiten von Dateien\n"
+"点击/开始创建/编辑文件\n"
 
 #: app/description/description.py:31
 msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
-msgstr ""
-"Mit dem ONLYOFFICE-Bot lassen sich Office-Dateien mühelos erstellen, "
-"konvertieren und gemeinsam bearbeiten."
+msgstr "使用 ONLYOFFICE 机器人，轻松创建、转换、编辑和协作办公文件。"
 
 #: app/filters/document_edit_filter.py:32 app/filters/document_edit_filter.py:35
 #: app/handlers/convert_router.py:68 app/handlers/convert_router.py:107
 msgid "File not supported"
-msgstr "Datei nicht unterstützt"
+msgstr "文件不支持"
 
 #: app/handlers/back_router.py:30
 msgid "⬅️ back"
-msgstr "⬅️ zurück"
+msgstr "⬅️ 返回"
 
 #: app/handlers/cancel_router.py:29 app/handlers/cancel_router.py:40
 msgid "❌ cancel"
-msgstr "❌ abbrechen"
+msgstr "❌ 取消"
 
 #: app/handlers/cancel_router.py:33
 msgid "There is nothing to cancel"
-msgstr "Es gibt nichts zu abbrechen"
+msgstr "没有可取消项"
 
 #: app/handlers/cancel_router.py:44 app/handlers/cancel_router.py:59
 msgid "Action canceled"
-msgstr "Aktion abgebrochen"
+msgstr "操作已取消"
 
 #: app/handlers/convert_router.py:54
 msgid "🔄 convert"
-msgstr "🔄 konvertieren"
+msgstr "🔄 转换"
 
 #: app/handlers/convert_router.py:59 app/handlers/edit_router.py:63
 msgid "Send file"
-msgstr "Datei senden"
+msgstr "发送文件"
 
 #: app/handlers/convert_router.py:78 app/handlers/edit_router.py:90
 msgid "The file is too large. Maximum allowed file size is 20 MB"
-msgstr "Die Datei ist zu groß. Die maximal zulässige Dateigröße beträgt 20 MB"
+msgstr "该文件太大。文件大小不能超过 20 MB"
 
 #: app/handlers/convert_router.py:101
 msgid "Select format to convert"
-msgstr "Wählen Sie das zu konvertierende Format aus"
+msgstr "选择需要转换的格式"
 
 #: app/handlers/convert_router.py:127
 msgid "🔄 Conversion..."
-msgstr "🔄 Konvertierung..."
+msgstr "🔄 转换中..."
 
 #: app/handlers/convert_router.py:186 app/routes/send_file.py:97
 msgid "Your file is ready. Please find the final version here."
-msgstr "Ihre Datei ist fertig. Die endgültige Version finden Sie hier."
+msgstr "您的文件已就绪。请在此处找到最终版本。"
 
 #: app/handlers/convert_router.py:191
 msgid "Failed to convert file"
-msgstr "Datei konnte nicht konvertiert werden"
+msgstr "转换文件失败"
 
 #: app/handlers/convert_router.py:196
 msgid "Invalid format"
-msgstr "Ungültiges Format"
+msgstr "格式无效"
 
 #: app/handlers/create_router.py:45
 msgid "create"
-msgstr "erstellen"
+msgstr "创建"
 
 #: app/handlers/create_router.py:51
 msgid "Select file format"
-msgstr "Dateiformat auswählen"
+msgstr "选择文件格式"
 
 #: app/handlers/create_router.py:75
 msgid "Enter file title"
-msgstr "Dateititel eingeben"
+msgstr "输入文件标题"
 
 #: app/handlers/create_router.py:110
 msgid "New document"
-msgstr "Neues Dokument"
+msgstr ""
 
 #: app/handlers/create_router.py:110
 msgid "New spreadsheet"
-msgstr "Neue Kalkulationstabelle"
+msgstr ""
 
 #: app/handlers/create_router.py:110
 msgid "New presentation"
-msgstr "Neue Präsentation"
+msgstr ""
 
 #: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
 #: app/routes/send_file.py:108
 msgid "Your file"
-msgstr "Ihre Datei"
+msgstr "您的文件"
 
 #: app/handlers/create_router.py:130 app/handlers/edit_router.py:116
 msgid "To start co-editing, send this message to other participants."
-msgstr ""
-"Um mit der gemeinsamen Bearbeitung zu beginnen, senden Sie diese Nachricht an "
-"die anderen Teilnehmer."
+msgstr "如需开始共同编辑，请将此信息发送给其他共同编辑者。"
 
 #: app/handlers/create_router.py:131 app/handlers/edit_router.py:111
 #: app/routes/send_file.py:112
 msgid "The ONLYOFFICE editor link:"
-msgstr "Der Link zum ONLYOFFICE-Editor:"
+msgstr "ONLYOFFICE 编辑器链接："
 
 #: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
 msgid "All group members can edit this file."
-msgstr "Alle Gruppenmitglieder können diese Datei bearbeiten."
+msgstr ""
 
 #: app/handlers/create_router.py:154
 msgid "Invalid title"
-msgstr "Ungültiger Titel"
+msgstr "标题无效"
 
 #: app/handlers/edit_router.py:60
 msgid "open"
-msgstr "öffnen"
+msgstr "打开"
 
 #: app/handlers/edit_router.py:119
 msgid "All group members can view this file. The link is available for 24 hours."
 msgstr ""
-"Alle Gruppenmitglieder können diese Datei ansehen. Der Link ist 24 Stunden "
-"lang verfügbar."
 
 #: app/handlers/edit_router.py:121
 msgid ""
 "To open the file for viewing by several users, send this message to other "
 "participants. The link is available for 24 hours."
 msgstr ""
-"Um die Datei zur Ansicht durch mehrere Benutzer zu öffnen, senden Sie diese "
-"Nachricht an andere Teilnehmer. Der Link ist 24 Stunden lang gültig."
+"如需打开文件供多名用户查看，请将此信息发送给其他查看者。此链接的有效期为 24 小"
+"时。"
 
 #: app/handlers/help_router.py:32
 msgid ""
@@ -213,20 +207,17 @@ msgid ""
 "☑️ Click the Open button to upload and open files from your device.\n"
 "☑️ Click the Convert button to select files for conversion."
 msgstr ""
-"📑 Der ONLYOFFICE-Bot kann Office-Dateien erstellen, öffnen und konvertieren\n"
+"“📑 ONLYOFFICE 机器人能够创建、打开和转换办公文件\n"
 "\n"
-"- Dokumente, Tabellenkalkulationen und Präsentationen erstellen\n"
-"- Lokale Dateien öffnen und bearbeiten\n"
-"- Zusammenarbeit mit anderen Personen in Echtzeit\n"
-"- Dateien in mehrere Formate konvertieren\n"
+"- 创建文档、电子表格、演示文稿\n"
+"- 打开并编辑您的本地文件\n"
+"- 与他人实时协作\n"
+"- 将文件转换为多种格式\n"
 "\n"
-"Drücken Sie /Start, um zu beginnen und die verfügbaren Optionen zu sehen:\n"
-"☑️ Klicken Sie auf die Schaltfläche Erstellen, um neue Dateien zu erstellen und "
-"sie an andere Telegram-Benutzer zur gemeinsamen Bearbeitung zu senden.\n"
-"☑️ Klicken Sie auf die Schaltfläche Öffnen, um Dateien von Ihrem Gerät "
-"hochzuladen und zu öffnen.\n"
-"☑️ Klicken Sie auf die Schaltfläche Konvertieren, um Dateien für die "
-"Konvertierung auszuwählen."
+"点击/开始，启用机器人并查看可用选项：\n"
+"☑️ 点击创建，新建文件并将其发送给其他 Telegram 用户以供共同编辑。\n"
+"☑️ 点击打开，上传并打开来自您设备的文件。\n"
+"☑️ 点击转换，选择需要转换的文件。"
 
 #: app/handlers/help_router.py:43
 msgid ""
@@ -242,87 +233,71 @@ msgid ""
 "file to the chat and tag bot to open this file for you and other group "
 "participants."
 msgstr ""
-"📑 ONLYOFFICE-Bot kann Office-Dateien in Telegram-Gruppenchats öffnen\n"
-"\n"
-"- Erstellen Sie Dokumente, Tabellenkalkulationen und Präsentationen\n"
-"- Öffnen und bearbeiten Sie Ihre lokalen Dateien\n"
-"- Arbeiten Sie in Echtzeit mit anderen zusammen\n"
-"\n"
-"☑️ Klicken Sie auf die Befehle /Dokument, /Kalkulationstabelle oder /"
-"Präsentation, um neue Dateien zu erstellen und sie zur gemeinsamen Bearbeitung "
-"an andere Telegram-Benutzer zu senden.\n"
-"☑️ Klicken Sie auf den Befehl /öffnen, um Dateien von Ihrem Gerät hochzuladen "
-"und zu öffnen. Oder senden Sie die Datei an den Chat- und Tag-Bot, um diese "
-"Datei für Sie und andere Gruppenteilnehmer zu öffnen."
 
 #: app/handlers/lang_router.py:34
 msgid "Select language"
-msgstr "Sprache auswählen"
+msgstr "选择语言"
 
 #: app/handlers/lang_router.py:39
 msgid "Available languages:"
-msgstr "Verfügbare Sprachen:"
+msgstr "可用语言："
 
 #: app/handlers/lang_router.py:50
 msgid "Language changed"
-msgstr "Sprache geändert"
+msgstr "语言已更改"
 
 #: app/handlers/start_router.py:32
 msgid "Create"
-msgstr "Erstellen"
+msgstr "创建"
 
 #: app/handlers/start_router.py:32
 msgid "🔄 Convert"
-msgstr "🔄 Konvertieren"
+msgstr "🔄 转换"
 
 #: app/handlers/start_router.py:37
 msgid "Choose an action"
-msgstr "Wählen Sie eine Aktion aus"
+msgstr "选择一个操作"
 
 #: app/handlers/start_router.py:46
 msgid "Please choose an action to work with bot"
-msgstr "Bitte wählen Sie eine Aktion aus, um mit dem Bot zu arbeitent"
+msgstr "请选择一个操作以使用机器人"
 
 #: app/keyboards/make_buttons.py:31 app/keyboards/make_buttons.py:39
 msgid "⬅️ Back"
-msgstr "⬅️ Zurück"
+msgstr "⬅️ 返回"
 
 #: app/keyboards/make_buttons.py:33 app/keyboards/make_buttons.py:41
 msgid "❌ Cancel"
-msgstr "❌ Abbrechen"
+msgstr "❌ 取消"
 
 #: app/middlewares/antiflood.py:80
 msgid "Too many requests, try again in {delta:.2f} seconds"
-msgstr "Zu viele Anfragen, versuchen Sie es in {delta:.2f} Sekunden erneut"
+msgstr "请求次数过多，请等待 {delta:.2f} 秒后重试"
 
 #: app/routes/get_locales.py:51
 msgid "The link has expired"
-msgstr "Der Link ist abgelaufen"
+msgstr "该链接已过期"
 
 #: app/routes/get_locales.py:52
 msgid "Please create a new one by opening this file again in the chat."
-msgstr ""
-"Bitte erstellen Sie einen neuen Link, indem Sie diese Datei erneut im Chat "
-"öffnen."
+msgstr "请在聊天中再次打开此文件以新建文件。"
 
 #: app/routes/send_file.py:109
 msgid "To start editing again, reply to the message with the file."
 msgstr ""
-"Um erneut mit der Bearbeitung zu beginnen, antworten Sie auf die Nachricht mit "
-"der Datei."
 
 #: app/routes/send_file.py:113
 msgid "expired"
-msgstr "abgelaufen"
+msgstr "已过期"
 
 #: app/utils/file_utils.py:33 app/utils/file_utils.py:59
 msgid "Document"
-msgstr "Dokument"
+msgstr "文档"
 
 #: app/utils/file_utils.py:33 app/utils/file_utils.py:61
 msgid "Spreadsheet"
-msgstr "Kalkulationstabelle"
+msgstr "电子表格"
 
 #: app/utils/file_utils.py:33 app/utils/file_utils.py:63
 msgid "Presentation"
-msgstr "Präsentation"
+msgstr "电子表格"

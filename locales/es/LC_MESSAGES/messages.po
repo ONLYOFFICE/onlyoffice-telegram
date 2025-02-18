@@ -8,15 +8,16 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-02-13 13:31+0300\n"
-"PO-Revision-Date: 2024-12-24 14:21+0300\n"
+"PO-Revision-Date: 2025-02-18 17:59+0300\n"
 "Last-Translator: \n"
-"Language: es_ES\n"
 "Language-Team: en <LL@li.org>\n"
-"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Language: es_ES\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=utf-8\n"
 "Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
 "Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.1\n"
 
 #: app/commands/commands.py:32
 msgid "Start"
@@ -35,19 +36,16 @@ msgid "Cancel"
 msgstr "Cancelar"
 
 #: app/commands/commands.py:42
-#, fuzzy
 msgid "Create document"
-msgstr ""
+msgstr "Crear documento"
 
 #: app/commands/commands.py:43
-#, fuzzy
 msgid "Create spreadsheet"
-msgstr ""
+msgstr "Crear hoja de cálculo"
 
 #: app/commands/commands.py:44
-#, fuzzy
 msgid "Create presentation"
-msgstr ""
+msgstr "Crear presentación"
 
 #: app/commands/commands.py:45 app/handlers/start_router.py:32
 msgid "Open"
@@ -64,8 +62,7 @@ msgid ""
 "\n"
 "Press /start to create/edit files\n"
 msgstr ""
-"📑 El bot de ONLYOFFICE puede crear, abrir y convertir archivos ofimáticos"
-"\n"
+"📑 El bot de ONLYOFFICE puede crear, abrir y convertir archivos ofimáticos\n"
 "\n"
 "- Cree documentos, hojas de cálculo y presentaciones\n"
 "- Abra sus archivos locales y edítelos\n"
@@ -79,12 +76,11 @@ msgid ""
 "Easily create, convert, edit and collaborate on office files using the "
 "ONLYOFFICE bot."
 msgstr ""
-"Cree, convierta, edite y colabore fácilmente en archivos ofimáticos con "
-"el bot de ONLYOFFICE."
+"Cree, convierta, edite y colabore fácilmente en archivos ofimáticos con el bot "
+"de ONLYOFFICE."
 
-#: app/filters/document_edit_filter.py:32
-#: app/filters/document_edit_filter.py:35 app/handlers/convert_router.py:68
-#: app/handlers/convert_router.py:107
+#: app/filters/document_edit_filter.py:32 app/filters/document_edit_filter.py:35
+#: app/handlers/convert_router.py:68 app/handlers/convert_router.py:107
 msgid "File not supported"
 msgstr "Archivo no compatible"
 
@@ -149,19 +145,16 @@ msgid "Enter file title"
 msgstr "Introduzca el título del archivo"
 
 #: app/handlers/create_router.py:110
-#, fuzzy
 msgid "New document"
-msgstr ""
+msgstr "Nuevo documento"
 
 #: app/handlers/create_router.py:110
-#, fuzzy
 msgid "New spreadsheet"
-msgstr ""
+msgstr "Nueva hoja de cálculo"
 
 #: app/handlers/create_router.py:110
-#, fuzzy
 msgid "New presentation"
-msgstr ""
+msgstr "Nueva presentación"
 
 #: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
 #: app/routes/send_file.py:108
@@ -179,7 +172,7 @@ msgstr "Enlace al editor ONLYOFFICE:"
 
 #: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
 msgid "All group members can edit this file."
-msgstr ""
+msgstr "Todos los miembros del grupo pueden editar este archivo."
 
 #: app/handlers/create_router.py:154
 msgid "Invalid title"
@@ -192,15 +185,16 @@ msgstr "abrir"
 #: app/handlers/edit_router.py:119
 msgid "All group members can view this file. The link is available for 24 hours."
 msgstr ""
+"Todos los miembros del grupo pueden ver este archivo. El enlace está "
+"disponible durante 24 horas."
 
 #: app/handlers/edit_router.py:121
 msgid ""
-"To open the file for viewing by several users, send this message to other"
-" participants. The link is available for 24 hours."
+"To open the file for viewing by several users, send this message to other "
+"participants. The link is available for 24 hours."
 msgstr ""
-"Para abrir el archivo para que lo vean varios usuarios, envíe este "
-"mensaje a otros participantes. El enlace estará disponible durante 24 "
-"horas."
+"Para abrir el archivo para que lo vean varios usuarios, envíe este mensaje a "
+"otros participantes. El enlace estará disponible durante 24 horas."
 
 #: app/handlers/help_router.py:32
 msgid ""
@@ -212,13 +206,12 @@ msgid ""
 "- Convert files to multiple formats\n"
 "\n"
 "Press /start to get started and see the available options:\n"
-"☑️ Click the Create button to create new files and send them to other "
-"Telegram users for co-editing.\n"
+"☑️ Click the Create button to create new files and send them to other Telegram "
+"users for co-editing.\n"
 "☑️ Click the Open button to upload and open files from your device.\n"
 "☑️ Click the Convert button to select files for conversion."
 msgstr ""
-"📑 El bot de ONLYOFFICE puede crear, abrir y convertir archivos ofimáticos"
-"\n"
+"📑 El bot de ONLYOFFICE puede crear, abrir y convertir archivos ofimáticos\n"
 "\n"
 "- Cree documentos, hojas de cálculo y presentaciones\n"
 "- Abra sus archivos locales y edítelos\n"
@@ -226,15 +219,14 @@ msgstr ""
 "- Convierta archivos a varios formatos\n"
 "\n"
 "Pulse /iniciar para empezar y ver las opciones disponibles:\n"
-"☑️ Haga clic en el botón Crear para crear nuevos archivos y enviarlos a "
-"otros usuarios de Telegram para su coedición.\n"
+"☑️ Haga clic en el botón Crear para crear nuevos archivos y enviarlos a otros "
+"usuarios de Telegram para su coedición.\n"
 "☑️ Haga clic en el botón Abrir para cargar y abrir archivos desde su "
 "dispositivo.\n"
-"☑️ Haga clic en el botón Convertir para seleccionar los archivos que "
-"desea convertir."
+"☑️ Haga clic en el botón Convertir para seleccionar los archivos que desea "
+"convertir."
 
 #: app/handlers/help_router.py:43
-#, fuzzy
 msgid ""
 "📑 ONLYOFFICE bot can open office files in Telegram group chats\n"
 "\n"
@@ -242,12 +234,25 @@ msgid ""
 "- Open your local files and edit them\n"
 "- Collaborate with other people in real time\n"
 "\n"
-"☑️ Click /document, /spreadsheet or /presentation command to create new "
-"files and send them to other Telegram users for co-editing.\n"
-"☑️ Click the /open command to upload and open files from your device. Or "
-"send file to the chat and tag bot to open this file for you and other "
-"group participants."
+"☑️ Click /document, /spreadsheet or /presentation command to create new files "
+"and send them to other Telegram users for co-editing.\n"
+"☑️ Click the /open command to upload and open files from your device. Or send "
+"file to the chat and tag bot to open this file for you and other group "
+"participants."
 msgstr ""
+"📑 El bot de ONLYOFFICE puede abrir archivos ofimáticos en los chats grupales "
+"de Telegram\n"
+"\n"
+"- Cree documentos, hojas de cálculo, presentaciones\n"
+"- Abra sus archivos locales y edítelos\n"
+"- Colabore con otras personas en tiempo real\n"
+"\n"
+"☑️ Haga clic en el comando /documento, /hoja de cálculo o /presentación para "
+"crear nuevos archivos y enviarlos a otros usuarios de Telegram para que los "
+"editen conjuntamente.\n"
+"☑️ Haga clic en el comando /abrir para subir y abrir archivos desde su "
+"dispositivo. O envíe un archivo al chat y etiquete al bot para que abra este "
+"archivo para usted y otros participantes del grupo."
 
 #: app/handlers/lang_router.py:34
 msgid "Select language"
@@ -298,9 +303,8 @@ msgid "Please create a new one by opening this file again in the chat."
 msgstr "Por favor, cree uno nuevo al volver a abrir este archivo en el chat."
 
 #: app/routes/send_file.py:109
-#, fuzzy
 msgid "To start editing again, reply to the message with the file."
-msgstr ""
+msgstr "Para empezar a editar una vez más, responda al mensaje con el archivo."
 
 #: app/routes/send_file.py:113
 msgid "expired"

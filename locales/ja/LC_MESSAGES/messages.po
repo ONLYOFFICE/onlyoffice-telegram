@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-02-13 13:31+0300\n"
-"PO-Revision-Date: 2025-02-18 18:04+0300\n"
+"PO-Revision-Date: 2025-02-19 12:16+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Language: ja_JP\n"
@@ -37,15 +37,15 @@ msgstr "キャンセル"
 
 #: app/commands/commands.py:42
 msgid "Create document"
-msgstr ""
+msgstr "ドキュメントを作成"
 
 #: app/commands/commands.py:43
 msgid "Create spreadsheet"
-msgstr ""
+msgstr "スプレッドシートを作成"
 
 #: app/commands/commands.py:44
 msgid "Create presentation"
-msgstr ""
+msgstr "プレゼンテーションを作成"
 
 #: app/commands/commands.py:45 app/handlers/start_router.py:32
 msgid "Open"
@@ -146,15 +146,15 @@ msgstr "ファイルのタイトルを入力してください"
 
 #: app/handlers/create_router.py:110
 msgid "New document"
-msgstr ""
+msgstr "新規ドキュメント"
 
 #: app/handlers/create_router.py:110
 msgid "New spreadsheet"
-msgstr ""
+msgstr "新規スプレッドシート"
 
 #: app/handlers/create_router.py:110
 msgid "New presentation"
-msgstr ""
+msgstr "新規プレゼンテーション"
 
 #: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
 #: app/routes/send_file.py:108
@@ -172,7 +172,7 @@ msgstr "ONLYOFFICEエディタのリンク："
 
 #: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
 msgid "All group members can edit this file."
-msgstr ""
+msgstr "グループのメンバー全員がこのファイルを編集できます。"
 
 #: app/handlers/create_router.py:154
 msgid "Invalid title"
@@ -185,6 +185,7 @@ msgstr "開く"
 #: app/handlers/edit_router.py:119
 msgid "All group members can view this file. The link is available for 24 hours."
 msgstr ""
+"グループのメンバー全員がこのファイルを閲覧できます。リンクは24時間有効です。"
 
 #: app/handlers/edit_router.py:121
 msgid ""
@@ -237,6 +238,18 @@ msgid ""
 "file to the chat and tag bot to open this file for you and other group "
 "participants."
 msgstr ""
+"📑 ONLYOFFICEのボットは、Telegramのグループチャットでオフィスファイルを開くこと"
+"ができます\n"
+"\n"
+"- ドキュメント、スプレッドシート、プレゼンテーションを作成する\n"
+"- ローカルファイルを開き、編集する\n"
+"- 他のユーザーとリアルタイムで共同作業を行う\n"
+"\n"
+"☑️ /document、/spreadsheet、または/presentationコマンドをクリックして、新しい"
+"ファイルを作成し、共同編集のために他のTelegramユーザーに送信する\n"
+"☑️ openコマンドをクリックして、デバイスからファイルをアップロードして開く。また"
+"は、ファイルをチャットに送信し、ボットにタグ付けして、このファイルを開き、あな"
+"たや他のグループ参加者のために開くことができます。"
 
 #: app/handlers/lang_router.py:34
 msgid "Select language"
@@ -288,7 +301,7 @@ msgstr "チャットで再度このファイルを開いて、新しいものを
 
 #: app/routes/send_file.py:109
 msgid "To start editing again, reply to the message with the file."
-msgstr ""
+msgstr "編集を再開するには、ファイル付きメッセージに返信してください。"
 
 #: app/routes/send_file.py:113
 msgid "expired"

@@ -8,7 +8,7 @@ msgstr ""
 "Project-Id-Version: PROJECT VERSION\n"
 "Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
 "POT-Creation-Date: 2025-02-13 13:31+0300\n"
-"PO-Revision-Date: 2025-02-18 18:18+0300\n"
+"PO-Revision-Date: 2025-02-19 14:11+0300\n"
 "Last-Translator: \n"
 "Language-Team: en <LL@li.org>\n"
 "Language: zh_CN\n"
@@ -37,15 +37,15 @@ msgstr "取消"
 
 #: app/commands/commands.py:42
 msgid "Create document"
-msgstr ""
+msgstr "创建文本文档"
 
 #: app/commands/commands.py:43
 msgid "Create spreadsheet"
-msgstr ""
+msgstr "创建电子表格"
 
 #: app/commands/commands.py:44
 msgid "Create presentation"
-msgstr ""
+msgstr "创建演示文稿"
 
 #: app/commands/commands.py:45 app/handlers/start_router.py:32
 msgid "Open"
@@ -144,15 +144,15 @@ msgstr "输入文件标题"
 
 #: app/handlers/create_router.py:110
 msgid "New document"
-msgstr ""
+msgstr "新文本文档"
 
 #: app/handlers/create_router.py:110
 msgid "New spreadsheet"
-msgstr ""
+msgstr "新电子表格"
 
 #: app/handlers/create_router.py:110
 msgid "New presentation"
-msgstr ""
+msgstr "新演示文稿"
 
 #: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
 #: app/routes/send_file.py:108
@@ -170,7 +170,7 @@ msgstr "ONLYOFFICE 编辑器链接："
 
 #: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
 msgid "All group members can edit this file."
-msgstr ""
+msgstr "所有组员均可编辑此文件。"
 
 #: app/handlers/create_router.py:154
 msgid "Invalid title"
@@ -182,7 +182,7 @@ msgstr "打开"
 
 #: app/handlers/edit_router.py:119
 msgid "All group members can view this file. The link is available for 24 hours."
-msgstr ""
+msgstr "所有组员均可查看此文件。此链接有效期为 24 小时。"
 
 #: app/handlers/edit_router.py:121
 msgid ""
@@ -233,6 +233,16 @@ msgid ""
 "file to the chat and tag bot to open this file for you and other group "
 "participants."
 msgstr ""
+"📑 ONLYOFFICE 机器人可在 Telegram 群聊中打开办公文件\n"
+"\n"
+"- 创建文本文档、电子表格、演示文稿\n"
+"- 打开本地文件并进行编辑\n"
+"- 与其他人实时协作\n"
+"\n"
+"☑️ 单击 /文本文档、/电子表格或 /演示文稿命令，即可创建新文件并将其发送给其他 "
+"Telegram 用户进行协作编辑。\n"
+"☑️ 单击 /打开命令，即可从您的设备上传和打开文件。或者将文件发送至聊天和标记机器"
+"人，为您和其他组员打开此文件。"
 
 #: app/handlers/lang_router.py:34
 msgid "Select language"
@@ -284,7 +294,7 @@ msgstr "请在聊天中再次打开此文件以新建文件。"
 
 #: app/routes/send_file.py:109
 msgid "To start editing again, reply to the message with the file."
-msgstr ""
+msgstr "要再次编辑，请用文件回复消息。"
 
 #: app/routes/send_file.py:113
 msgid "expired"

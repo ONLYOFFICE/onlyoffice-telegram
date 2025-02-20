@@ -81,7 +81,7 @@ async def handle_create_title(message: Message, state: FSMContext):
 
 
 @router.message(MenuState.on_create_title, DocumentNameFilter())
-async def handle_create_document(message: Message, state: FSMContext, r: Redis):
+async def handle_create_document(message: Message, state: FSMContext, r: Redis, file_name: str = None):
     try:
         data = await state.get_data()
         format_description = data["format_description"]
@@ -100,7 +100,6 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis):
         else:
             lang = getattr(message.from_user, "language_code", "default") or "default"
 
-        file_name = message.text
         if message.chat.type in [ChatType.GROUP, ChatType.SUPERGROUP]:
             if lang in ["en", "ar", "hi", "mr", "bn", "pa", "te", "ta", "ml", "gu", "kn", "ml", "mr", "ur"]:
                 time_str = message.date.strftime("%Y-%m-%d_%I-%M %p")

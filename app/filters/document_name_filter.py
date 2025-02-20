@@ -14,7 +14,7 @@
 # limitations under the License.
 #
 
-import re
+import unicodedata
 
 from aiogram.filters import BaseFilter
 from aiogram.types import Message
@@ -22,9 +22,21 @@ from aiogram.types import Message
 
 class DocumentNameFilter(BaseFilter):
     async def __call__(self, message: Message) -> bool:
-        forbidden_chars = r'[<>:"/\\|?*\.]'
+        def filter_characters(file_name):
+            allowed_chars = " !#$%&()+,;=@^_-}{~."
+            filtered_chars = []
+            for char in file_name:
+                if unicodedata.category(char).startswith("L") or char.isdigit():
+                    filtered_chars.append(char)
+                elif char in allowed_chars:
+                    filtered_chars.append(char)
+            filtered_chars = "".join(filtered_chars)
+            filtered_chars = filtered_chars.lstrip(" &.").rstrip(" &.")
+            return filtered_chars
+
         if message.text:
-            if re.search(forbidden_chars, message.text):
+            file_name = filter_characters(message.text)
+            if len(file_name) > 60 or len(file_name) <= 0:
                 return False
-            return True
+            return {"file_name": file_name}
         return False

@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 1.1.0
 ## Added
 - creation docx, xlsx, pptx
 - collaboration editing for docm, docx, dotm, dotx, xlsm, xlsx, xltm, xltx, potm, potx, ppsm, ppsx, pptm, pptx, pdf

@@ -25,6 +25,8 @@ services:
       - WEBHOOK_HOST=${WEBHOOK_HOST}
       - WEBHOOK_PATH=${WEBHOOK_PATH}
       - WEBHOOK_PORT=${WEBHOOK_PORT}
+      - ANALYTICS_APP_NAME=${ANALYTICS_APP_NAME}
+      - ANALYTICS_TOKEN=${ANALYTICS_TOKEN}
     stdin_open: true
     restart: always
     ports:

@@ -17,6 +17,9 @@
 import os
 from pathlib import Path
 
+ANALYTICS_APP_NAME = os.getenv("ANALYTICS_APP_NAME")
+ANALYTICS_TOKEN = os.getenv("ANALYTICS_TOKEN")
+
 BOT_NAME = os.getenv("BOT_NAME")
 BOT_TOKEN = os.getenv("BOT_TOKEN")
 

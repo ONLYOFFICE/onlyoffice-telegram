@@ -103,7 +103,20 @@
     <script src="{{ DOCSERVER_URL }}/web-apps/apps/api/documents/api.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
+    <script async src="https://tganalytics.xyz/index.js" onload="initAnalytics()" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
+        function initAnalytics() {
+            const appName = "{{ANALYTICS_APP_NAME}}"
+            const token = "{{ANALYTICS_TOKEN}}"
+            if (appName === "None" || token === "None") {
+                return;
+            }
+            window.telegramAnalytics.init({
+                appName: "{{ANALYTICS_APP_NAME}}",
+                token: "{{ANALYTICS_TOKEN}}",
+            });
+        }
+
         const deepMerge = (target, source) => {
             for (const key in source) {
                 if (source[key] instanceof Object && key in target) {

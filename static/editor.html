@@ -1,0 +1,225 @@
+<!--*
+ *
+ * (c) Copyright Ascensio System SIA 2025
+ *
+ * Licensed under the Apache License, Version 2.0 (the "License");
+ * you may not use this file except in compliance with the License.
+ * You may obtain a copy of the License at
+ *
+ *     http://www.apache.org/licenses/LICENSE-2.0
+ *
+ * Unless required by applicable law or agreed to in writing, software
+ * distributed under the License is distributed on an "AS IS" BASIS,
+ * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+ * See the License for the specific language governing permissions and
+ * limitations under the License.
+ *
+*-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, interactive-widget=resizes-content" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <title>ONLYOFFICE</title>
+    <style>
+        html {
+            height: 100%;
+            width: 100%;
+        }
+
+        body {
+            background: #fff;
+            color: #333;
+            font-family: Arial, Tahoma, sans-serif;
+            font-size: 12px;
+            font-weight: normal;
+            height: 100%;
+            margin: 0;
+            overflow-y: hidden;
+            padding: 0;
+            text-decoration: none;
+        }
+
+        div {
+            margin: 0;
+            padding: 0;
+        }
+
+        .form {
+            height: 100%;
+        }
+
+        #error {
+            height: 100%;
+        }
+
+        .error_container {
+            height: 100%;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .error_logo {
+            margin-bottom: 40px;
+        }
+
+        #error_title {
+            max-width: 287px;
+            font-size: 23px;
+            font-weight: 700;
+            line-height: 28px;
+            text-align: center;
+            margin: 0 0 8px 0;
+        }
+
+        #error_description {
+            max-width: 287px;
+            font-size: 14px;
+            font-weight: 400;
+            line-height: 16px;
+            text-align: center;
+            margin: 0;
+        }
+    </style>
+  </head>
+  <body>
+    <div class="form">
+      <div id="editor">
+      </div>
+      <div id="error" style="display: none;">
+        <div class="error_container">
+            <img class="error_logo" src="/static/logo.svg">
+            <h1 id="error_title">The link has expired</h1>
+            <p id="error_description">Please create a new one by opening this file again in the chat.</p>
+        </div>
+      </div>
+    </div>
+    <script src="{{ DOCSERVER_URL }}/web-apps/apps/api/documents/api.js"></script>
+    <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
+    <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
+    <script async src="https://tganalytics.xyz/index.js" onload="initAnalytics()" type="text/javascript"></script>
+    <script type="text/javascript" language="javascript">
+        function initAnalytics() {
+            const appName = "{{ANALYTICS_APP_NAME}}"
+            const token = "{{ANALYTICS_TOKEN}}"
+            if (appName === "None" || token === "None") {
+                return;
+            }
+            window.telegramAnalytics.init({
+                appName: "{{ANALYTICS_APP_NAME}}",
+                token: "{{ANALYTICS_TOKEN}}",
+            });
+        }
+
+        const deepMerge = (target, source) => {
+            for (const key in source) {
+                if (source[key] instanceof Object && key in target) {
+                    target[key] = deepMerge(target[key], source[key]);
+                } else {
+                    target[key] = source[key];
+                }
+            }
+            return target;
+        }
+
+        const initData = Telegram.WebApp.initData || "";
+
+        const DESKTOP_MODE = {{DESKTOP_MODE}} && ["tdesktop", "macos"].includes(Telegram.WebApp.platform) //, "weba", "webk", "web"
+        let config;
+        const preset = {
+            width: "100%",
+            height: "100%",
+            type: DESKTOP_MODE ? "desktop" : "mobile",
+        };
+
+        const onLoad = () => {
+            Telegram.WebApp.ready();
+            Telegram.WebApp.expand();
+
+            $.ajax("/editor/getConfig", {
+                type: "GET",
+                data: {
+                    _auth: initData
+                },
+                dataType: "json",
+                success: handleGetConfigSuccess,
+                error: handleGetConfigError
+            });
+        };
+
+        const handleGetConfigSuccess = (result) => {
+            if (result.ok) {
+                config = deepMerge(preset, result.config);
+                connectEditor();
+                fixSize();
+            } else if (result.error) {
+                showError();
+                console.log("getConfig error:", result.error);
+            }
+        };
+
+        const handleGetConfigError = (error) => {
+            showError();
+            console.log("getConfig error:", error);
+        };
+
+        const connectEditor = () => {
+            docEditor = new DocsAPI.DocEditor("editor", config);
+        };
+
+        const fixSize = () => {
+            if (config.type !== "mobile") {
+                return;
+            }
+            const iframe = document.querySelector("iframe");
+            if (iframe) {
+                iframe.style.height = `${screen.availHeight}px`;
+                window.scrollTo(0, -1);
+                iframe.style.height = `${window.innerHeight}px`;
+            }
+        };
+
+        const showError = async () => {
+            const language_code = Telegram.WebApp.initDataUnsafe.user.language_code;
+            $.ajax("/editor/getLocales", {
+                type: "GET",
+                data: {
+                    _auth: initData,
+                    lang: language_code
+                },
+                dataType: "json",
+                success: (locales) => {
+                    const error = document.getElementById("error");
+                    const errorTitle = document.getElementById("error_title");
+                    const errorDescription = document.getElementById("error_description");
+                    errorTitle.textContent = locales.title;
+                    errorDescription.textContent = locales.description;
+                    error.style.display = "block";
+                },
+                error: () => {
+                    const error = document.getElementById("error");
+                    error.style.display = "block";
+                }
+            });
+
+
+        }
+
+        if (window.addEventListener) {
+            window.addEventListener("load", onLoad);
+            window.addEventListener("resize", fixSize);
+            window.addEventListener("orientationchange", fixSize);
+        } else if (window.attachEvent) {
+            window.attachEvent("onload", onLoad);
+            window.attachEvent("onresize", fixSize);
+            window.attachEvent("orientationchange", fixSize);
+        }
+    </script>
+  </body>
+</html>

@@ -1,0 +1,44 @@
+version: '3.8'
+services:
+  telegram:
+    build:
+      context: .
+      target: telegram
+    image: onlyoffice/telegram:${PRODUCT_VERSION}
+    container_name: onlyoffice-telegram
+    depends_on:
+      - redis
+    environment:
+      - LANG=${LANG}
+      - LANGUAGE=${LANGUAGE}
+      - LC_ALL=${LC_ALL}
+      - REDIS_HOST=${REDIS_HOST}
+      - REDIS_DB=${REDIS_DB}
+      - REDIS_PORT=${REDIS_PORT}
+      - BOT_NAME=${BOT_NAME}
+      - BOT_TOKEN=${BOT_TOKEN}
+      - DOCSERVER_URL=${DOCSERVER_URL}
+      - JWT_SECRET=${JWT_SECRET}
+      - JWT_HEADER=${JWT_HEADER}
+      - WEB_APP_NAME=${WEB_APP_NAME}
+      - WEB_APP_URL=${WEB_APP_URL}
+      - WEBHOOK_HOST=${WEBHOOK_HOST}
+      - WEBHOOK_PATH=${WEBHOOK_PATH}
+      - WEBHOOK_PORT=${WEBHOOK_PORT}
+      - ANALYTICS_APP_NAME=${ANALYTICS_APP_NAME}
+      - ANALYTICS_TOKEN=${ANALYTICS_TOKEN}
+    stdin_open: true
+    restart: always
+    ports:
+      - '8000:8000'
+
+  redis:
+    container_name: redis
+    image: redis
+    restart: always
+    expose:
+      - '6379'
+
+networks:
+  default:
+    name: onlyoffice

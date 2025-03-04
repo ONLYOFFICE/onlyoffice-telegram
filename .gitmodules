@@ -1,0 +1,8 @@
+[submodule "static/assets/document-formats"]
+	path = static/assets/document-formats
+	url = https://github.com/ONLYOFFICE/document-formats
+	branch = master
+[submodule "static/assets/document-templates"]
+	path = static/assets/document-templates
+	url = https://github.com/ONLYOFFICE/document-templates
+	branch = main/new-2letter-code

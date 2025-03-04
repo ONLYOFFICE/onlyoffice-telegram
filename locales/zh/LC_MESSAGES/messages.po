@@ -1,0 +1,313 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-02-13 13:31+0300\n"
+"PO-Revision-Date: 2025-02-19 14:11+0300\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: zh_CN\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=UTF-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=1; plural=0;\n"
+"Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#: app/commands/commands.py:32
+msgid "Start"
+msgstr "开始"
+
+#: app/commands/commands.py:33
+msgid "Change language"
+msgstr "更改语言"
+
+#: app/commands/commands.py:34 app/commands/commands.py:46
+msgid "Help"
+msgstr "帮助"
+
+#: app/commands/commands.py:35 app/commands/commands.py:47
+msgid "Cancel"
+msgstr "取消"
+
+#: app/commands/commands.py:42
+msgid "Create document"
+msgstr "创建文本文档"
+
+#: app/commands/commands.py:43
+msgid "Create spreadsheet"
+msgstr "创建电子表格"
+
+#: app/commands/commands.py:44
+msgid "Create presentation"
+msgstr "创建演示文稿"
+
+#: app/commands/commands.py:45 app/handlers/start_router.py:32
+msgid "Open"
+msgstr "打开"
+
+#: app/description/description.py:25
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to create/edit files\n"
+msgstr ""
+"📑 ONLYOFFICE 机器人能够创建、打开和转换办公文件\n"
+"\n"
+"- 创建文档、电子表格、演示文稿\n"
+"- 打开并编辑您的本地文件\n"
+"- 与他人实时协作\n"
+"- 将文件转换为多种格式\n"
+"\n"
+"点击/开始创建/编辑文件\n"
+"点击 /start 创建/编辑文件\n"
+#: app/description/description.py:31
+msgid ""
+"Easily create, convert, edit and collaborate on office files using the "
+"ONLYOFFICE bot."
+msgstr "使用 ONLYOFFICE 机器人，轻松创建、转换、编辑和协作办公文件。"
+
+#: app/filters/document_edit_filter.py:32 app/filters/document_edit_filter.py:35
+#: app/handlers/convert_router.py:68 app/handlers/convert_router.py:107
+msgid "File not supported"
+msgstr "文件不支持"
+
+#: app/handlers/back_router.py:30
+msgid "⬅️ back"
+msgstr "⬅️ 返回"
+
+#: app/handlers/cancel_router.py:29 app/handlers/cancel_router.py:40
+msgid "❌ cancel"
+msgstr "❌ 取消"
+
+#: app/handlers/cancel_router.py:33
+msgid "There is nothing to cancel"
+msgstr "没有可取消项"
+
+#: app/handlers/cancel_router.py:44 app/handlers/cancel_router.py:59
+msgid "Action canceled"
+msgstr "操作已取消"
+
+#: app/handlers/convert_router.py:54
+msgid "🔄 convert"
+msgstr "🔄 转换"
+
+#: app/handlers/convert_router.py:59 app/handlers/edit_router.py:63
+msgid "Send file"
+msgstr "发送文件"
+
+#: app/handlers/convert_router.py:78 app/handlers/edit_router.py:90
+msgid "The file is too large. Maximum allowed file size is 20 MB"
+msgstr "该文件太大。文件大小不能超过 20 MB"
+
+#: app/handlers/convert_router.py:101
+msgid "Select format to convert"
+msgstr "选择需要转换的格式"
+
+#: app/handlers/convert_router.py:127
+msgid "🔄 Conversion..."
+msgstr "🔄 转换中..."
+
+#: app/handlers/convert_router.py:186 app/routes/send_file.py:97
+msgid "Your file is ready. Please find the final version here."
+msgstr "您的文件已就绪。请在此处找到最终版本。"
+
+#: app/handlers/convert_router.py:191
+msgid "Failed to convert file"
+msgstr "转换文件失败"
+
+#: app/handlers/convert_router.py:196
+msgid "Invalid format"
+msgstr "格式无效"
+
+#: app/handlers/create_router.py:45
+msgid "create"
+msgstr "创建"
+
+#: app/handlers/create_router.py:51
+msgid "Select file format"
+msgstr "选择文件格式"
+
+#: app/handlers/create_router.py:75
+msgid "Enter file title"
+msgstr "输入文件标题"
+
+#: app/handlers/create_router.py:110
+msgid "New document"
+msgstr "新文本文档"
+
+#: app/handlers/create_router.py:110
+msgid "New spreadsheet"
+msgstr "新电子表格"
+
+#: app/handlers/create_router.py:110
+msgid "New presentation"
+msgstr "新演示文稿"
+
+#: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
+#: app/routes/send_file.py:108
+msgid "Your file"
+msgstr "您的文件"
+
+#: app/handlers/create_router.py:130 app/handlers/edit_router.py:116
+msgid "To start co-editing, send this message to other participants."
+msgstr "如需开始共同编辑，请将此信息发送给其他共同编辑者。"
+
+#: app/handlers/create_router.py:131 app/handlers/edit_router.py:111
+#: app/routes/send_file.py:112
+msgid "The ONLYOFFICE editor link:"
+msgstr "ONLYOFFICE 编辑器链接："
+
+#: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
+msgid "All group members can edit this file."
+msgstr "所有组员均可编辑此文件。"
+
+#: app/handlers/create_router.py:154
+msgid "Invalid title"
+msgstr "标题无效"
+
+#: app/handlers/edit_router.py:60
+msgid "open"
+msgstr "打开"
+
+#: app/handlers/edit_router.py:119
+msgid "All group members can view this file. The link is available for 24 hours."
+msgstr "所有组员均可查看此文件。此链接有效期为 24 小时。"
+
+#: app/handlers/edit_router.py:121
+msgid ""
+"To open the file for viewing by several users, send this message to other "
+"participants. The link is available for 24 hours."
+msgstr ""
+"如需打开文件供多名用户查看，请将此信息发送给其他查看者。此链接的有效期为 24 小"
+"时。"
+
+#: app/handlers/help_router.py:32
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to get started and see the available options:\n"
+"☑️ Click the Create button to create new files and send them to other Telegram "
+"users for co-editing.\n"
+"☑️ Click the Open button to upload and open files from your device.\n"
+"☑️ Click the Convert button to select files for conversion."
+msgstr ""
+"“📑 ONLYOFFICE 机器人能够创建、打开和转换办公文件\n"
+"\n"
+"- 创建文档、电子表格、演示文稿\n"
+"- 打开并编辑您的本地文件\n"
+"- 与他人实时协作\n"
+"- 将文件转换为多种格式\n"
+"\n"
+"点击 /start，启用机器人并查看可用选项：\n"
+"☑️ 点击创建，新建文件并将其发送给其他 Telegram 用户以供共同编辑。\n"
+"☑️ 点击打开，上传并打开来自您设备的文件。\n"
+"☑️ 点击转换，选择需要转换的文件。"
+
+#: app/handlers/help_router.py:43
+msgid ""
+"📑 ONLYOFFICE bot can open office files in Telegram group chats\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"\n"
+"☑️ Click /document, /spreadsheet or /presentation command to create new files "
+"and send them to other Telegram users for co-editing.\n"
+"☑️ Click the /open command to upload and open files from your device. Or send "
+"file to the chat and tag bot to open this file for you and other group "
+"participants."
+msgstr ""
+"📑 ONLYOFFICE 机器人可在 Telegram 群聊中打开办公文件\n"
+"\n"
+"- 创建文本文档、电子表格、演示文稿\n"
+"- 打开本地文件并进行编辑\n"
+"- 与其他人实时协作\n"
+"\n"
+"☑️ 单击 /document、/spreadsheet 或 /presentation 命令，即可创建新文件并将其发送给其他 "
+"Telegram 用户进行协作编辑。\n"
+"☑️ 单击 /open 命令，即可从您的设备上传和打开文件。或者将文件发送至聊天和标记机器"
+"人，为您和其他组员打开此文件。"
+
+#: app/handlers/lang_router.py:34
+msgid "Select language"
+msgstr "选择语言"
+
+#: app/handlers/lang_router.py:39
+msgid "Available languages:"
+msgstr "可用语言："
+
+#: app/handlers/lang_router.py:50
+msgid "Language changed"
+msgstr "语言已更改"
+
+#: app/handlers/start_router.py:32
+msgid "Create"
+msgstr "创建"
+
+#: app/handlers/start_router.py:32
+msgid "🔄 Convert"
+msgstr "🔄 转换"
+
+#: app/handlers/start_router.py:37
+msgid "Choose an action"
+msgstr "选择一个操作"
+
+#: app/handlers/start_router.py:46
+msgid "Please choose an action to work with bot"
+msgstr "请选择一个操作以使用机器人"
+
+#: app/keyboards/make_buttons.py:31 app/keyboards/make_buttons.py:39
+msgid "⬅️ Back"
+msgstr "⬅️ 返回"
+
+#: app/keyboards/make_buttons.py:33 app/keyboards/make_buttons.py:41
+msgid "❌ Cancel"
+msgstr "❌ 取消"
+
+#: app/middlewares/antiflood.py:80
+msgid "Too many requests, try again in {delta:.2f} seconds"
+msgstr "请求次数过多，请等待 {delta:.2f} 秒后重试"
+
+#: app/routes/get_locales.py:51
+msgid "The link has expired"
+msgstr "该链接已过期"
+
+#: app/routes/get_locales.py:52
+msgid "Please create a new one by opening this file again in the chat."
+msgstr "请在聊天中再次打开此文件以新建文件。"
+
+#: app/routes/send_file.py:109
+msgid "To start editing again, reply to the message with the file."
+msgstr "要再次编辑，请用文件回复消息。"
+
+#: app/routes/send_file.py:113
+msgid "expired"
+msgstr "已过期"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:59
+msgid "Document"
+msgstr "文档"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:61
+msgid "Spreadsheet"
+msgstr "电子表格"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:63
+msgid "Presentation"
+msgstr "电子表格"

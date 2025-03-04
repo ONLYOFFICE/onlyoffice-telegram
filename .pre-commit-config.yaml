@@ -1,0 +1,23 @@
+repos:
+  - repo: https://github.com/pre-commit/pre-commit-hooks
+    rev: v4.6.0
+    hooks:
+      - id: "check-case-conflict"
+      - id: "check-yaml"
+      - id: "detect-private-key"
+      - id: "end-of-file-fixer"
+      - id: "mixed-line-ending"
+      - id: "requirements-txt-fixer"
+      - id: "trailing-whitespace"
+
+  - repo: https://github.com/astral-sh/ruff-pre-commit
+    rev: 'v0.9.1'
+    hooks:
+      - id: ruff
+        args: [--fix, --exit-non-zero-on-fix]
+      - id: ruff-format
+
+  - repo: https://github.com/psf/black
+    rev: 24.10.0
+    hooks:
+      - id: black

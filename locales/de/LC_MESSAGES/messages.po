@@ -1,0 +1,328 @@
+# English translations for PROJECT.
+# Copyright (C) 2024 ORGANIZATION
+# This file is distributed under the same license as the PROJECT project.
+# FIRST AUTHOR <EMAIL@ADDRESS>, 2024.
+#
+msgid ""
+msgstr ""
+"Project-Id-Version: PROJECT VERSION\n"
+"Report-Msgid-Bugs-To: EMAIL@ADDRESS\n"
+"POT-Creation-Date: 2025-02-13 13:31+0300\n"
+"PO-Revision-Date: 2025-02-19 11:29+0300\n"
+"Last-Translator: \n"
+"Language-Team: en <LL@li.org>\n"
+"Language: de_DE\n"
+"MIME-Version: 1.0\n"
+"Content-Type: text/plain; charset=utf-8\n"
+"Content-Transfer-Encoding: 8bit\n"
+"Plural-Forms: nplurals=2; plural=(n != 1);\n"
+"Generated-By: Babel 2.16.0\n"
+"X-Generator: Poedit 3.4.1\n"
+
+#: app/commands/commands.py:32
+msgid "Start"
+msgstr "Start"
+
+#: app/commands/commands.py:33
+msgid "Change language"
+msgstr "Sprache ändern"
+
+#: app/commands/commands.py:34 app/commands/commands.py:46
+msgid "Help"
+msgstr "Hilfe"
+
+#: app/commands/commands.py:35 app/commands/commands.py:47
+msgid "Cancel"
+msgstr "Abbrechen"
+
+#: app/commands/commands.py:42
+msgid "Create document"
+msgstr "Dokument erstellen"
+
+#: app/commands/commands.py:43
+msgid "Create spreadsheet"
+msgstr "Kalkulationstabelle erstellen"
+
+#: app/commands/commands.py:44
+msgid "Create presentation"
+msgstr "Präsentation erstellen"
+
+#: app/commands/commands.py:45 app/handlers/start_router.py:32
+msgid "Open"
+msgstr "Öffnen"
+
+#: app/description/description.py:25
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to create/edit files\n"
+msgstr ""
+"📑 Der ONLYOFFICE-Bot kann Office-Dateien erstellen, öffnen und konvertieren\n"
+"\n"
+"- Dokumente, Tabellenkalkulationen und Präsentationen erstellen\n"
+"- Lokale Dateien öffnen und bearbeiten\n"
+"- Zusammenarbeit mit anderen Personen in Echtzeit\n"
+"- Dateien in mehrere Formate konvertieren\n"
+"\n"
+"Drücken Sie /start zum Erstellen oder Bearbeiten von Dateien\n"
+
+#: app/description/description.py:31
+msgid ""
+"Easily create, convert, edit and collaborate on office files using the "
+"ONLYOFFICE bot."
+msgstr ""
+"Mit dem ONLYOFFICE-Bot lassen sich Office-Dateien mühelos erstellen, "
+"konvertieren und gemeinsam bearbeiten."
+
+#: app/filters/document_edit_filter.py:32 app/filters/document_edit_filter.py:35
+#: app/handlers/convert_router.py:68 app/handlers/convert_router.py:107
+msgid "File not supported"
+msgstr "Datei nicht unterstützt"
+
+#: app/handlers/back_router.py:30
+msgid "⬅️ back"
+msgstr "⬅️ zurück"
+
+#: app/handlers/cancel_router.py:29 app/handlers/cancel_router.py:40
+msgid "❌ cancel"
+msgstr "❌ abbrechen"
+
+#: app/handlers/cancel_router.py:33
+msgid "There is nothing to cancel"
+msgstr "Es gibt nichts zu abbrechen"
+
+#: app/handlers/cancel_router.py:44 app/handlers/cancel_router.py:59
+msgid "Action canceled"
+msgstr "Aktion abgebrochen"
+
+#: app/handlers/convert_router.py:54
+msgid "🔄 convert"
+msgstr "🔄 konvertieren"
+
+#: app/handlers/convert_router.py:59 app/handlers/edit_router.py:63
+msgid "Send file"
+msgstr "Datei senden"
+
+#: app/handlers/convert_router.py:78 app/handlers/edit_router.py:90
+msgid "The file is too large. Maximum allowed file size is 20 MB"
+msgstr "Die Datei ist zu groß. Die maximal zulässige Dateigröße beträgt 20 MB"
+
+#: app/handlers/convert_router.py:101
+msgid "Select format to convert"
+msgstr "Wählen Sie das zu konvertierende Format aus"
+
+#: app/handlers/convert_router.py:127
+msgid "🔄 Conversion..."
+msgstr "🔄 Konvertierung..."
+
+#: app/handlers/convert_router.py:186 app/routes/send_file.py:97
+msgid "Your file is ready. Please find the final version here."
+msgstr "Ihre Datei ist fertig. Die endgültige Version finden Sie hier."
+
+#: app/handlers/convert_router.py:191
+msgid "Failed to convert file"
+msgstr "Datei konnte nicht konvertiert werden"
+
+#: app/handlers/convert_router.py:196
+msgid "Invalid format"
+msgstr "Ungültiges Format"
+
+#: app/handlers/create_router.py:45
+msgid "create"
+msgstr "erstellen"
+
+#: app/handlers/create_router.py:51
+msgid "Select file format"
+msgstr "Dateiformat auswählen"
+
+#: app/handlers/create_router.py:75
+msgid "Enter file title"
+msgstr "Dateititel eingeben"
+
+#: app/handlers/create_router.py:110
+msgid "New document"
+msgstr "Neues Dokument"
+
+#: app/handlers/create_router.py:110
+msgid "New spreadsheet"
+msgstr "Neue Kalkulationstabelle"
+
+#: app/handlers/create_router.py:110
+msgid "New presentation"
+msgstr "Neue Präsentation"
+
+#: app/handlers/create_router.py:129 app/handlers/edit_router.py:111
+#: app/routes/send_file.py:108
+msgid "Your file"
+msgstr "Ihre Datei"
+
+#: app/handlers/create_router.py:130 app/handlers/edit_router.py:116
+msgid "To start co-editing, send this message to other participants."
+msgstr ""
+"Um mit der gemeinsamen Bearbeitung zu beginnen, senden Sie diese Nachricht an "
+"die anderen Teilnehmer."
+
+#: app/handlers/create_router.py:131 app/handlers/edit_router.py:111
+#: app/routes/send_file.py:112
+msgid "The ONLYOFFICE editor link:"
+msgstr "Der Link zum ONLYOFFICE-Editor:"
+
+#: app/handlers/create_router.py:134 app/handlers/edit_router.py:114
+msgid "All group members can edit this file."
+msgstr "Alle Gruppenmitglieder können diese Datei bearbeiten."
+
+#: app/handlers/create_router.py:154
+msgid "Invalid title"
+msgstr "Ungültiger Titel"
+
+#: app/handlers/edit_router.py:60
+msgid "open"
+msgstr "öffnen"
+
+#: app/handlers/edit_router.py:119
+msgid "All group members can view this file. The link is available for 24 hours."
+msgstr ""
+"Alle Gruppenmitglieder können diese Datei ansehen. Der Link ist 24 Stunden lang "
+"verfügbar."
+
+#: app/handlers/edit_router.py:121
+msgid ""
+"To open the file for viewing by several users, send this message to other "
+"participants. The link is available for 24 hours."
+msgstr ""
+"Um die Datei zur Ansicht durch mehrere Benutzer zu öffnen, senden Sie diese "
+"Nachricht an andere Teilnehmer. Der Link ist 24 Stunden lang gültig."
+
+#: app/handlers/help_router.py:32
+msgid ""
+"📑 ONLYOFFICE bot can create, open and convert office files\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"- Convert files to multiple formats\n"
+"\n"
+"Press /start to get started and see the available options:\n"
+"☑️ Click the Create button to create new files and send them to other Telegram "
+"users for co-editing.\n"
+"☑️ Click the Open button to upload and open files from your device.\n"
+"☑️ Click the Convert button to select files for conversion."
+msgstr ""
+"📑 Der ONLYOFFICE-Bot kann Office-Dateien erstellen, öffnen und konvertieren\n"
+"\n"
+"- Dokumente, Tabellenkalkulationen und Präsentationen erstellen\n"
+"- Lokale Dateien öffnen und bearbeiten\n"
+"- Zusammenarbeit mit anderen Personen in Echtzeit\n"
+"- Dateien in mehrere Formate konvertieren\n"
+"\n"
+"Drücken Sie /start, um zu beginnen und die verfügbaren Optionen zu sehen:\n"
+"☑️ Klicken Sie auf die Schaltfläche Erstellen, um neue Dateien zu erstellen und "
+"sie an andere Telegram-Benutzer zur gemeinsamen Bearbeitung zu senden.\n"
+"☑️ Klicken Sie auf die Schaltfläche Öffnen, um Dateien von Ihrem Gerät "
+"hochzuladen und zu öffnen.\n"
+"☑️ Klicken Sie auf die Schaltfläche Konvertieren, um Dateien für die "
+"Konvertierung auszuwählen."
+
+#: app/handlers/help_router.py:43
+msgid ""
+"📑 ONLYOFFICE bot can open office files in Telegram group chats\n"
+"\n"
+"- Create documents, spreadsheets, presentations\n"
+"- Open your local files and edit them\n"
+"- Collaborate with other people in real time\n"
+"\n"
+"☑️ Click /document, /spreadsheet or /presentation command to create new files "
+"and send them to other Telegram users for co-editing.\n"
+"☑️ Click the /open command to upload and open files from your device. Or send "
+"file to the chat and tag bot to open this file for you and other group "
+"participants."
+msgstr ""
+"📑 ONLYOFFICE-Bot kann Office-Dateien in Telegram-Gruppenchats öffnen\n"
+"\n"
+"- Erstellen Sie Dokumente, Tabellenkalkulationen und Präsentationen\n"
+"- Öffnen und bearbeiten Sie Ihre lokalen Dateien\n"
+"- Arbeiten Sie in Echtzeit mit anderen zusammen\n"
+"\n"
+"☑️ Klicken Sie auf die Befehle /document, /spreadsheet oder /"
+"presentation, um neue Dateien zu erstellen und sie zur gemeinsamen Bearbeitung "
+"an andere Telegram-Benutzer zu senden.\n"
+"☑️ Klicken Sie auf den Befehl /open, um Dateien von Ihrem Gerät hochzuladen "
+"und zu öffnen. Oder senden Sie die Datei an den Chat- und Tag-Bot, um diese "
+"Datei für Sie und andere Gruppenteilnehmer zu öffnen."
+
+#: app/handlers/lang_router.py:34
+msgid "Select language"
+msgstr "Sprache auswählen"
+
+#: app/handlers/lang_router.py:39
+msgid "Available languages:"
+msgstr "Verfügbare Sprachen:"
+
+#: app/handlers/lang_router.py:50
+msgid "Language changed"
+msgstr "Sprache geändert"
+
+#: app/handlers/start_router.py:32
+msgid "Create"
+msgstr "Erstellen"
+
+#: app/handlers/start_router.py:32
+msgid "🔄 Convert"
+msgstr "🔄 Konvertieren"
+
+#: app/handlers/start_router.py:37
+msgid "Choose an action"
+msgstr "Wählen Sie eine Aktion aus"
+
+#: app/handlers/start_router.py:46
+msgid "Please choose an action to work with bot"
+msgstr "Bitte wählen Sie eine Aktion aus, um mit dem Bot zu arbeitent"
+
+#: app/keyboards/make_buttons.py:31 app/keyboards/make_buttons.py:39
+msgid "⬅️ Back"
+msgstr "⬅️ Zurück"
+
+#: app/keyboards/make_buttons.py:33 app/keyboards/make_buttons.py:41
+msgid "❌ Cancel"
+msgstr "❌ Abbrechen"
+
+#: app/middlewares/antiflood.py:80
+msgid "Too many requests, try again in {delta:.2f} seconds"
+msgstr "Zu viele Anfragen, versuchen Sie es in {delta:.2f} Sekunden erneut"
+
+#: app/routes/get_locales.py:51
+msgid "The link has expired"
+msgstr "Der Link ist abgelaufen"
+
+#: app/routes/get_locales.py:52
+msgid "Please create a new one by opening this file again in the chat."
+msgstr ""
+"Bitte erstellen Sie einen neuen Link, indem Sie diese Datei erneut im Chat "
+"öffnen."
+
+#: app/routes/send_file.py:109
+msgid "To start editing again, reply to the message with the file."
+msgstr ""
+"Um erneut mit der Bearbeitung zu beginnen, antworten Sie auf die Nachricht mit "
+"der Datei."
+
+#: app/routes/send_file.py:113
+msgid "expired"
+msgstr "abgelaufen"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:59
+msgid "Document"
+msgstr "Dokument"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:61
+msgid "Spreadsheet"
+msgstr "Kalkulationstabelle"
+
+#: app/utils/file_utils.py:33 app/utils/file_utils.py:63
+msgid "Presentation"
+msgstr "Präsentation"

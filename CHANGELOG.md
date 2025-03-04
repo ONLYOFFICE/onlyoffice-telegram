@@ -1,6 +1,6 @@
 # Change Log
 
-## 1.1.0
+## 1.0.0
 ## Added
 - support direct and group chats
 - creation docx, xlsx, pptx

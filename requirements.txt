@@ -2,7 +2,7 @@ aiogram==3.15.0
 aiogram-i18n==1.4
 aiohttp==3.10.5
 babel==2.16.0
-Jinja2==3.1.4
+Jinja2==3.1.6
 PyJWT==2.9.0
 python-dotenv==1.0.1
 redis==5.0.8

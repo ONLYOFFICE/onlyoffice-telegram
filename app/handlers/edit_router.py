@@ -90,6 +90,7 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
                 _("The file is too large. Maximum allowed file size is 20 MB"),
                 reply_to_message_id=message.message_id,
             )
+            return
 
         session = {
             "document_type": f["type"],

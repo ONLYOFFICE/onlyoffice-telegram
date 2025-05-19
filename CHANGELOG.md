@@ -1,5 +1,9 @@
 # Change Log
 
+##
+## Added
+- ca, cs, da, hu, id, ro, sq, ur empty file templates
+
 ## 1.0.0
 ## Added
 - support direct and group chats

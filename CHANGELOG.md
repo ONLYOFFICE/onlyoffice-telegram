@@ -3,6 +3,9 @@
 ##
 ## Added
 - ca, cs, da, hu, id, ro, sq, ur empty file templates
+- diagram documentType for vsdx, vssx, vstx, vsdm, vssm, vstm
+- view odg, md
+- edit xlsb
 
 ## 1.0.0
 ## Added

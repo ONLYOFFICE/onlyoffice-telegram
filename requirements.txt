@@ -1,6 +1,6 @@
 aiogram==3.15.0
 aiogram-i18n==1.4
-aiohttp==3.10.5
+aiohttp==3.12.14
 babel==2.16.0
 Jinja2==3.1.4
 PyJWT==2.9.0

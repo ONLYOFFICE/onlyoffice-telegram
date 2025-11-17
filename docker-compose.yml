@@ -15,6 +15,7 @@ services:
       - REDIS_HOST=${REDIS_HOST}
       - REDIS_DB=${REDIS_DB}
       - REDIS_PORT=${REDIS_PORT}
+      - TTL=${TTL}
       - BOT_NAME=${BOT_NAME}
       - BOT_TOKEN=${BOT_TOKEN}
       - DOCSERVER_URL=${DOCSERVER_URL}

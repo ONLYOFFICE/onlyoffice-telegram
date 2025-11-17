@@ -140,7 +140,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis, 
 
         pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
+        pipeline.expire(key, TTL * 3600)
         pipeline.execute()
 
     except Exception as e:

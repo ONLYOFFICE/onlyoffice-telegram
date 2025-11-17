@@ -31,8 +31,7 @@ def decode_token(token):
 
 def create_token(key: str):
     now = datetime.datetime.utcnow()
-    hours = TTL // 3600
-    expiration_time = now + datetime.timedelta(hours=hours)
+    expiration_time = now + datetime.timedelta(hours=TTL)
     payload = {"key": key, "iat": now, "exp": expiration_time}
     token = encode_payload(payload)
     return token

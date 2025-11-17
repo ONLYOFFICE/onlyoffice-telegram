@@ -49,7 +49,7 @@ REDIS_DB = int(os.getenv("REDIS_DB"))
 REDIS_HOST = os.getenv("REDIS_HOST")
 REDIS_PORT = int(os.getenv("REDIS_PORT"))
 
-TTL = 3600 * 24
+TTL = int(os.getenv("TTL"))
 
 WEB_APP_NAME = os.getenv("WEB_APP_NAME")
 WEB_APP_URL = os.getenv("WEB_APP_URL")

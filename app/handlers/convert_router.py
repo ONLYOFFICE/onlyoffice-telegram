@@ -152,7 +152,7 @@ async def handle_conversion_finish(
             "file_type": file_type,
         },
     )
-    r.expire(key, TTL)
+    r.expire(key, TTL * 3600)
 
     async with aiohttp.ClientSession() as session:
         end_convert = False

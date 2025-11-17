@@ -133,7 +133,7 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
 
         pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
+        pipeline.expire(key, TTL * 3600)
         pipeline.execute()
 
     except Exception as e:

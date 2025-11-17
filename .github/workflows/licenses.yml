@@ -1,0 +1,35 @@
+name: Licenses
+
+on:
+  workflow_dispatch:
+  push:
+    branches: [master, develop]
+  pull_request:
+    branches: [master, develop]
+
+jobs:
+  licences:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+      - name: Install Python
+        uses: actions/setup-python@v4
+        with:
+          python-version: '3.9'
+          cache: 'pip'
+      - name: Install Dependencies
+        run: | 
+          python3 -m pip install --upgrade pip==20.3.4
+          python3 -m pip install --upgrade build
+          pip install -r requirements.txt
+      - name: Get Repository License
+        id: license
+        run: |
+          license="${{ (github.event.repository.license.spdx_id) || (github.event.repository.licenses[0]) }}"
+          echo "License detected: $license"
+          echo "license=$license" >> $GITHUB_OUTPUT
+      - name: Check Licenses
+        uses: ONLYOFFICE/check-licenses@v1
+        with:
+          project_license: ${{ steps.license.outputs.license }}

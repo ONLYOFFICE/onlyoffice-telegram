@@ -1,0 +1,74 @@
+name: "Build onlyoffice-telegram"
+
+run-name: "Build onlyoffice-telegram: ${{ github.event.inputs.tag || github.run_number }}"
+
+on:
+  push:
+    branches:
+    - develop
+
+  workflow_dispatch:
+    inputs:
+      tag:
+        description: 'Specify tag (ex. rc.5) or it will be set automaticaly :rc.<run_number>'
+        type: string
+        required: false
+
+env:
+  DOCKER_HUB_IMAGE_NAME: onlyoffice-telegram
+  DOCKER_HUB_NAMESPACE: onlyoffice
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v4
+
+      - name: Login to Container Registry
+        uses: docker/login-action@v3
+        with:
+          username: ${{ secrets.DOCKER_HUB_USERNAME }}
+          password: ${{ secrets.DOCKER_HUB_ACCESS_TOKEN }}
+
+      - name: Setup QEMU
+        uses: docker/setup-qemu-action@v3
+
+      - name: Setup Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: handle-rc-tag
+        env:
+          EVENT: ${{ github.event_name }}
+          REF: ${{ github.ref_name }}
+          MANUAL_TAG: ${{ github.event.inputs.tag }}
+        run: |
+          if [[ "$EVENT" == 'push' && "$REF" == 'develop' ]]; then
+           echo "RC_TAG=1.0.1-rc.${{ github.run_number }}" >> "$GITHUB_ENV"
+          elif [[ "$EVENT" == 'workflow_dispatch' && -z "$TAG" ]]; then
+           echo "RC_TAG=1.0.1-rc.${{ github.run_number }}" >> "$GITHUB_ENV"
+          fi
+
+      - name: Publish Image
+        uses: docker/build-push-action@v6
+        env:
+          DOCKER_BUILD_RECORD_UPLOAD: false
+        with:
+          context: .
+          file: Dockerfile
+          push: true
+          platforms: linux/amd64
+          tags: ${{ env.DOCKER_HUB_NAMESPACE }}/telegram:${{ github.event.inputs.tag || env.RC_TAG }}
+
+  update:
+    name: Update connector
+    runs-on: ubuntu-latest
+    if: ${{ false }}
+    #needs: ['build']
+    steps:
+      - name: Make hook
+        id: webhook
+        run: |
+          telegram_webhook_hash=$(printf 'telegram-webhook' | openssl dgst -sha256 -r -hmac "${{ secrets.TELEGRAM_WEBHOOK_TOKEN }}" | awk '{print $1}')
+          curl ${{ secrets.TELEGRAM_WEBHOOK_URL }} -X POST -H "X-Signature: sha256=${telegram_webhook_hash}" -d 'telegram-webhook'
+        shell: bash

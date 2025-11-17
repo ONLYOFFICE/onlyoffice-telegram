@@ -18,7 +18,7 @@ import datetime
 
 import jwt
 
-from config import JWT_SECRET
+from config import JWT_SECRET, TTL
 
 
 def encode_payload(payload):
@@ -31,7 +31,8 @@ def decode_token(token):
 
 def create_token(key: str):
     now = datetime.datetime.utcnow()
-    expiration_time = now + datetime.timedelta(hours=24)
+    hours = TTL // 3600
+    expiration_time = now + datetime.timedelta(hours=hours)
     payload = {"key": key, "iat": now, "exp": expiration_time}
     token = encode_payload(payload)
     return token

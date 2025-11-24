@@ -1,0 +1,25 @@
+---
+- - :approve
+  - attrs
+  - :who:
+    :why: MIT
+    :versions: []
+    :when: 2025-11-07 09:55:31.982492900 Z
+- - :approve
+  - idna
+  - :who:
+    :why: BSD-3-Clause
+    :versions: []
+    :when: 2025-11-07 09:55:31.982492900 Z
+- - :approve
+  - markupsafe
+  - :who:
+    :why: BSD-3-Clause
+    :versions: []
+    :when: 2025-11-07 09:55:31.982492900 Z
+- - :approve
+  - typing-extensions
+  - :who:
+    :why: PSF-2.0
+    :versions: []
+    :when: 2025-11-07 09:55:31.982492900 Z

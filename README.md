@@ -135,7 +135,7 @@ The bot will not automatically respond to files simply posted into the chat. To 
 
 **Important**: If multiple files are sent together, the bot will only generate an editor link for the **first file** in that message (same behavior as one-on-one chats).
 
-> **Note**: File conversion is not available in group chat mode. Use one-on-one with the bot for conversion tasks.
+> **Note** File conversion is not available in group chat mode. Use one-on-one with the bot for conversion tasks.
 
 ## 📂 Opening your own files
 

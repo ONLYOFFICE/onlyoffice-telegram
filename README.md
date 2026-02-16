@@ -56,7 +56,7 @@ Here’s the step-by-step walkthrough:
 5. **Get the final file back**  
    When you finish editing and close the editor, the bot automatically sends the updated file back into the Telegram chat.  
 
-> **Note**: The editing link will deactivate once the modified file is sent. To reopen the file, simply reply to the message containing the file with any text.
+> **Note** The editing link will deactivate once the modified file is sent. To reopen the file, simply reply to the message containing the file with any text.
 
 That’s it — no downloads, no chaos. Everything inside Telegram.  
 

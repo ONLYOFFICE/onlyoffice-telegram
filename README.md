@@ -203,7 +203,6 @@ This means your work always stays under your control, and sessions are self-expi
 * **🤔 Got stuck?** To get some hints for working with the bot, use the `/help` command.
 * **🐞 Found a bug?** Please report it by creating an [issue](https://github.com/ONLYOFFICE/onlyoffice-telegram/issues).
 * **❓ Have a question?** Ask our community and developers on the [ONLYOFFICE Forum](https://community.onlyoffice.com/).
-* **💡 Want to suggest a feature?** Share your ideas on our [feedback platform](https://feedback.onlyoffice.com/forums/966080-your-voice-matters).
 * **👨‍💻 Need help for developers?** Check our [API documentation](https://api.onlyoffice.com).
 
 ---

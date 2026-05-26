@@ -103,7 +103,6 @@ async def get_config(request: Request):
             "editorConfig": {
                 "customization": {
                     "compactHeader": True,
-                    "toolbarNoTabs": True,
                     "logo": {"visible": False},
                 },
                 "lang": session["lang"],

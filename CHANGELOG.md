@@ -1,6 +1,6 @@
 # Change Log
 
-##
+## 1.1.0
 ## Changed
 - empty file templates
 - supported formats

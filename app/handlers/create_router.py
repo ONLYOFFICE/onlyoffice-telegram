@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -140,7 +140,7 @@ async def handle_create_document(message: Message, state: FSMContext, r: Redis, 
 
         pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
+        pipeline.expire(key, TTL * 3600)
         pipeline.execute()
 
     except Exception as e:

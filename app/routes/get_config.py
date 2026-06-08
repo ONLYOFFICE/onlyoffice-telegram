@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -78,7 +78,7 @@ async def get_config(request: Request):
             session["members"] = " ".join(members)
             pipeline.hset(key, "members", session["members"])
 
-        pipeline.expire(f"{key}", TTL)
+        pipeline.expire(f"{key}", TTL * 3600)
         pipeline.execute()
 
         session["lang"] = results[1].decode("utf-8") if results[1] else user.get("language_code", "en")
@@ -103,7 +103,6 @@ async def get_config(request: Request):
             "editorConfig": {
                 "customization": {
                     "compactHeader": True,
-                    "toolbarNoTabs": True,
                     "logo": {"visible": False},
                 },
                 "lang": session["lang"],

@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -152,7 +152,7 @@ async def handle_conversion_finish(
             "file_type": file_type,
         },
     )
-    r.expire(key, TTL)
+    r.expire(key, TTL * 3600)
 
     async with aiohttp.ClientSession() as session:
         end_convert = False

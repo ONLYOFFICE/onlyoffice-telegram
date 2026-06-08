@@ -1,5 +1,10 @@
 # Change Log
 
+## 1.1.0
+## Changed
+- empty file templates
+- supported formats
+
 ## 1.0.0
 ## Added
 - support direct and group chats

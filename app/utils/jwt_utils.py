@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -18,7 +18,7 @@ import datetime
 
 import jwt
 
-from config import JWT_SECRET
+from config import JWT_SECRET, TTL
 
 
 def encode_payload(payload):
@@ -31,7 +31,7 @@ def decode_token(token):
 
 def create_token(key: str):
     now = datetime.datetime.utcnow()
-    expiration_time = now + datetime.timedelta(hours=24)
+    expiration_time = now + datetime.timedelta(hours=TTL)
     payload = {"key": key, "iat": now, "exp": expiration_time}
     token = encode_payload(payload)
     return token

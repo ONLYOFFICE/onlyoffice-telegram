@@ -1,5 +1,5 @@
 #
-# (c) Copyright Ascensio System SIA 2025
+# (c) Copyright Ascensio System SIA 2026
 #
 # Licensed under the Apache License, Version 2.0 (the "License");
 # you may not use this file except in compliance with the License.
@@ -90,6 +90,7 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
                 _("The file is too large. Maximum allowed file size is 20 MB"),
                 reply_to_message_id=message.message_id,
             )
+            return
 
         session = {
             "document_type": f["type"],
@@ -132,7 +133,7 @@ async def handle_edit_document_upload(message: Message, state: FSMContext, r: Re
 
         pipeline = r.pipeline()
         pipeline.hset(key, mapping=session)
-        pipeline.expire(key, TTL)
+        pipeline.expire(key, TTL * 3600)
         pipeline.execute()
 
     except Exception as e:

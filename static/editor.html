@@ -103,18 +103,20 @@
     <script src="{{ DOCSERVER_URL }}/web-apps/apps/api/documents/api.js"></script>
     <script src="https://telegram.org/js/telegram-web-app.js?1"></script>
     <script src="https://webappcontent.telegram.org/js/jquery.min.js"></script>
-    <script async src="https://tganalytics.xyz/index.js" onload="initAnalytics()" type="text/javascript"></script>
     <script type="text/javascript" language="javascript">
-        function initAnalytics() {
-            const appName = "{{ANALYTICS_APP_NAME}}"
-            const token = "{{ANALYTICS_TOKEN}}"
-            if (appName === "None" || token === "None") {
-                return;
-            }
-            window.telegramAnalytics.init({
-                appName: "{{ANALYTICS_APP_NAME}}",
-                token: "{{ANALYTICS_TOKEN}}",
-            });
+        function loadAnalytics() {
+            {% if ANALYTICS_APP_NAME and ANALYTICS_TOKEN %}
+            const script = document.createElement("script");
+            script.src = "https://tganalytics.xyz/index.js";
+            script.async = true;
+            script.onload = () => {
+                window.telegramAnalytics.init({
+                    appName: "{{ ANALYTICS_APP_NAME }}",
+                    token: "{{ ANALYTICS_TOKEN }}",
+                });
+            };
+            document.head.appendChild(script);
+            {% endif %}
         }
 
         const deepMerge = (target, source) => {
@@ -141,6 +143,7 @@
         const onLoad = () => {
             Telegram.WebApp.ready();
             Telegram.WebApp.expand();
+            loadAnalytics();
 
             $.ajax("/editor/getConfig", {
                 type: "GET",

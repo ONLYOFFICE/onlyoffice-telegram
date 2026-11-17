@@ -1,5 +1,9 @@
 # Change Log
 
+## 1.1.1
+## Fixed
+- editor loading delayed by analytics script
+
 ## 1.1.0
 ## Changed
 - empty file templates
